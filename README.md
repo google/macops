@@ -38,8 +38,7 @@ Contact
 =======
 
 We have a public mailing list at
-[<https://groups.google.com/forum/>\#!forum/google-macops
-google-macops@googlegroups.com]
+[google-macops@googlegroups.com](https://groups.google.com/forum/#!forum/google-macops)
 
   [can\_haz\_image]: https://code.google.com/p/google-macops/source/browse/#svn%2Ftrunk%2Fcan_haz_image
   [crankd tools]: https://code.google.com/p/google-macops/source/browse/#svn%2Ftrunk%2Fcrankd
