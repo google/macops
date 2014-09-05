@@ -1,9 +1,7 @@
 Overview
 ========
 
-These are some utilities, tools, and scripts for managing and tracking a
-fleet of Macintoshes in a corporate environment. We expect to use this
-primarily as a repository for small scripts or tools that don't warrant
+These are some utilities, tools, and scripts for managing and tracking a fleet of Macintoshes in a corporate environment. We expect to use this primarily as a repository for small scripts or tools that don't warrant
 a standalone project.
 
 can\_haz\_image
@@ -20,6 +18,10 @@ facter
 ------
 
 A simple fact for tracking application usage: [facter][]
+
+run_it
+------
+A utility to measure the system impact of a process. Code right here: [http://www.github.com/macops/run_it]
 
 Related Projects
 ================
