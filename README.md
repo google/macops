@@ -21,7 +21,7 @@ A simple fact for tracking application usage: [facter][]
 
 run_it
 ------
-A utility to measure the system impact of a process. Code right here: [http://www.github.com/macops/run_it]
+A utility to measure the system impact of a process. Code right here: https://github.com/google/macops/tree/master/run_it
 
 Related Projects
 ================
