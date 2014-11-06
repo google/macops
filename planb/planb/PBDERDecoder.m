@@ -188,7 +188,6 @@
 - (NSString *)decodeOIDWithBytes:(unsigned char *)bytes length:(NSUInteger)length {
   NSMutableArray *objectId = [NSMutableArray array];
   BOOL inVariableLengthByte = NO;
-  short variableLengthCounter = 0;
   NSUInteger variableLength = 0;
   for (NSUInteger i = 0; i < length; ++i) {
     if (i == 0) {
@@ -200,19 +199,16 @@
       // The remaining bytes are encoded with Variable Length Quantity.
       unsigned char byte = bytes[i];
       if (byte & 0x80) {
-        variableLengthCounter++;
         inVariableLengthByte = YES;
-
         NSUInteger a = (NSUInteger) (byte & ~0x80);
+        variableLength = variableLength << 7;
         variableLength += a;
-        variableLength = variableLength << (variableLengthCounter * 7);
-
       } else if (inVariableLengthByte) {
         NSUInteger a = (NSUInteger) (byte & ~0x80);
+        variableLength = variableLength << 7;
         variableLength += a;
         inVariableLengthByte = NO;
         [objectId addObject:@(variableLength)];
-        variableLengthCounter = 0;
       } else {
         [objectId addObject:@((NSUInteger)byte)];
       }
