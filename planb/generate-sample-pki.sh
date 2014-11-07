@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Sample PKI setup with CA, intermediate, server and client certificates.
+# Sample public-key setup with CA, intermediate, server and client certificates.
 # On OS X, default configuration in /System/Library/OpenSSL/openssl.cnf is used.
 #
 # Copyright 2014 Google Inc. All rights reserved.
@@ -41,7 +41,9 @@ ${OPENSSL} req -new -x509 -days 365 \
   -${DEFAULT_MD} -extensions v3_ca \
   -subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORG}/CN=${CN_AUTHORITY}" \
   -key ca.key -out ca.pem
-echo -e "Created certificate authority: ca.pem\n"
+echo -e "Created certificate authority: ca.pem"
+openssl x509 -text -nameopt multiline \
+  -certopt no_sigdump -certopt no_pubkey -noout -in ca.pem
 
 ${OPENSSL} genrsa -out intermediate.key ${KEYSIZE}
 ${OPENSSL} req -new -${DEFAULT_MD} -new \
@@ -50,13 +52,11 @@ ${OPENSSL} req -new -${DEFAULT_MD} -new \
 ${OPENSSL} ca -extensions v3_ca -notext -md ${DEFAULT_MD} \
   -keyfile ca.key -cert ca.pem \
   -in intermediate.csr -out intermediate.pem
-echo -e "Created intermediate authority: intermediate.pem, verifying ...\n"
-
+echo -e "Created intermediate authority: intermediate.pem, verifying ..."
 ${OPENSSL} verify -CAfile ca.pem intermediate.pem
-echo ""
 
 /bin/cat ca.pem intermediate.pem > chain.pem
-echo -e "Created chain: chain.pem\n"
+echo -e "Created chain: chain.pem"
 
 ${OPENSSL} genrsa -out server.key ${KEYSIZE}
 ${OPENSSL} req -new -${DEFAULT_MD} \
@@ -65,7 +65,9 @@ ${OPENSSL} req -new -${DEFAULT_MD} \
 ${OPENSSL} ca -extensions usr_cert -notext -md ${DEFAULT_MD} \
   -keyfile intermediate.key -cert intermediate.pem \
   -in server.csr -out server.pem
-echo -e "Created server certificate: server.pem\n"
+echo -e "Created server certificate: server.pem"
+openssl x509 -text -nameopt multiline \
+  -certopt no_sigdump -certopt no_pubkey -noout -in server.pem
 
 echo 01 > intermediate.srl
 echo """[ tls_client ]
@@ -80,5 +82,7 @@ ${OPENSSL} req -new -${DEFAULT_MD} \
 ${OPENSSL} x509 -req -days 365 -extfile client.cnf -extensions tls_client \
   -CA intermediate.pem -CAkey intermediate.key \
   -in client.csr -out client.pem
-echo -e "Created client certificate: client.pem\n"
+echo -e "Created client certificate: client.pem:"
+openssl x509 -text -nameopt multiline \
+  -certopt no_sigdump -certopt no_pubkey -noout -in client.pem
 
