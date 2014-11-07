@@ -23,11 +23,11 @@ If your server requires client certificate authentication, install the client ce
 
 Compiling Plan B requires a modern version of Xcode, available from Apple's developer site.
 
-* Check out the code with `git clone https://github.com/google/macops` and open the Xcode project with `open macops/planb/planb.xcodeproj`.
+* Check out the code with `git clone https://github.com/google/macops` and open the Xcode project with `open macops/planb/planb.xcodeproj`
 
-By default, the program will try download `https://mac.internal.megacorp.com/pkgbase/pkg1/package1-stable.dmg`, `.../pkg2/package2-stable.dmg` and so on.
+By default, the program will try download `https://mac.internal.megacorp.com/pkgs/pkg1/package1-stable.dmg`, `.../pkg2/package2-stable.dmg` and so on.
 
-* Edit `PBConnectionDelegate.m` and change `kConnectionDelegateHost` to the hostname of your server and `kConnectionDelegatePackageBase` to the path of the folder containing your disk images. By default, the program will use `https://mac.internal.megacorp.com/pkgbase/`.
+* Edit `PBConnectionDelegate.m` and change `kConnectionDelegateHost` to the hostname of your server and `kConnectionDelegatePackageBase` to the path of the folder containing your disk images. By default, the program will use `https://mac.internal.megacorp.com/pkgs/`
 
 * Edit `main.m` and change the `packages` array to match the names of your disk image names and their contained packages' receipt names. By default, the program will construct `pkg1/package1-stable.dmg` and forget the receipt for package `com.megacorp.package1`, and so on.
 
