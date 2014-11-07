@@ -19,6 +19,10 @@ facter
 
 A simple fact for tracking application usage: [facter][]
 
+planb
+------
+A host remediation program for managed Macs. Securely downloads disk images from your server and installs contained packages.
+
 run_it
 ------
 A utility to measure the system impact of a process. Code right here: https://github.com/google/macops/tree/master/run_it
