@@ -41,4 +41,11 @@ By default, the program will request `https://mac.internal.megacorp.com/pkgs/pkg
 
 The resulting, compiled program will run on its own without any external dependencies.
 
+Deployment
+----------
+
 It is recommended to create a simple script to determine the health of the machine, for example by checking the last successful run date of the primary management software, and running Plan B if the condition is not met. This script can then be started periodically as a system launch daemon.
+
+Have a look at `planb_check` and `com.megacorp.planb.plist` for such an example script and LaunchDaemon configuration.
+
+In our environment, we have a wrapper tool for puppet, which verifies the configuration run was successful and updates the timestamp on a file. We track this in `planb_check`, and base the decision to kick off `planb` from it.

@@ -6,8 +6,9 @@
 # Specify an optional sleep interval to delay the checks; useful to let the
 # scheduled management tool runs try to fix things.
 
-readonly DELAY=$(( 60 * 60 * 24 * 3 ))  # 3 days in seconds
+# Management tool should update this path after a successful run
 readonly LASTSUCCESS="/var/lib/lastsuccess"
+readonly DELAY=$(( 60 * 60 * 24 * 3 ))  # 3 days in seconds
 readonly PLANB="/usr/local/sbin/planb"
 readonly PLANB_TIMEOUT=900
 
