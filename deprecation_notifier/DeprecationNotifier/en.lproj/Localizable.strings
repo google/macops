@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  DeprecationNotifier
+*/
+
+"expectedVersion" = "10.10";
+
+"deprecationMsg" = "Your computer is running a deprecated version of Mac OS X.
+
+Please upgrade to Mac OS X 10.10 (Yosemite) as soon as possible.
+
+Instructions for doing this can be found at go/macupgrade,
+which has been opened in the background.";
+
+"instructionURL" = "https://goto.google.com/macupgrade";

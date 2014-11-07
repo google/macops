@@ -27,6 +27,10 @@ run_it
 ------
 A utility to measure the system impact of a process. Code right here: https://github.com/google/macops/tree/master/run_it
 
+deprecation_notifier
+--------------------
+A nagging utility intended to provoke users into doing major OS upgrades.
+
 Related Projects
 ================
 
