@@ -42,7 +42,7 @@ ${OPENSSL} req -new -x509 -days 365 \
   -subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORG}/CN=${CN_AUTHORITY}" \
   -key ca.key -out ca.pem
 echo -e "Created certificate authority: ca.pem"
-openssl x509 -text -nameopt multiline \
+${OPENSSL} x509 -text -nameopt multiline \
   -certopt no_sigdump -certopt no_pubkey -noout -in ca.pem
 
 ${OPENSSL} genrsa -out intermediate.key ${KEYSIZE}
@@ -66,7 +66,7 @@ ${OPENSSL} ca -extensions usr_cert -notext -md ${DEFAULT_MD} \
   -keyfile intermediate.key -cert intermediate.pem \
   -in server.csr -out server.pem
 echo -e "Created server certificate: server.pem"
-openssl x509 -text -nameopt multiline \
+${OPENSSL} x509 -text -nameopt multiline \
   -certopt no_sigdump -certopt no_pubkey -noout -in server.pem
 
 echo 01 > intermediate.srl
@@ -82,7 +82,7 @@ ${OPENSSL} req -new -${DEFAULT_MD} \
 ${OPENSSL} x509 -req -days 365 -extfile client.cnf -extensions tls_client \
   -CA intermediate.pem -CAkey intermediate.key \
   -in client.csr -out client.pem
-echo -e "Created client certificate: client.pem:"
-openssl x509 -text -nameopt multiline \
+echo -e "Created client certificate: client.pem"
+${OPENSSL} x509 -text -nameopt multiline \
   -certopt no_sigdump -certopt no_pubkey -noout -in client.pem
 
