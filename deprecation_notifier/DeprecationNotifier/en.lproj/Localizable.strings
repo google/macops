@@ -9,7 +9,4 @@
 
 Please upgrade to Mac OS X 10.10 (Yosemite) as soon as possible.
 
-Instructions for doing this can be found at go/macupgrade,
-which has been opened in the background.";
-
-"instructionURL" = "https://goto.google.com/macupgrade";
+"instructionURL" = "https://megacorp.com/helpdesk/upgrade-instructions";

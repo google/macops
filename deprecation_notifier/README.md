@@ -16,3 +16,8 @@ Features
   - Checks that the current OS version is lower than the desired version and exits if it isn't.
   - Configurable using a simple strings file.
 
+Customizing
+-----------
+
+The customizations will generally be in Localizable.strings. There are also some
+defaults in DNAppDelegate.h which you may want to change.
