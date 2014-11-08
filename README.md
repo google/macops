@@ -50,6 +50,11 @@ Contact
 We have a public mailing list at
 [google-macops@googlegroups.com](https://groups.google.com/forum/#!forum/google-macops)
 
+Disclaimer
+==========
+
+This is not an official Google product.
+
   [can\_haz\_image]: https://code.google.com/p/google-macops/source/browse/#svn%2Ftrunk%2Fcan_haz_image
   [crankd tools]: https://code.google.com/p/google-macops/source/browse/#svn%2Ftrunk%2Fcrankd
   [facter]: https://code.google.com/p/google-macops/source/browse/trunk/facter/apps.rb
