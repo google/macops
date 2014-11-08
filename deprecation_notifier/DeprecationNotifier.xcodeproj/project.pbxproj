@@ -1,0 +1,312 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DAEEFCC161B4E470021F678 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DAEEFCE161B4E470021F678 /* Localizable.strings */; };
+		0DB29191161AE48900206BFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB29190161AE48900206BFC /* Cocoa.framework */; };
+		0DB2919B161AE48900206BFC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DB29199161AE48900206BFC /* InfoPlist.strings */; };
+		0DB2919D161AE48900206BFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2919C161AE48900206BFC /* main.m */; };
+		0DB291A4161AE48900206BFC /* DNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB291A3161AE48900206BFC /* DNAppDelegate.m */; };
+		0DB291A7161AE48900206BFC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB291A5161AE48900206BFC /* MainMenu.xib */; };
+		0DB291C6161AE54000206BFC /* DNLockedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB291C5161AE54000206BFC /* DNLockedWindow.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0DAEEFCD161B4E470021F678 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0DB2918C161AE48900206BFC /* DeprecationNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeprecationNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DB29190161AE48900206BFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		0DB29193161AE48900206BFC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		0DB29194161AE48900206BFC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0DB29195161AE48900206BFC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0DB29198161AE48900206BFC /* DeprecationNotifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeprecationNotifier-Info.plist"; sourceTree = "<group>"; };
+		0DB2919A161AE48900206BFC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0DB2919C161AE48900206BFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0DB2919E161AE48900206BFC /* DeprecationNotifier-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeprecationNotifier-Prefix.pch"; sourceTree = "<group>"; };
+		0DB291A2161AE48900206BFC /* DNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNAppDelegate.h; sourceTree = "<group>"; };
+		0DB291A3161AE48900206BFC /* DNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNAppDelegate.m; sourceTree = "<group>"; };
+		0DB291A6161AE48900206BFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0DB291C4161AE54000206BFC /* DNLockedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNLockedWindow.h; sourceTree = "<group>"; };
+		0DB291C5161AE54000206BFC /* DNLockedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNLockedWindow.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0DB29189161AE48900206BFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DB29191161AE48900206BFC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DB29181161AE48900206BFC = {
+			isa = PBXGroup;
+			children = (
+				0DB29196161AE48900206BFC /* DeprecationNotifier */,
+				0DB2918F161AE48900206BFC /* Frameworks */,
+				0DB2918D161AE48900206BFC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0DB2918D161AE48900206BFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0DB2918C161AE48900206BFC /* DeprecationNotifier.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DB2918F161AE48900206BFC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DB29190161AE48900206BFC /* Cocoa.framework */,
+				0DB29192161AE48900206BFC /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0DB29192161AE48900206BFC /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DB29193161AE48900206BFC /* AppKit.framework */,
+				0DB29194161AE48900206BFC /* CoreData.framework */,
+				0DB29195161AE48900206BFC /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		0DB29196161AE48900206BFC /* DeprecationNotifier */ = {
+			isa = PBXGroup;
+			children = (
+				0DB291A2161AE48900206BFC /* DNAppDelegate.h */,
+				0DB291A3161AE48900206BFC /* DNAppDelegate.m */,
+				0DB291C4161AE54000206BFC /* DNLockedWindow.h */,
+				0DB291C5161AE54000206BFC /* DNLockedWindow.m */,
+				0DB291A5161AE48900206BFC /* MainMenu.xib */,
+				0DAEEFCE161B4E470021F678 /* Localizable.strings */,
+				0DB29197161AE48900206BFC /* Supporting Files */,
+			);
+			path = DeprecationNotifier;
+			sourceTree = "<group>";
+		};
+		0DB29197161AE48900206BFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0DB29198161AE48900206BFC /* DeprecationNotifier-Info.plist */,
+				0DB29199161AE48900206BFC /* InfoPlist.strings */,
+				0DB2919C161AE48900206BFC /* main.m */,
+				0DB2919E161AE48900206BFC /* DeprecationNotifier-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0DB2918B161AE48900206BFC /* DeprecationNotifier */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DB291BE161AE48900206BFC /* Build configuration list for PBXNativeTarget "DeprecationNotifier" */;
+			buildPhases = (
+				0DB29188161AE48900206BFC /* Sources */,
+				0DB29189161AE48900206BFC /* Frameworks */,
+				0DB2918A161AE48900206BFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeprecationNotifier;
+			productName = DeprecationNotifier;
+			productReference = 0DB2918C161AE48900206BFC /* DeprecationNotifier.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0DB29183161AE48900206BFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DN;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Google;
+			};
+			buildConfigurationList = 0DB29186161AE48900206BFC /* Build configuration list for PBXProject "DeprecationNotifier" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0DB29181161AE48900206BFC;
+			productRefGroup = 0DB2918D161AE48900206BFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0DB2918B161AE48900206BFC /* DeprecationNotifier */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0DB2918A161AE48900206BFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DB2919B161AE48900206BFC /* InfoPlist.strings in Resources */,
+				0DB291A7161AE48900206BFC /* MainMenu.xib in Resources */,
+				0DAEEFCC161B4E470021F678 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0DB29188161AE48900206BFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DB2919D161AE48900206BFC /* main.m in Sources */,
+				0DB291A4161AE48900206BFC /* DNAppDelegate.m in Sources */,
+				0DB291C6161AE54000206BFC /* DNLockedWindow.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0DAEEFCE161B4E470021F678 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DAEEFCD161B4E470021F678 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0DB29199161AE48900206BFC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DB2919A161AE48900206BFC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0DB291A5161AE48900206BFC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DB291A6161AE48900206BFC /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0DB291BC161AE48900206BFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+			};
+			name = Debug;
+		};
+		0DB291BD161AE48900206BFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = "";
+			};
+			name = Release;
+		};
+		0DB291BF161AE48900206BFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DeprecationNotifier/DeprecationNotifier-Prefix.pch";
+				INFOPLIST_FILE = "DeprecationNotifier/DeprecationNotifier-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0DB291C0161AE48900206BFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DeprecationNotifier/DeprecationNotifier-Prefix.pch";
+				INFOPLIST_FILE = "DeprecationNotifier/DeprecationNotifier-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DB29186161AE48900206BFC /* Build configuration list for PBXProject "DeprecationNotifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DB291BC161AE48900206BFC /* Debug */,
+				0DB291BD161AE48900206BFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DB291BE161AE48900206BFC /* Build configuration list for PBXNativeTarget "DeprecationNotifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DB291BF161AE48900206BFC /* Debug */,
+				0DB291C0161AE48900206BFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0DB29183161AE48900206BFC /* Project object */;
+}
