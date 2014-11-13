@@ -7,14 +7,18 @@ Mechanisms
 ----------
 
 If the machine's local disk is FV2-encrypted:
+
 1. Adds a new user called `fde_locked_user` with a random password
 2. Adds this user to the list of users who can unlock the disk
 3. Removes all other users
 4. Shuts down the machine
 
+
 If not:
+
 1. Renames `launchd` to `launchd_disabled`
 2. Shuts down the machine
+
 
 The encrypted case is best when using some sort of FileVault key escrow mechanism, like [Cauliflower Vest](https://github.com/google/cauliflowervest), as this allows for recovery of the disk's data for, e.g., legal discovery.
 
