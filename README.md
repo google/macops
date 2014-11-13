@@ -31,6 +31,10 @@ deprecation_notifier
 --------------------
 A nagging utility intended to provoke users into doing major OS upgrades.
 
+macdestroyer
+------------
+A payload-only package that attempts to render the target machine unbootable.
+
 Related Projects
 ================
 
