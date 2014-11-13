@@ -30,7 +30,7 @@ LOCK_USER_NAME="Machine Disabled"
 LOCK_USER_HINT="Machine Disabled"
 LOCK_USER_SHELL=/usr/bin/false
 LOCK_USER_GROUP=20
-LOCK_USER_IMAGE="/Library/User Pictures/Animals/Eagle.tif"
+LOCK_USER_IMAGE="/Library/User Pictures/jolly-roger.jpg"
 
 FDESETUP_PLIST="/tmp/lockuserplist.plist"
 
@@ -51,8 +51,8 @@ function create_temp_user() {
   dscl . create /Users/${LOCK_USER_UNAME} UserShell ${LOCK_USER_SHELL}
   dscl . create /Users/${LOCK_USER_UNAME} PrimaryGroupID ${LOCK_USER_GROUP}
   dscl . create /Users/${LOCK_USER_UNAME} RealName "${LOCK_USER_NAME}"
-  dscl . create /Users/${LOCK_USER_UNAME} picture "${LOCK_USER_IMAGE}"
-  dscl . create /Users/${LOCK_USER_UNAME} hint "${LOCK_USER_HINT}"
+  dscl . create /Users/${LOCK_USER_UNAME} Picture "${LOCK_USER_IMAGE}"
+  dscl . create /Users/${LOCK_USER_UNAME} Hint "${LOCK_USER_HINT}"
 }
 
 function add_user_to_filevault() {
