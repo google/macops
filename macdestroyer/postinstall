@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# On 10.8, if the machine is FileVault 2 encrypted, forcibly lock a user out
-# with no way back in without access to the FileVault recovery key.
+# Forcibly locks a user out of their machine with no way back in without
+# access to the FileVault recovery key.
 #
 # Otherwise, prevent the machine from booting by renaming launchd to
 # launchd_disabled.
@@ -22,7 +22,7 @@
 
 PATH="/usr/bin:/bin:/sbin"
 
-CURRENT_FV_USERS=$(fdesetup list 2>&1 | cut -d ',' -f 1)
+CURRENT_FV_USERS=$(fdesetup10.8 list 2>&1 | cut -d ',' -f 1)
 
 LOCK_USER_UNAME=fde_locked_user
 LOCK_USER_PASSW=$(openssl rand -base64 32)
@@ -41,12 +41,8 @@ function check_for_root() {
   fi
 }
 
-function check_for_108() {
-  [[ $(sw_vers -productVersion) == 10.8* ]]
-}
-
 function check_for_filevault() {
-  fdesetup status | grep -q On
+  fdesetup10.8 status | grep -q On
 }
 
 function create_temp_user() {
@@ -64,13 +60,13 @@ function add_user_to_filevault() {
   defaults write ${FDESETUP_PLIST} "Password" -string ${LOCK_USER_PASSW}
   defaults write ${FDESETUP_PLIST} "AdditionalUsers" -array \
       "{ 'Username' = \"${LOCK_USER_UNAME}\"; 'Password' = \"${LOCK_USER_PASSW}\"; }"
-  fdesetup add -inputplist < ${FDESETUP_PLIST}
+  fdesetup10.8 add -inputplist < ${FDESETUP_PLIST}
   rm ${FDESETUP_PLIST}
 }
 
 function remove_old_filevault_users() {
   for USER in ${CURRENT_FV_USERS}; do
-    fdesetup remove -user ${USER}
+    fdesetup10.8 remove -user ${USER}
   done
 }
 
@@ -81,14 +77,10 @@ function break_machine() {
 function main() {
   check_for_root
 
-  if check_for_108; then
-    if check_for_filevault; then
-      create_temp_user
-      add_user_to_filevault
-      remove_old_filevault_users
-    else
-      break_machine
-    fi
+  if check_for_filevault; then
+    create_temp_user
+    add_user_to_filevault
+    remove_old_filevault_users
   else
     break_machine
   fi

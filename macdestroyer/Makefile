@@ -15,4 +15,5 @@
 LUGGAGE:=../luggage.make
 include ${LUGGAGE}
 
-PAYLOAD:=pack-script-postinstall
+TITLE=macdestroyer
+PAYLOAD:=pack-script-postinstall pack-usr-bin-fdesetup10.8
