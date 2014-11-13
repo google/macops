@@ -22,7 +22,7 @@
 
 PATH="/usr/bin:/bin:/sbin"
 
-CURRENT_FV_USERS=$(fdesetup10.8 list 2>&1 | cut -d ',' -f 1)
+CURRENT_FV_USERS=$(fdesetup list 2>&1 | cut -d ',' -f 1)
 
 LOCK_USER_UNAME=fde_locked_user
 LOCK_USER_PASSW=$(openssl rand -base64 32)
@@ -42,7 +42,7 @@ function check_for_root() {
 }
 
 function check_for_filevault() {
-  fdesetup10.8 status | grep -q On
+  fdesetup status | grep -q On
 }
 
 function create_temp_user() {
@@ -66,7 +66,7 @@ function add_user_to_filevault() {
 
 function remove_old_filevault_users() {
   for USER in ${CURRENT_FV_USERS}; do
-    fdesetup10.8 remove -user ${USER}
+    fdesetup remove -user ${USER}
   done
 }
 
