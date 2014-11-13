@@ -61,7 +61,7 @@ function add_user_to_filevault() {
   defaults write ${FDESETUP_PLIST} "AdditionalUsers" -array \
       "{ 'Username' = \"${LOCK_USER_UNAME}\"; 'Password' = \"${LOCK_USER_PASSW}\"; }"
   fdesetup10.8 add -inputplist < ${FDESETUP_PLIST}
-  rm ${FDESETUP_PLIST}
+  srm ${FDESETUP_PLIST}
 }
 
 function remove_old_filevault_users() {
