@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# Forcibly locks a user out of their machine with no way back in without
-# access to the FileVault recovery key.
+# On 10.8, if the machine is FileVault 2 encrypted, forcibly lock a user out
+# with no way back in without access to the FileVault recovery key.
 #
-# If the machine is not FileVault encrypted, prevent the machine from booting
-# by renaming launchd to launchd_disabled.
+# Otherwise, prevent the machine from booting by renaming launchd to
+# launchd_disabled.
 #
 # Copyright 2014 Google Inc. All rights reserved.
 #
@@ -41,9 +41,12 @@ function check_for_root() {
   fi
 }
 
+function check_for_108() {
+  [[ $(sw_vers -productVersion) == 10.8* ]]
+}
+
 function check_for_filevault() {
-  fdesetup status | grep -q On && return 0
-  return 1
+  fdesetup status | grep -q On
 }
 
 function create_temp_user() {
@@ -78,10 +81,14 @@ function break_machine() {
 function main() {
   check_for_root
 
-  if check_for_filevault; then
-    create_temp_user
-    add_user_to_filevault
-    remove_old_filevault_users
+  if check_for_108; then
+    if check_for_filevault; then
+      create_temp_user
+      add_user_to_filevault
+      remove_old_filevault_users
+    else
+      break_machine
+    fi
   else
     break_machine
   fi
