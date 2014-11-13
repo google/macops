@@ -22,7 +22,7 @@ If not:
 
 The encrypted case is best when using some sort of FileVault key escrow mechanism, like [Cauliflower Vest](https://github.com/google/cauliflowervest), as this allows for recovery of the disk's data for, e.g., legal discovery.
 
-The non-FV2 case is, obviously, merely an annoyance to anyone knowledgable with OS X.
+The non-FV2 case is, obviously, merely an annoyance to anyone knowledgeable with OS X.
 
 Customization
 -------------
