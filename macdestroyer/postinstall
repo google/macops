@@ -32,8 +32,6 @@ LOCK_USER_SHELL=/usr/bin/false
 LOCK_USER_GROUP=20
 LOCK_USER_IMAGE="/Library/User Pictures/jolly-roger.jpg"
 
-FDESETUP_PLIST="/tmp/lockuserplist.plist"
-
 function check_for_root() {
   if [[ $(id -u) -ne 0 ]]; then
     echo "Not invoked as root, exiting."
@@ -56,12 +54,7 @@ function create_temp_user() {
 }
 
 function add_user_to_filevault() {
-  defaults write ${FDESETUP_PLIST} "Username" -string ${LOCK_USER_UNAME}
-  defaults write ${FDESETUP_PLIST} "Password" -string ${LOCK_USER_PASSW}
-  defaults write ${FDESETUP_PLIST} "AdditionalUsers" -array \
-      "{ 'Username' = \"${LOCK_USER_UNAME}\"; 'Password' = \"${LOCK_USER_PASSW}\"; }"
-  fdesetup10.8 add -inputplist < ${FDESETUP_PLIST}
-  srm ${FDESETUP_PLIST}
+  fdeadduser ${LOCK_USER_UNAME} ${LOCK_USER_PASSW}
 }
 
 function remove_old_filevault_users() {

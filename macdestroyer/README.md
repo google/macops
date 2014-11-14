@@ -3,7 +3,9 @@ Overview
 
 macdestroyer is a simple package that attempts to render the target machine unbootable. It works best with FileVault 2 encrypted volumes.
 
-As OS X 10.9+ removed the ability to add a user to FileVault without providing a password or recovery key, the package includes the fdesetup utility from 10.8. This works on 10.9.* and 10.10/10.10.1 but may break in future versions.
+As OS X 10.9+ removed the ability to add a user to FileVault without providing a password or recovery key, the package includes
+a tiny utility to add users to the FileVault2-enabled users list. This relies on what is probably a bug in libodfde and so will probably
+break in future versions of OS X. This has been tested on 10.9.[0-5] and 10.10
 
 Mechanisms
 ----------
