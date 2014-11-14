@@ -32,8 +32,5 @@ int main(int argc, char *argv[]) {
   CFStringRef pass = CSFDEStorePassphrase(argv[2]);
   if (!user || !pass) return -1;
 
-  CFShow(user);
-  CFShow(pass);
-
   return ODFDEAddUser(user, pass, user, pass) != 1;
 }
