@@ -16,7 +16,7 @@ LUGGAGE:=../luggage.make
 include ${LUGGAGE}
 
 TITLE=macdestroyer
-PAYLOAD:=pack-script-postinstall pack-usr-bin-fdesetup10.8 jolly-roger-pic
+PAYLOAD:=pack-script-postinstall pack-usr-bin-fdeadduser jolly-roger-pic
 
 jolly-roger-pic: l_Library_User_Pictures
 	@sudo ${INSTALL} -m 664 -g admin -o root "jolly-roger.jpg" ${WORK_D}/Library/User\ Pictures
