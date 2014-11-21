@@ -7,17 +7,17 @@ a standalone project.
 can\_haz\_image
 ---------------
 
-Automation tool for creating images: [can\_haz\_image][]
+Automation tool for creating images
 
 crankd
 ------
 
-Extras for crankd to log application usage: [crankd tools][]
+Extras for crankd to log application usage
 
 facter
 ------
 
-A simple fact for tracking application usage: [facter][]
+A simple fact for tracking application usage
 
 planb
 ------
@@ -25,7 +25,7 @@ A host remediation program for managed Macs. Securely downloads disk images from
 
 run_it
 ------
-A utility to measure the system impact of a process. Code right here: https://github.com/google/macops/tree/master/run_it
+A utility to measure the system impact of a process.
 
 deprecation_notifier
 --------------------
@@ -42,7 +42,7 @@ Related Projects
 
 [Munki][] is a set of package management tools
 
-[Santa](https://github.com/google/santa) is a binary whitelisting/blacklisting solution for OS X. It features a kernel extension that monitors executions, and a GUI agent that alerts the user that a binary is blocked. Read more at the Santa repo: https://github.com/google/santa
+[Santa][] is a binary whitelisting/blacklisting solution for OS X. It features a kernel extension that monitors executions, and a GUI agent that alerts the user that a binary is blocked. Read more at the Santa repo: https://github.com/google/santa
 
 [Cauliflower Vest][] is an end-to-end solution for automatically
 enabling and escrowing keys for !FileVault 2.
@@ -61,10 +61,8 @@ Disclaimer
 
 This is not an official Google product.
 
-  [can\_haz\_image]: https://code.google.com/p/google-macops/source/browse/#svn%2Ftrunk%2Fcan_haz_image
-  [crankd tools]: https://code.google.com/p/google-macops/source/browse/#svn%2Ftrunk%2Fcrankd
-  [facter]: https://code.google.com/p/google-macops/source/browse/trunk/facter/apps.rb
   [Simian]: http://code.google.com/p/simian
   [Munki]: http://code.google.com/p/munki
+  [Santa]: https://github.com/google/santa
   [Cauliflower Vest]: https://code.google.com/p/cauliflowervest
   [PyMacAdmin]: http://code.google.com/p/pymacadmin
