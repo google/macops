@@ -42,6 +42,8 @@ Related Projects
 
 [Munki][] is a set of package management tools
 
+[Santa](https://github.com/google/santa) is a binary whitelisting/blacklisting solution for OS X. It features a kernel extension that monitors executions, and a GUI agent that alerts the user that a binary is blocked. Read more at the Santa repo: https://github.com/google/santa
+
 [Cauliflower Vest][] is an end-to-end solution for automatically
 enabling and escrowing keys for !FileVault 2.
 
