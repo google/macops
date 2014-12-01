@@ -50,6 +50,8 @@ enabling and escrowing keys for !FileVault 2.
 [PyMacAdmin][] is another collection of Python utilities for Mac OS X
 system administration, the main piece of which is crankd
 
+[Santa][] is a binary whitelisting/blacklisting solution for Mac OS X.
+
 Contact
 =======
 
@@ -66,3 +68,4 @@ This is not an official Google product.
   [Santa]: https://github.com/google/santa
   [Cauliflower Vest]: https://code.google.com/p/cauliflowervest
   [PyMacAdmin]: http://code.google.com/p/pymacadmin
+  [Santa]: http://github.com/google/santa
