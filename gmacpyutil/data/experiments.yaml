@@ -1,0 +1,39 @@
+# This file contains active experiments.
+#
+# The format is YAML.
+# The file MUST have a serial number.
+# The file MUST have an experiments section with 0 or more experiments defined.
+# Each experiment name MUST only contain 0-9 a-z and _.
+# Each experiment MUST have an owner field and a percent field.
+#   The owner field is a string, percent is an int or float from 0.0 to 100.0.
+# Each experiment MUST have a begin_date field.
+# Each experiment SHOULD have an obsolete_after field.
+#   These date fields are in ISO 8601 format without time or timezone
+#   e.g., YYYY-MM-DD.
+# Each experiment SHOULD have a description field.
+#   This field is a string.
+# Each experiment MAY have an enable_unstable and enable_testing field.
+#   These fields are booleans.
+
+# Sample Experiment:
+# experiments:
+#   sample_experiment:
+#     percent: 50.0
+#     begin_date: 2013-01-25
+#     obsolete_after: 2013-06-25
+#     owner: "bofh"
+#     description: "Test experiment"
+#     enable_unstable: true
+
+experiments:
+  foo_rollout:
+    percent: 50
+    begin_date: 2014-10-27
+    owner: "someone"
+    description: "Deploy Foo.app"
+  convert_to_profiles:
+    percent: 0
+    begin_date: 2014-08-22
+    owner: "someoneelse"
+    description: "Use profiles instead of local MCX"
+    enable_unstable: true

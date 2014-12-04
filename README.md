@@ -6,18 +6,27 @@ a standalone project.
 
 can\_haz\_image
 ---------------
-
 Automation tool for creating images
 
 crankd
 ------
-
 Extras for crankd to log application usage
+
+deprecation_notifier
+--------------------
+A nagging utility intended to provoke users into doing major OS upgrades.
 
 facter
 ------
-
 A simple fact for tracking application usage
+
+gmacpyutil
+----------
+Python modules with useful methods for managing and controlling Macintosh computers
+
+macdestroyer
+------------
+A package that attempts to render the target machine unbootable.
 
 planb
 ------
@@ -27,13 +36,6 @@ run_it
 ------
 A utility to measure the system impact of a process.
 
-deprecation_notifier
---------------------
-A nagging utility intended to provoke users into doing major OS upgrades.
-
-macdestroyer
-------------
-A package that attempts to render the target machine unbootable.
 
 Related Projects
 ================
