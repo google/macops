@@ -217,7 +217,7 @@
   } else {
     NSString *pipeOut = [[NSString alloc] initWithData:stdBuff
                                               encoding:NSUTF8StringEncoding];
-    PBLog(@"Error: cannot forget %@: %@", _packagePath, pipeOut);
+    PBLog(@"Error: cannot forget %@: %@", _receiptName, pipeOut);
     return NO;
   }
 }
@@ -228,18 +228,19 @@
   NSDate *startDate = [NSDate date];
   NSMutableData *stdBuff = [[NSMutableData alloc] init];
 
-  while ([task isRunning] && -[startDate timeIntervalSinceNow] < timeout) {
+  do {
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
 
-    if ([[[pipe fileHandleForReading] availableData] length]) {
-      [stdBuff appendData:[[pipe fileHandleForReading] availableData]];
-    }
-  }
+    NSData *availableData = [[pipe fileHandleForReading] availableData];
 
-  // Task has exceeded its timeout, so kill it and return no stdBuff.
+    if ([availableData length]) {
+      [stdBuff appendData:availableData];
+    }
+  } while ([task isRunning] && -[startDate timeIntervalSinceNow] < timeout);
+
+  // If task has exceeded its timeout, kill it.
   if ([task isRunning]) {
     [task terminate];
-    return nil;
   }
 
   return stdBuff;
