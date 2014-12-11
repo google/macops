@@ -85,9 +85,6 @@ class MultilineSysLogHandler(logging.handlers.SysLogHandler):
     msg = self.format(record)
 
     if len(msg) > 2000:
-      record_one = copy.deepcopy(record)
-      record_two = copy.deepcopy(record)
-
       break_loc_pre = 0
       for break_char in ['\n', ' ', '\t']:
         break_loc_pre = msg.rfind(break_char, 1000, 2000)
@@ -99,13 +96,17 @@ class MultilineSysLogHandler(logging.handlers.SysLogHandler):
         break_loc_pre = 2000
         break_loc_post = 2000
 
-      record_one.msg = msg[:break_loc_pre]
-      record_one.args = None
-      record_two.msg = 'CONTINUED: %s' % msg[break_loc_post:]
-      record_two.args = None
+      r1msg = msg[:break_loc_pre]
+      r2msg = 'CONTINUED: %s' % msg[break_loc_post:]
 
-      logging.handlers.SysLogHandler.emit(self, record_one)
-      self.emit(record_two)
+      r1 = logging.LogRecord(
+          record.name, record.levelno, record.pathname, record.lineno,
+          r1msg, record.args, None, func=record.funcName)
+      r2 = logging.LogRecord(
+          record.name, record.levelno, record.pathname, None, r2msg, None, None)
+
+      logging.handlers.SysLogHandler.emit(self, r1)
+      self.emit(r2)
     else:
       logging.handlers.SysLogHandler.emit(self, record)
 
