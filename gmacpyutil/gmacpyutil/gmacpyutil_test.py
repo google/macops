@@ -86,6 +86,14 @@ class GmacpytutilModuleTest(mox.MoxTestBase):
                      'CONTINUED: %s' % ('y' * 149))
     mock_syslogemit.reset_mock()
 
+  def testMultilineSysLogHandlerException(self):
+    gmacpyutil.ConfigureLogging(stderr=False, syslog=True)
+
+    try:
+      raise Exception('\n'.join(['error ' * 100] * 10))
+    except Exception:  # pylint: disable=broad-except
+      gmacputil.logging.exception('something is busticated')
+
   def testConfigureLogging(self):
     """Test ConfigureLogging, syslog and stderr, debug log level."""
     self.StubSetup()
