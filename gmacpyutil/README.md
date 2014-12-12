@@ -21,9 +21,11 @@ All modules and methods should have helpful docstrings. Some of the highlights:
   - Configure the system proxy
 
 # Requirements
-Most of the module will work with a default python installation. However, `experiments` will need [PyYAML][] and `cocoadialog` will need [CocoaDialog][].
+Most of the module will work with a default python installation.
 
-The tests have several non-default requirements: [mox][], [mock][], and [google-apputils][]
+`gmacpyutil.experiments` will need [PyYAML][] and `gmacpyutil.cocoadialog` will need [CocoaDialog][].
+
+The tests have several requirements: [mox][], [mock][], and [google-apputils][]
 
 # Customization
 Most customization can be done by modifying `defaults.py`.
@@ -44,7 +46,26 @@ $ python -m unittest discover -p '*_test.py'
 ```
 
 # Experiments
-`experiments.py` can also be installed as a standalone script.
+`gmacpyutil.experiments` can also be installed as a program.
+```
+$ python -m gmacpyutil.experiments --help
+Usage: experiments.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -D, --debug
+  -F, --formatted       Output experiments as one "experiment,status" per line
+  -e MANUALLY_ENABLE, --enable=MANUALLY_ENABLE
+                        Comma-delimited list of experiments to manually
+                        enable.
+  -d MANUALLY_DISABLE, --disable=MANUALLY_DISABLE
+                        Comma-delimited list of experiments to manually
+                        enable.
+  -r RECOMMENDED, --recommended=RECOMMENDED
+                        Comma-delimited list of experiments to no longer
+                        manually manage.
+
+```
 
 The typical use is to deploy an `experiments.yaml` file (a sample is included in `data/experiments.yaml`) to every client. A new experiment is usually created with a `percentage` of `0`, and the experiment owner manually enables the experiment on her machine and tests. Once the tests pass, the owner will set `enable_unstable` to `true`, and verify there. Depending on the size of the fleet, she can also `enable_testing`. Then, she will gradually increase the `percentage` as she sees fit.
 
