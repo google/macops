@@ -92,7 +92,7 @@ class GmacpytutilModuleTest(mox.MoxTestBase):
     try:
       raise Exception('\n'.join(['error ' * 100] * 10))
     except Exception:  # pylint: disable=broad-except
-      gmacputil.logging.exception('something is busticated')
+      gmacpyutil.logging.exception('something is busticated')
 
   def testConfigureLogging(self):
     """Test ConfigureLogging, syslog and stderr, debug log level."""

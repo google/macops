@@ -1,6 +1,5 @@
 """Modules and methods for managing OS X."""
 
-import copy
 import ctypes
 import fcntl
 import logging
