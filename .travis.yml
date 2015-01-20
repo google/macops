@@ -1,0 +1,8 @@
+---
+language: objective-c
+
+env:
+  - TEST_DIR=gmacpyutil
+  - TEST_DIR=run_it
+
+script: cd $TEST_DIR && bash run_tests.sh
