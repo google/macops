@@ -100,7 +100,7 @@ class MultilineSysLogHandler(logging.handlers.SysLogHandler):
 
       r1 = logging.LogRecord(
           record.name, record.levelno, record.pathname, record.lineno,
-          r1msg, record.args, None, func=record.funcName)
+          r1msg, None, None, func=record.funcName)
       r2 = logging.LogRecord(
           record.name, record.levelno, record.pathname, None, r2msg, None, None)
 
