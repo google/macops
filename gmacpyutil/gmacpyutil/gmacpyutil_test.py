@@ -94,6 +94,11 @@ class GmacpytutilModuleTest(mox.MoxTestBase):
     except Exception:  # pylint: disable=broad-except
       gmacpyutil.logging.exception('something is busticated')
 
+  def testMultilineSysLogHandlerFormattedString(self):
+    fs = '%s' +  'a' * 2500
+    gmacpyutil.ConfigureLogging(stderr=False, syslog=True)
+    gmacpyutil.logging.error(fs, 'foo')
+
   def testConfigureLogging(self):
     """Test ConfigureLogging, syslog and stderr, debug log level."""
     self.StubSetup()

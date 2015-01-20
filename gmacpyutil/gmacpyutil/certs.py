@@ -195,7 +195,7 @@ def _GetCertificates(keychain=None):
 
 
 def DeleteCert(osx_fingerprint, keychain=None, gui=False,
-               certhandler=None):
+               password=None):
   """Deletes a certificate by SHA1 hash.
 
   Args:
@@ -203,17 +203,14 @@ def DeleteCert(osx_fingerprint, keychain=None, gui=False,
     keychain: str, keychain to delete from; if unset the default keychain is
               used (normally the login keychain)
     gui: True if running in a gui context
-    certhandler: calib.CertificateHandler provides sso password to eliminate
-                 another password prompt for installation into the system
-                 keychain
-
+    password: The user's password if already known.
 
   Raises:
     CertError: unable to delete certificate
   """
   sudo, sudo_pass = _GetSudoContext(keychain,
                                     gui=gui,
-                                    certhandler=certhandler)
+                                    password=password)
   cmd = [CMD_SECURITY, 'delete-certificate', '-Z', osx_fingerprint]
   if keychain:
     cmd.append(keychain)
@@ -372,44 +369,35 @@ def CreateIdentityPreference(issuer_cn, service, keychain=login_keychain):
     raise CertError(stdout, stderr)
 
 
-def _GetSudoContext(keychain, gui=False, certhandler=None):
+def _GetSudoContext(keychain, gui=False, password=None):
   """Determine if we need sudo and get a sudo password if necessary.
 
-  This code assumes that if a certhandler is passed in, the password stored in
-  that object is for a user with sudo privs.
   TODO(user): handle shadow admin
 
   Args:
     keychain: path to keychain
     gui: True if we are running from the gui
-    certhandler: calib.CertificateHandler
+    password: The user's password.
 
   Returns:
     sudo: True if this is the system keychain and we will need sudo
-    sudo_pass: sudo password if necessary, or None
+    sudo_pass: sudo password if necessary, or None if not necessary or not
+               available.
   """
 
   sudo_pass = None
   if keychain == SYSTEM_KEYCHAIN:
 
-    # If we have a certhandler we already have the password so no need
-    # for another prompt.  We must test in case net credentials differ
-    # from local credentials, or users are different (provisioning)
-    if certhandler:
-      sudo_pass = certhandler.opener.password
-      if not sudo_pass:
-        logging.debug('Getting a password for sudo in certs._GetSudoContext')
-        sudo_pass = getauth.GetPassword(gui=gui)
-        certhandler.opener.password = sudo_pass
-      else:
-        logging.debug('Trying to reuse password from certhandler for sudo')
+    # If we're given a password we should test if it works for sudo.
+    if password:
       (unused_stdout, unused_stderr, return_code) = gmacpyutil.RunProcess(
-          ['-v'], sudo=True, sudo_password=sudo_pass)
+          ['-v'], sudo=True, sudo_password=password)
       if return_code == 0:
-        return keychain == SYSTEM_KEYCHAIN, sudo_pass
+        return keychain == SYSTEM_KEYCHAIN, password
 
     if gui:
-      # If this is gui context try and get a passwd, otherwise let sudo do the
+      # If we arrive here it means the password doesn't work for sudo, if this
+      # is a gui context, try and get a passwd, otherwise let sudo do the
       # prompting in the terminal
       try:
         sudo_pass = getauth.GetPassword(gui=gui)
@@ -421,7 +409,7 @@ def _GetSudoContext(keychain, gui=False, certhandler=None):
 
 def InstallPrivateKeyInKeychain(private_key, keychain=login_keychain,
                                 trusted_app_path=None, passphrase=None,
-                                gui=False, certhandler=None):
+                                gui=False, password=None):
   """Install the private key into the keychain.
 
   Args:
@@ -431,16 +419,14 @@ def InstallPrivateKeyInKeychain(private_key, keychain=login_keychain,
                       access private key.  If None, trust is set Open
     passphrase: str, optional passphrase the private key is encrypted with
     gui: True if running in a gui context
-    certhandler: calib.CertificateHandler provides sso password to eliminate
-                 another password prompt for installation into the system
-                 keychain
+    password: The user's password if already known.
 
   Raises:
     KeychainError: if there are any errors installing
   """
   sudo, sudo_pass = _GetSudoContext(keychain,
                                     gui=gui,
-                                    certhandler=certhandler)
+                                    password=password)
 
   temp_dir = tempfile.mkdtemp(prefix='cert_pkey_install')
   key_file = '%s/private.key' % temp_dir
@@ -475,7 +461,7 @@ def InstallPrivateKeyInKeychain(private_key, keychain=login_keychain,
 
 def InstallCertInKeychain(pem, private_key, keychain=login_keychain,
                           trusted_app_path=None, passphrase=None, gui=False,
-                          certhandler=None):
+                          password=None):
   """Install the certificate and private key into the keychain.
 
   Args:
@@ -487,16 +473,14 @@ def InstallCertInKeychain(pem, private_key, keychain=login_keychain,
                       backwards compatibility.  If None, trust is set Open
     passphrase: str, optional passphrase the private key is encrypted with
     gui: True if running in a gui context
-    certhandler: calib.CertificateHandler provides sso password to eliminate
-                 another password prompt for installation into the system
-                 keychain
+    password: The user's password if already known.
 
   Raises:
     KeychainError: if there are any errors installing
   """
   sudo, sudo_pass = _GetSudoContext(keychain,
                                     gui=gui,
-                                    certhandler=certhandler)
+                                    password=password)
 
   if type(trusted_app_path) == str:
     # Convert bare strings to a list for backwards compatibility
@@ -507,7 +491,7 @@ def InstallCertInKeychain(pem, private_key, keychain=login_keychain,
   InstallPrivateKeyInKeychain(private_key, keychain=keychain,
                               trusted_app_path=trusted_app_path,
                               passphrase=passphrase, gui=gui,
-                              certhandler=certhandler)
+                              password=sudo_pass)
 
   temp_dir = tempfile.mkdtemp(prefix='cert_install')
   cert_file = '%s/certificate.cer' % temp_dir
@@ -534,7 +518,7 @@ def InstallCertInKeychain(pem, private_key, keychain=login_keychain,
 
 
 def RemoveIssuerCertsFromKeychain(issuer_cn, keychain=login_keychain, gui=False,
-                                  certhandler=None):
+                                  password=None):
   """Removes all certificates issued from a given CN from the keychain.
 
   DeleteCert tries to raise privileges to allow deletions from the System
@@ -544,9 +528,7 @@ def RemoveIssuerCertsFromKeychain(issuer_cn, keychain=login_keychain, gui=False,
     issuer_cn: str, the certificate's issuer's CN
     keychain: str, the path to the keychain to remove from
     gui: True if running in a gui context
-    certhandler: calib.CertificateHandler provides sso password to eliminate
-                 another password prompt for installation into the system
-                 keychain
+    password: The user's password if already known.
 
   Raises:
     KeychainError: if there are any errors removing
@@ -564,7 +546,7 @@ def RemoveIssuerCertsFromKeychain(issuer_cn, keychain=login_keychain, gui=False,
       logging.debug('Removing cert with fingerprint %s from %s',
                     cert.osx_fingerprint, keychain)
       DeleteCert(cert.osx_fingerprint, keychain=keychain, gui=gui,
-                 certhandler=certhandler)
+                 password=password)
       deleted_certs.append(cert.serial)
     except CertError, e:
       logging.error('Cannot delete old certificate: %s', str(e))

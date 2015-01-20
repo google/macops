@@ -703,13 +703,13 @@ class CertsModuleTest(mox.MoxTestBase):
     certs.FindCertificates(issuer_cn='i', keychain='k').AndReturn([c])
     certs.logging.debug(
         'Removing cert with fingerprint %s from %s', 'f', 'k').AndReturn(None)
-    certs.DeleteCert('f', certhandler=None,
+    certs.DeleteCert('f', password=None,
                      gui=False, keychain='k').AndReturn(None)
     # Remove fails
     certs.FindCertificates(issuer_cn='i', keychain='k').AndReturn([c])
     certs.logging.debug(
         'Removing cert with fingerprint %s from %s', 'f', 'k').AndReturn(None)
-    certs.DeleteCert('f', certhandler=None,
+    certs.DeleteCert('f', password=None,
                      gui=False, keychain='k').AndRaise(certs.CertError('err'))
     certs.logging.error('Cannot delete old certificate: %s', 'err')
 
@@ -805,9 +805,7 @@ class CertsModuleTest(mox.MoxTestBase):
     self.mox.VerifyAll()
 
   def _SudoContextHelper(self):
-    self.certh = self.mox.CreateMockAnything()
-    self.certh.opener = self.mox.CreateMockAnything()
-    self.certh.opener.password = 'pass'
+    self.password = 'hunter2'
     self.keychain = certs.SYSTEM_KEYCHAIN
 
   def testGetSudoContextWithCertHandler(self):
@@ -816,14 +814,14 @@ class CertsModuleTest(mox.MoxTestBase):
     self.mox.StubOutWithMock(certs.gmacpyutil, 'RunProcess')
     certs.gmacpyutil.RunProcess(
         ['-v'], sudo=True,
-        sudo_password=self.certh.opener.password).AndReturn(['', '', 0])
+        sudo_password=self.password).AndReturn(['', '', 0])
     self.mox.ReplayAll()
     sudo, sudo_pass = certs._GetSudoContext(self.keychain,
                                             gui=True,
-                                            certhandler=self.certh)
+                                            password=self.password)
     self.mox.VerifyAll()
     self.assertTrue(sudo)
-    self.assertEqual(sudo_pass, self.certh.opener.password)
+    self.assertEqual(sudo_pass, 'hunter2')
 
   def testGetSudoContextWithoutCertHandlerGUIError(self):
     self._SudoContextHelper()
