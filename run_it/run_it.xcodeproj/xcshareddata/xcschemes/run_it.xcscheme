@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "DA7508CC1961C47A004797F3"
                BuildableName = "run_it"
                BlueprintName = "run_it"
+               ReferencedContainer = "container:run_it.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DA7508E11961DBCA004797F3"
+               BuildableName = "run_it-Tests.xctest"
+               BlueprintName = "run_it-Tests"
                ReferencedContainer = "container:run_it.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

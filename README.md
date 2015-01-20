@@ -1,4 +1,4 @@
-Overview
+Overview [![Build Status](https://travis-ci.org/google/macops.png?branch=master)](https://travis-ci.org/google/macops)
 ========
 
 These are some utilities, tools, and scripts for managing and tracking a fleet of Macintoshes in a corporate environment. We expect to use this primarily as a repository for small scripts or tools that don't warrant
