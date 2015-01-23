@@ -64,7 +64,7 @@ Disclaimer
 This is not an official Google product.
 
   [Simian]: http://code.google.com/p/simian
-  [Munki]: http://code.google.com/p/munki
+  [Munki]: https://github.com/munki/munki
   [Santa]: https://github.com/google/santa
   [Cauliflower Vest]: https://code.google.com/p/cauliflowervest
   [PyMacAdmin]: http://code.google.com/p/pymacadmin
