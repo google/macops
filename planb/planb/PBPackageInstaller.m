@@ -198,7 +198,6 @@
   NSArray *args = @[ @"--forget", packageReceipt ];
   NSTask *pkgutil = [[NSTask alloc] init];
   NSPipe *pipe = [NSPipe pipe];
-  NSPipe *stdin_pipe = [NSPipe pipe];
 
   [pkgutil setLaunchPath:@"/usr/sbin/pkgutil"];
   [pkgutil setArguments:args];
