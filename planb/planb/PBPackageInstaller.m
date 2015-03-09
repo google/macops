@@ -130,6 +130,7 @@
   [hdiutil setArguments:args];
   [hdiutil setStandardOutput:pipe];
   [hdiutil setStandardError:pipe];
+  [hdiutil setStandardInput:[NSPipe pipe]];
   @try {
     [hdiutil launch];
   }
@@ -168,6 +169,7 @@
   [installer setArguments:args];
   [installer setStandardOutput:pipe];
   [installer setStandardError:pipe];
+  [installer setStandardInput:[NSPipe pipe]];
   @try {
     [installer launch];
   }
@@ -196,11 +198,13 @@
   NSArray *args = @[ @"--forget", packageReceipt ];
   NSTask *pkgutil = [[NSTask alloc] init];
   NSPipe *pipe = [NSPipe pipe];
+  NSPipe *stdin_pipe = [NSPipe pipe];
 
   [pkgutil setLaunchPath:@"/usr/sbin/pkgutil"];
   [pkgutil setArguments:args];
   [pkgutil setStandardOutput:pipe];
   [pkgutil setStandardError:pipe];
+  [pkgutil setStandardInput:[NSPipe pipe]];
   @try {
     [pkgutil launch];
   }
@@ -240,7 +244,7 @@
 
   // If task has exceeded its timeout, kill it.
   if ([task isRunning]) {
-    [task terminate];
+    kill([task processIdentifier], SIGKILL);
   }
 
   return stdBuff;
