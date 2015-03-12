@@ -81,9 +81,17 @@ int main(int argc, const char * argv[]) {
 
       NSURL *url = [URLBuilder URLForTrackWithPkg:item];
       PBLog(@"Requesting %@", url);
+
+      // Disable disk and memory caching of downloads.
+      [NSURLCache setSharedURLCache:[[NSURLCache alloc] initWithMemoryCapacity:0
+                                                                  diskCapacity:0
+                                                                      diskPath:nil]];
+
+      // Also instruct NSURLRequest to ignore local and remote caches; download only from source.
       NSURLRequest *urlReq = [NSURLRequest requestWithURL:url
-                                              cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                              cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                           timeoutInterval:30];
+
       NSURLConnection *urlConn = [[NSURLConnection alloc] initWithRequest:urlReq
                                                                  delegate:connDel];
 
