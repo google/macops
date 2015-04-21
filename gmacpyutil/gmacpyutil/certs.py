@@ -372,8 +372,6 @@ def CreateIdentityPreference(issuer_cn, service, keychain=login_keychain):
 def _GetSudoContext(keychain, gui=False, password=None):
   """Determine if we need sudo and get a sudo password if necessary.
 
-  TODO(user): handle shadow admin
-
   Args:
     keychain: path to keychain
     gui: True if we are running from the gui
@@ -400,7 +398,9 @@ def _GetSudoContext(keychain, gui=False, password=None):
       # is a gui context, try and get a passwd, otherwise let sudo do the
       # prompting in the terminal
       try:
-        sudo_pass = getauth.GetPassword(gui=gui)
+        sudo_pass = getauth.GetPassword(
+            gui=gui, title='Get sudo Password', prompt='sudo password',
+            text='Enter local machine password')
       except (EOFError, KeyboardInterrupt):
         logging.exception('Could not get sudo password from GUI prompt')
         raise

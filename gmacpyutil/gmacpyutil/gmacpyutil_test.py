@@ -1147,6 +1147,36 @@ class GmacpytutilModuleTest(mox.MoxTestBase):
     self.assertEqual(major_os_version, '10.10')
     self.mox.VerifyAll()
 
+  @mock.patch.multiple(gmacpyutil, CreatePowerAssertion=mock.DEFAULT,
+                       ReleasePowerAssertion=mock.DEFAULT,
+                       ConfigureIOKit=mock.DEFAULT, logging=mock.DEFAULT)
+  def testNoIdleAssertion(self, **mocks):
+    """Test NoIdleAssertion context handler."""
+    mocks['CreatePowerAssertion'].return_value = (None, 'id')
+    mocks['ReleasePowerAssertion'].return_value = None
+    with gmacpyutil.NoIdleAssertion('reason'):
+      pass
+
+    self.assertTrue(mocks['CreatePowerAssertion'].called)
+    self.assertTrue(mocks['ReleasePowerAssertion'].called)
+    self.assertTrue(mocks['logging'].debug.called)
+    self.assertFalse(mocks['logging'].error.called)
+
+  @mock.patch.multiple(gmacpyutil, CreatePowerAssertion=mock.DEFAULT,
+                       ReleasePowerAssertion=mock.DEFAULT,
+                       ConfigureIOKit=mock.DEFAULT, logging=mock.DEFAULT)
+  def testNoIdleAssertionLogsOnError(self, **mocks):
+    """Test NoIdleAssertion context handler logs on error."""
+    mocks['CreatePowerAssertion'].return_value = (True, 'id')
+    mocks['ReleasePowerAssertion'].return_value = True
+    with gmacpyutil.NoIdleAssertion('reason'):
+      pass
+
+    self.assertTrue(mocks['CreatePowerAssertion'].called)
+    self.assertTrue(mocks['ReleasePowerAssertion'].called)
+    self.assertFalse(mocks['logging'].debug.called)
+    self.assertEqual(2, mocks['logging'].error.call_count)
+
 
 def main(unused_argv):
   basetest.main()

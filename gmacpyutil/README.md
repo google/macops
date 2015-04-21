@@ -6,7 +6,7 @@ All modules and methods should have helpful docstrings. Some of the highlights:
 - `gmacpyutil` has several top-level methods
   - `RunProcess`, a full-featured wrapper for subprocess.Popen with support for sudo, background execution, streaming output, and more
   - `ConfigureLogging`, a convenience method to automatically configure syslog and, optionally, console logging
-  - Reading and modifying plists with `GetPlist`, `GetPlistKey`, and `SetPlistKey`
+  - Reading and modifying plists with `GetPlist`, `GetPlistKey`, and `SetPistKey`
 - `gmacpyutil.airport` has methods to control WiFi interfaces
 - `gmacpyutil.certs` has methods to manipulate certificates in the OS X Keychain
   - `FindCertificates` can find one or more certificates based on attributes such as issuer, subject, fingerprint, start and end dates, and more
