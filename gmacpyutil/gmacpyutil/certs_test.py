@@ -828,7 +828,9 @@ class CertsModuleTest(mox.MoxTestBase):
 
     self.mox.StubOutWithMock(certs.logging, 'exception')
     self.mox.StubOutWithMock(certs.getauth, 'GetPassword')
-    certs.getauth.GetPassword(gui=True).AndRaise(EOFError)
+    certs.getauth.GetPassword(
+        gui=True, title='Get sudo Password', prompt='sudo password',
+        text='Enter local machine password').AndRaise(EOFError)
     certs.logging.exception(
         'Could not get sudo password from GUI prompt').AndReturn(None)
     self.mox.ReplayAll()
@@ -839,7 +841,9 @@ class CertsModuleTest(mox.MoxTestBase):
     self._SudoContextHelper()
 
     self.mox.StubOutWithMock(certs.getauth, 'GetPassword')
-    certs.getauth.GetPassword(gui=True).AndReturn('pass')
+    certs.getauth.GetPassword(
+        gui=True, title='Get sudo Password', prompt='sudo password',
+        text='Enter local machine password').AndReturn('pass')
     self.mox.ReplayAll()
     sudo, sudo_pass = certs._GetSudoContext(self.keychain, gui=True)
     self.mox.VerifyAll()

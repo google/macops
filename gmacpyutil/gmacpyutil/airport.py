@@ -50,6 +50,23 @@ def GetDefaultInterface():
   return CWInterface.interface()  # pylint:disable=undefined-variable
 
 
+def GetInterfaceName(interface=None):
+  """Return the BSD name of the interface.
+
+  Args:
+    interface: the CWInterface to operate on.
+
+  Returns:
+    str: the BSD name of the interface, e.g. en0
+  """
+  if not interface:
+    interface = GetDefaultInterface()
+    if not interface:
+      return None
+
+  return str(interface.interfaceName())
+
+
 def GetInterfacePower(interface=None):
   """Determines if the interface is powered on.
 

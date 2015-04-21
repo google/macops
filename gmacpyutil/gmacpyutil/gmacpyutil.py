@@ -1,5 +1,6 @@
 """Modules and methods for managing OS X."""
 
+import contextlib
 import ctypes
 import fcntl
 import logging
@@ -620,9 +621,46 @@ def ReleasePowerAssertion(io_lib, assertion_id):
         CreatePowerAssertion()
 
   Returns:
-    0 if successful, stderr otherwise
+    0 if successful, stderr otherwise.
   """
-  return io_lib.IOPMAssertionRelease(assertion_id)
+  try:
+    return io_lib.IOPMAssertionRelease(assertion_id)
+  except AttributeError:
+    return 'IOKit library returned an error.'
+
+
+@contextlib.contextmanager
+def NoIdleAssertion(reason):
+  """Context manager for creating and releasing a NoIdleAssertion.
+
+  https://docs.python.org/2/library/contextlib.html#contextlib.contextmanager
+
+  Usage:
+  with NoIdleAssertion():
+    # Some stuff
+
+  Args:
+    reason: string, tag for the power assertion
+  Yields:
+    None
+  """
+  assertion_type = 'NoIdleSleepAssertion'
+  io_lib = ConfigureIOKit()
+  returncode, assertion_id = CreatePowerAssertion(
+      io_lib, assertion_type, 255, reason)
+  if returncode:
+    logging.error('Could not create assertion: %s', returncode)
+  else:
+    logging.debug('Created %s', assertion_type)
+
+  try:
+    yield
+  finally:
+    returncode = ReleasePowerAssertion(io_lib, assertion_id)
+    if returncode:
+      logging.error('Could not release assertion: %s', returncode)
+    else:
+      logging.debug('Released %s', assertion_type)
 
 
 def GetPlist(plist):

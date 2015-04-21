@@ -311,13 +311,13 @@ class SystemProfiler(object):
     Raises:
       SystemProfilerError: when disk0 is not found on SATA bus.
     """
-    # the order is important so we prefer SATA then RAID finally PATA
-    sp_types = ['SPSerialATADataType', 'SPHardwareRAIDDataType',
-                'SPParallelATADataType']
+    # the order is important so we prefer SATA, NVMe, RAID then finally PATA.
+    sp_types = ['SPSerialATADataType', 'SPNVMeDataType',
+                'SPHardwareRAIDDataType', 'SPParallelATADataType']
     for sp_type in sp_types:
       for data in self._GetSystemProfile(sp_type):
         if data.get('_dataType', None) == sp_type:
-          for controller in data['_items']:
+          for controller in data.get('_items', []):
             for device in controller.get('_items', []):
               if device.get('bsd_name', '').find('disk0') > -1:
                 logging.debug('device_serial: %s', device['device_serial'])
