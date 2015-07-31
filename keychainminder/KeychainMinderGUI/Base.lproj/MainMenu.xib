@@ -33,6 +33,24 @@
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8p-ne-To3" userLabel="Welcome View">
                                 <rect key="frame" x="0.0" y="0.0" width="587" height="193"/>
                                 <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fD-av-7VE">
+                                        <rect key="frame" x="149" y="79" width="289" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Do you remember your previous password?" id="Fdi-O8-RFQ">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Tz-fE-q7b">
+                                        <rect key="frame" x="18" y="139" width="551" height="34"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="ICs-fG-r27">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">Your account password is out of sync with your login keychain password. 
+This can cause problems with applications that use the keychain.</string>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrD-5c-PpT">
                                         <rect key="frame" x="319" y="13" width="100" height="32"/>
                                         <buttonCell key="cell" type="push" title="No" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UKP-NR-5tY">
@@ -54,24 +72,6 @@
                                             <outlet property="nextKeyView" destination="IrD-5c-PpT" id="y02-Cx-df6"/>
                                         </connections>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fD-av-7VE">
-                                        <rect key="frame" x="149" y="79" width="289" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Do you remember your previous password?" id="Fdi-O8-RFQ">
-                                            <font key="font" metaFont="systemBold"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Tz-fE-q7b">
-                                        <rect key="frame" x="18" y="139" width="551" height="34"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="ICs-fG-r27">
-                                            <font key="font" metaFont="system"/>
-                                            <string key="title">Your account password is out of sync with your login keychain password. 
-This can cause problems with applications that use the keychain.</string>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                 </subviews>
                             </customView>
                         </subviews>
