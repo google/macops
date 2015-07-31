@@ -67,5 +67,5 @@ the plugin. The app does the following:
 Acknowledgements
 ================
 
-Thanks to [@tjburgin](https://twitter.com/tomjburgin) for help getting
+Thanks to [@tomjburgin](https://twitter.com/tomjburgin) for help getting
 SecurityAgentPlugins working at the screensaver.
