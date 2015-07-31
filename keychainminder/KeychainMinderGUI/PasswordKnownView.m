@@ -72,9 +72,8 @@ extern OSStatus SecKeychainChangePassword(SecKeychainRef keychainRef,
 }
 
 - (OSStatus)changeKeychainPasswordOldPassword:(NSString *)oldPw newPassword:(NSString *)newPw {
-  OSStatus ret = SecKeychainChangePassword(
+  return SecKeychainChangePassword(
       NULL, (UInt32)oldPw.length, [oldPw UTF8String], (UInt32)newPw.length, [newPw UTF8String]);
-  return ret;
 }
 
 @end
