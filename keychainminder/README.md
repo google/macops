@@ -1,5 +1,4 @@
-Keychain Minder
-================
+# Keychain Minder
 
 Keychain Minder is a simple OS X SecurityAgentPlugin for monitoring keychain
 password synchronization in enterprise environments.
@@ -18,19 +17,16 @@ does not work for unlocking the keychain, it will pop-up a dialog informing the
 user and giving them the option to either change the password (using both old 
 and new passwords) or reset the keychain.
 
-Installation
-============
+## Installation
 
 There's a package Makefile in the Package folder. You'll need
 [TheLuggage](https://github.com/unixorn/theluggage) installed to build it.
 
-Uninstallation
-==============
+## Uninstallation
 
 `sudo /Library/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/uninstall.sh`
 
-How it works
-============
+## How it works
 
 During every login the plugin is invoked. It does the following:
 
@@ -64,8 +60,7 @@ the plugin. The app does the following:
    and Local Items keychains using the provided password.
 4. Exits.
 
-Acknowledgements
-================
+## Acknowledgements
 
 Thanks to [@tomjburgin](https://twitter.com/tomjburgin) for inspiration and
 help getting the plugin working at the screensaver.
