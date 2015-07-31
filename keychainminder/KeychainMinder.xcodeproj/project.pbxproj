@@ -120,10 +120,10 @@
 		0D0EA9AC1B62BFE20041A897 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				0D189CAF1B6BE7470082B239 /* uninstall.sh */,
-				0D189CB01B6BE7470082B239 /* update_authdb.py */,
 				0D0EA9B41B62C0FC0041A897 /* main.m */,
 				0D0EA9AE1B62BFE20041A897 /* Info.plist */,
+				0D189CAF1B6BE7470082B239 /* uninstall.sh */,
+				0D189CB01B6BE7470082B239 /* update_authdb.py */,
 			);
 			name = Plugin;
 			path = KeychainMinder;
