@@ -39,7 +39,7 @@ SCREENSAVER_RULE = 'authenticate-session-owner-or-admin'
 def _GetRightData(right):
   """Get the current configuration for the requested right as a dict."""
   output = subprocess.check_output(
-      ["/usr/bin/security", "authorizationdb", "read", right],
+      ['/usr/bin/security', 'authorizationdb', 'read', right],
       stderr=subprocess.PIPE)
   data = plistlib.readPlistFromString(output)
   return data
@@ -49,7 +49,7 @@ def _SetRightData(right, data):
   """Update the configuration for the requested right."""
   data = plistlib.writePlistToString(data)
   p = subprocess.Popen(
-      ["/usr/bin/security", "authorizationdb", "write", right],
+      ['/usr/bin/security', 'authorizationdb', 'write', right],
       stdin=subprocess.PIPE,
       stderr=subprocess.PIPE)
   p.communicate(input=data)
@@ -96,8 +96,8 @@ def CheckForRoot():
 def ParseOptions():
   parser = argparse.ArgumentParser()
   group = parser.add_mutually_exclusive_group(required=True)
-  group.add_argument("--install", action="store_true", dest="install", help="Install plugin")
-  group.add_argument("--remove", action="store_true", dest="remove", help="Remove plugin")
+  group.add_argument('--install', action='store_true', dest='install', help='Install plugin')
+  group.add_argument('--remove', action='store_true', dest='remove', help='Remove plugin')
   return parser.parse_args()
 
 def main(argv):
