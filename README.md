@@ -24,6 +24,10 @@ gmacpyutil
 ----------
 Python modules with useful methods for managing and controlling Macintosh computers
 
+keychainminder
+--------------
+A SecurityAgentPlugin to keep the login keychain synchronized in enterprise environments.
+
 macdestroyer
 ------------
 A package that attempts to render the target machine unbootable.

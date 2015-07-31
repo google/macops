@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.google.corp.keychainminder</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/bin/open</string>
+		<string>/Library/Security/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/KeychainMinderGUI.app</string>
+	</array>
+	<key>WatchPaths</key>
+	<array>
+		<string>/Library/Preferences/com.google.corp.keychainminder.plist</string>
+	</array>
+</dict>
+</plist>
