@@ -29,58 +29,65 @@ import sys
 
 
 # Default mechanism.
-KEYCHAIN_MINDER_MECHANISM = "KeychainMinder:check,privileged"
+AUTHENTICATE_RIGHT = 'authenticate'
+KEYCHAIN_MINDER_MECHANISM = 'KeychainMinder:check,privileged'
 
-def _GetMechanismsContainsUs(mechanisms, mechanism=KEYCHAIN_MINDER_MECHANISM):
-  """Check if |mechanisms| contains |mechanism|."""
-  for m in mechanisms:
-    if m == mechanism:
-      return True
-  return False
+SCREENSAVER_RIGHT = 'system.login.screensaver'
+SCREENSAVER_RULE = 'authenticate-session-owner-or-admin'
 
-def _GetAuthenticateData():
-  """Get the current configuration for the 'authenticate' right as a dict."""
+
+def _GetRightData(right):
+  """Get the current configuration for the requested right as a dict."""
   output = subprocess.check_output(
-      ["/usr/bin/security", "authorizationdb", "read", "authenticate"],
+      ["/usr/bin/security", "authorizationdb", "read", right],
       stderr=subprocess.PIPE)
   data = plistlib.readPlistFromString(output)
   return data
 
-def _SetAuthenticateData(input):
-  """Update the configuration for the 'authenticate' right."""
-  data = plistlib.writePlistToString(input)
+
+def _SetRightData(right, data):
+  """Update the configuration for the requested right."""
+  data = plistlib.writePlistToString(data)
   p = subprocess.Popen(
-      ["/usr/bin/security", "authorizationdb", "write", "authenticate"],
+      ["/usr/bin/security", "authorizationdb", "write", right],
       stdin=subprocess.PIPE,
       stderr=subprocess.PIPE)
   p.communicate(input=data)
 
-def _UpdateMechanisms(data, install=True, mechanism=KEYCHAIN_MINDER_MECHANISM):
-  """Install/remove the requested mechanism in the right configuration."""
-  mechanisms = data.get('mechanisms')
-  if not mechanisms:
-    sys.exit("Unable to parse mechanisms from authenticate right")
-
-  if install != _GetMechanismsContainsUs(mechanisms):
-    if install:
-      mechanisms.append(mechanism)
-    else:
-      mechanisms.remove(mechanism)
-    data['mechanisms'] = mechanisms
-    _SetAuthenticateData(data)
-  else:
-    if install:
-      sys.exit("Mechanism is already installed")
-    else:
-      sys.exit("Mechanism is not installed")
 
 def InstallPlugin():
-  _UpdateMechanisms(_GetAuthenticateData())
-  print 'Mechanism installed.'
+  data = _GetRightData(AUTHENTICATE_RIGHT)
+  if not data.get('mechanisms').count(KEYCHAIN_MINDER_MECHANISM):
+    mechanisms = data.get('mechanisms')
+    mechanisms.append(KEYCHAIN_MINDER_MECHANISM)
+    data['mechanisms'] = mechanisms
+    _SetRightData(AUTHENTICATE_RIGHT, data)
+    print 'Mechanism installed.'
+  else:
+    print 'Mechanism already installed.'
+
+  data = _GetRightData(SCREENSAVER_RIGHT)
+  if data.get('rules') != [SCREENSAVER_RULE]:
+    data['rules'] = [SCREENSAVER_RULE]
+    _SetRightData(SCREENSAVER_RIGHT, data)
+    print 'Screensaver rule updated.'
+  else:
+    print 'Screensaver rule already correct.'
 
 def RemovePlugin():
-  _UpdateMechanisms(_GetAuthenticateData(), install=False)
-  print 'Mechanism removed.'
+  data = _GetRightData(AUTHENTICATE_RIGHT)
+  if not data.get('mechanisms').count(KEYCHAIN_MINDER_MECHANISM):
+    mechanisms = data.get('mechanisms')
+    mechanisms.append(KEYCHAIN_MINDER_MECHANISM)
+    data['mechanisms'] = mechanisms
+    _SetRightData(AUTHENTICATE_RIGHT, data)
+    print 'Mechanism removed.'
+  else:
+    print 'Mechanism already removed.'
+
+  # Note: Don't revert the screensaver rule. It wouldn't be difficult to
+  # revert to 'use-login-window-ui' but this isn't valid on all OS versions.
+
 
 def CheckForRoot():
   if not os.geteuid() == 0:
