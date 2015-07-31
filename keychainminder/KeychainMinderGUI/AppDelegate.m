@@ -40,6 +40,7 @@
   self.knownView = [[PasswordKnownView alloc] init];
   self.notKnownView = [[PasswordNotKnownView alloc] init];
 
+  [self.window makeFirstResponder:nil];
   [NSApp activateIgnoringOtherApps:YES];
 
   NSLog(@"KeychainMinder launched for %@", NSUserName());

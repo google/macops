@@ -12,10 +12,16 @@ users don't know what a keychain is, don't understand the dialog or have
 forgotten their password.
 
 Keychain Minder re-creates this built-in mechanism but does so for screensaver
-unlock and preference pane unlock instead of login. Upon noticing the password
+and preference pane unlock instead of login. Upon noticing the password
 does not work for unlocking the keychain, it will pop-up a dialog informing the
-user and giving them the option to either change the password (using both old 
+user and giving them the option to either change the password (using both old
 and new passwords) or reset the keychain.
+
+## Screenshots
+
+![Welcome](Docs/KeychainMinderWelcome.png)
+![Known Password](Docs/KeychainMinderKnownPw.png)
+![Unknown Password](Docs/KeychainMinderUnknownPw.png)
 
 ## Installation
 
