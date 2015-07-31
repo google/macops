@@ -68,4 +68,4 @@ Acknowledgements
 ================
 
 Thanks to [@tomjburgin](https://twitter.com/tomjburgin) for inspiration and
-help getting SecurityAgentPlugins working at the screensaver.
+help getting the plugin working at the screensaver.
