@@ -18,10 +18,10 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-python /Library/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/update_authdb.py --remove
-rm -rf /Library/SecurityAgentPlguins/KeychainMinder.bundle
-rm /Library/LaunchAgents/com.google.corp.keychainminder.plist
-rm /Library/Preferences/com.google.corp.keychainminder.plist
+/usr/bin/env python /Library/Security/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/update_authdb.py --remove
+/bin/rm -rf /Library/Security/SecurityAgentPlugins/KeychainMinder.bundle
+/bin/rm /Library/LaunchAgents/com.google.corp.keychainminder.plist
+/bin/rm /Library/Preferences/com.google.corp.keychainminder.plist
 
 user=$(/usr/bin/stat -f '%u' /dev/console)
 [[ -z "$user" ]] && exit 0
