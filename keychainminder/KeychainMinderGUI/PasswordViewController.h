@@ -16,9 +16,18 @@
 
 @interface PasswordViewController : NSViewController
 
+///  Subclasses should override and return an array of
+///  text fields, in the order they appear on screen.
 - (NSArray *)textFields;
+
+///  Call when the user has chosen to continue. Disables the focus ring around
+///  each of the textfields.
 - (void)beginProcessing;
+
+///  Called when processing is over. Re-enables the text field focus rings.
 - (void)endProcessing;
+
+///  Shakes the provided text field, empties it, calls endProcessing and then selects it.
 - (void)badPasswordField:(NSTextField *)textField;
 
 @end

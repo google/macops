@@ -53,7 +53,7 @@
   animation.keyPath = @"position.x";
   animation.values = @[ @0, @10, @-10, @10, @-10, @10, @0 ];
   animation.keyTimes = @[ @0, @(1 / 6.0), @(2 / 6.0), @(3 / 6.0), @(4 / 6.0), @(5 / 6.0), @1 ];
-  animation.duration = 0.8;
+  animation.duration = 0.6;
   animation.additive = YES;
   return animation;
 }
@@ -61,11 +61,11 @@
 - (void)badPasswordField:(NSTextField *)textField {
   [CATransaction begin];
   [CATransaction setCompletionBlock:^{
+    [textField setStringValue:@""];
     [self endProcessing];
     [self.view.window makeFirstResponder:textField];
   }];
   [textField.layer addAnimation:[self makeShakeAnimation] forKey:@"shake"];
-  [textField setStringValue:@""];
   [CATransaction commit];
 }
 
