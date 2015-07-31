@@ -3,7 +3,7 @@
 #  Requires TheLuggage (github.com/unixorn/luggage) to be installed.
 #
 
-LUGGAGE:=/usr/local/share/luggage.make
+LUGGAGE:=/usr/local/share/luggage/luggage.make
 include ${LUGGAGE}
 
 TITLE:=KeychainMinder
