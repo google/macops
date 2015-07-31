@@ -12,7 +12,13 @@
 ///    See the License for the specific language governing permissions and
 ///    limitations under the License.
 
-#import "PasswordViewController.h"
+@import Cocoa;
 
-@interface PasswordNotKnownView : PasswordViewController
+@interface PasswordViewController : NSViewController
+
+- (NSArray *)textFields;
+- (void)beginProcessing;
+- (void)endProcessing;
+- (void)badPasswordField:(NSTextField *)textField;
+
 @end

@@ -12,23 +12,23 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <window title="Keychain Minder" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="335" y="390" width="700" height="340"/>
+            <rect key="contentRect" x="335" y="390" width="587" height="340"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1577"/>
             <value key="minSize" type="size" width="700" height="340"/>
             <value key="maxSize" type="size" width="700" height="340"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="340"/>
+                <rect key="frame" x="0.0" y="0.0" width="587" height="340"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOg-tf-pER">
-                        <rect key="frame" x="300" y="214" width="100" height="100"/>
+                        <rect key="frame" x="243" y="214" width="100" height="100"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Keychain_Locked" id="ZVR-0s-ZNR"/>
                         <connections>
                             <outlet property="nextKeyView" destination="nMs-QZ-8nH" id="miE-io-61T"/>
                         </connections>
                     </imageView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DOU-9T-PHY" userLabel="View Area">
-                        <rect key="frame" x="57" y="20" width="587" height="193"/>
+                        <rect key="frame" x="0.0" y="20" width="587" height="193"/>
                         <subviews>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8p-ne-To3" userLabel="Welcome View">
                                 <rect key="frame" x="0.0" y="0.0" width="587" height="193"/>
@@ -94,7 +94,7 @@ MgA3AEEARwBQAFcAXABkAHkAewB9AH8AgQCLAJAAlQCgAKMApQCnAKkArgC5AMIAygDNANYA2wDoAOwA
             <connections>
                 <outlet property="initialFirstResponder" destination="qOg-tf-pER" id="oYc-Gg-UUe"/>
             </connections>
-            <point key="canvasLocation" x="482" y="474"/>
+            <point key="canvasLocation" x="482.5" y="474"/>
         </window>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">

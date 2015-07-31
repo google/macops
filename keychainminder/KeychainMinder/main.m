@@ -106,7 +106,8 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
       uid_t gid = pw->pw_gid;
       endpwent();
 
-      // Switch EUID/EGID to the target user so SecKeychain* knows who to affect. Then switch back.
+      // Switch EUID/EGID to the target user so SecKeychain* knows who to affect, validate
+      // the login keychain password, then switch back to the previous user.
       seteuid(uid);
       setegid(gid);
       SecKeychainSetUserInteractionAllowed(NO);
@@ -114,9 +115,9 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
       seteuid(originalUid);
       setegid(originalGid);
 
+      // Remove the current user, so they aren't duplicated in a second if
+      // the password wasn't valid.
       NSMutableArray *users = GetUsers();
-
-      // Remove the current user, so they aren't duplicated in a second if the password wasn't valid.
       [users removeObject:username];
 
       if (!passwordValid) {

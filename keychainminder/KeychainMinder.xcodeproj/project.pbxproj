@@ -24,6 +24,7 @@
 		0D19C15B1B6AB320000D5475 /* PasswordKnownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D19C1591B6AB320000D5475 /* PasswordKnownView.xib */; };
 		0D19C15F1B6AB329000D5475 /* PasswordNotKnownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D19C15D1B6AB329000D5475 /* PasswordNotKnownView.m */; };
 		0D19C1601B6AB329000D5475 /* PasswordNotKnownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D19C15E1B6AB329000D5475 /* PasswordNotKnownView.xib */; };
+		0D80140E1B6C0074006B8540 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D80140D1B6C0074006B8540 /* PasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		0D19C15C1B6AB329000D5475 /* PasswordNotKnownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordNotKnownView.h; sourceTree = "<group>"; };
 		0D19C15D1B6AB329000D5475 /* PasswordNotKnownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordNotKnownView.m; sourceTree = "<group>"; };
 		0D19C15E1B6AB329000D5475 /* PasswordNotKnownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordNotKnownView.xib; sourceTree = "<group>"; };
+		0D80140C1B6C0074006B8540 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		0D80140D1B6C0074006B8540 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,8 @@
 				0D0EA9C31B62D9AE0041A897 /* AppDelegate.h */,
 				0D0EA9C41B62D9AE0041A897 /* AppDelegate.m */,
 				0D0EA9CA1B62D9AE0041A897 /* MainMenu.xib */,
+				0D80140C1B6C0074006B8540 /* PasswordViewController.h */,
+				0D80140D1B6C0074006B8540 /* PasswordViewController.m */,
 				0D19C1571B6AB320000D5475 /* PasswordKnownView.h */,
 				0D19C1581B6AB320000D5475 /* PasswordKnownView.m */,
 				0D19C1591B6AB320000D5475 /* PasswordKnownView.xib */,
@@ -284,6 +289,7 @@
 				0D19C15F1B6AB329000D5475 /* PasswordNotKnownView.m in Sources */,
 				0D0EA9C71B62D9AE0041A897 /* main.m in Sources */,
 				0D0EA9C51B62D9AE0041A897 /* AppDelegate.m in Sources */,
+				0D80140E1B6C0074006B8540 /* PasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
