@@ -17,6 +17,14 @@ does not work for unlocking the keychain, it will pop-up a dialog informing the
 user and giving them the option to either change the password (using both old
 and new passwords) or reset the keychain.
 
+## Testing
+
+Keychain Minder has had very little testing so far but has been known to 
+work on 10.9.5, 10.10.4 and 10.11 beta 5.
+
+There's no real reason it shouldn't work on 10.7 and 10.8, it just hasn't 
+been tried. If you find it works, please let us know!
+
 ## Screenshots
 
 ![Welcome](Docs/KeychainMinderWelcome.png)
@@ -64,7 +72,13 @@ the plugin. The app does the following:
    keychain using this new password using SecKeychainResetLogin. This
    undocumented function from the Security framework will reset both the login
    and Local Items keychains using the provided password.
-4. Exits.
+
+The hardlink/open/unlock/unlink dance used in both the plugin and UI app
+are to avoid locking the Local Items keychain, as doing so can cause issues
+when trying to update the password or reset. 
+
+The undocumented functions used to update the password or reset the keychain
+could stop working at any time, though the same functions *are* used by Keychain Access.
 
 ## Acknowledgements
 
