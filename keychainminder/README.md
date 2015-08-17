@@ -36,6 +36,8 @@ been tried. If you find it works, please let us know!
 There's a package Makefile in the Package folder. You'll need
 [TheLuggage](https://github.com/unixorn/luggage) installed to build it.
 
+A reboot is required to take effect at the screensaver.
+
 ## Uninstallation
 
 `sudo /Library/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/uninstall.sh`

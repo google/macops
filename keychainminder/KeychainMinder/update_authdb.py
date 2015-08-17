@@ -67,8 +67,8 @@ def InstallPlugin():
     print 'Mechanism already installed.'
 
   data = _GetRightData(SCREENSAVER_RIGHT)
-  if data.get('rules') != [SCREENSAVER_RULE]:
-    data['rules'] = [SCREENSAVER_RULE]
+  if data.get('rule') != [SCREENSAVER_RULE]:
+    data['rule'] = [SCREENSAVER_RULE]
     _SetRightData(SCREENSAVER_RIGHT, data)
     print 'Screensaver rule updated.'
   else:
