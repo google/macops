@@ -34,7 +34,7 @@ been tried. If you find it works, please let us know!
 ## Installation
 
 There's a package Makefile in the Package folder. You'll need
-[TheLuggage](https://github.com/unixorn/theluggage) installed to build it.
+[TheLuggage](https://github.com/unixorn/luggage) installed to build it.
 
 ## Uninstallation
 
