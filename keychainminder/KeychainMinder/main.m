@@ -45,21 +45,10 @@ NSString *GetStringFromContext(MechanismRecord *mechanism, AuthorizationString k
   OSStatus err = mechanism->pluginRecord->callbacks->GetContextValue(
       mechanism->engineRef, key, &flags, &value);
   if (err == errSecSuccess && value->length > 0) {
-    return [[NSString alloc] initWithBytes:value->data
-                                    length:value->length
-                                  encoding:NSUTF8StringEncoding];
-  }
-  return nil;
-}
-
-NSString *GetStringFromHint(MechanismRecord *mechanism, AuthorizationString key) {
-  const AuthorizationValue *value;
-  OSStatus err = mechanism->pluginRecord->callbacks->GetHintValue(
-      mechanism->engineRef, key, &value);
-  if (err == errSecSuccess && value->length > 0) {
-    return [[NSString alloc] initWithBytes:value->data
-                                    length:value->length
-                                  encoding:NSUTF8StringEncoding];
+    NSString *s = [[NSString alloc] initWithBytes:value->data
+                                           length:value->length
+                                         encoding:NSUTF8StringEncoding];
+    return [s stringByReplacingOccurrencesOfString:@"\0" withString:@""];
   }
   return nil;
 }
@@ -91,11 +80,7 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
     NSString *username = GetStringFromContext(mechanism, kAuthorizationEnvironmentUsername);
     NSString *password = GetStringFromContext(mechanism, kAuthorizationEnvironmentPassword);
 
-    NSString *right = GetStringFromHint(mechanism, "authorize-right");
-    BOOL acceptableRight = ([right isEqualToString:@"system.login.screensaver"] ||
-                            [right hasPrefix:@"system.preferences"]);
-
-    if (acceptableRight && username && password) {
+    if (username && password) {
       // Get current UID/GID for later
       uid_t originalUid = geteuid();
       gid_t originalGid = getegid();

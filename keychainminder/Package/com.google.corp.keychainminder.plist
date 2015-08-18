@@ -9,6 +9,8 @@
 		<string>/usr/bin/open</string>
 		<string>/Library/Security/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/KeychainMinderGUI.app</string>
 	</array>
+	<key>RunAtLoad</key>
+	<true/>
 	<key>WatchPaths</key>
 	<array>
 		<string>/Library/Preferences/com.google.corp.keychainminder.plist</string>
