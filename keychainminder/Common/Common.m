@@ -29,41 +29,25 @@ void SetUsers(NSMutableArray *usersArray) {
 }
 
 BOOL ValidateLoginPassword(NSString *newPassword) {
-  AuthorizationItem authRightsItems[1];
-  authRightsItems[0].name = "com.google.keychain-minder.validate-new-password";
-  authRightsItems[0].value = NULL;
-  authRightsItems[0].valueLength = 0;
-  authRightsItems[0].flags = 0;
-  AuthorizationRights authRights;
-  authRights.count = sizeof(authRightsItems) / sizeof(authRightsItems[0]);
-  authRights.items = authRightsItems;
+  NSError *err = nil;
 
-  AuthorizationItem authEnvItems[2];
-  authEnvItems[0].name = kAuthorizationEnvironmentUsername;
-  authEnvItems[0].valueLength = NSUserName().length;
-  authEnvItems[0].value = (void *)[NSUserName() UTF8String];
-  authEnvItems[0].flags = 0;
-  authEnvItems[1].name = kAuthorizationEnvironmentPassword;
-  authEnvItems[1].valueLength = newPassword.length;
-  authEnvItems[1].value = (void *)[newPassword UTF8String];
-  authEnvItems[1].flags = 0;
-  AuthorizationEnvironment authEnv;
-  authEnv.count = sizeof(authEnvItems) / sizeof(authEnvItems[0]);
-  authEnv.items = authEnvItems;
+  ODSession *mySession = [ODSession defaultSession];
 
-  AuthorizationFlags authFlags = (kAuthorizationFlagDefaults |
-                                  kAuthorizationFlagExtendRights);
+  ODNode *myNode = [ODNode nodeWithSession:mySession type:kODNodeTypeAuthentication error:&err];
+  if (err) {
+    NSLog(@"Unable to get node: %@", err);
+    return NO;
+  }
 
-  AuthorizationRef authRef = NULL;
+  ODRecord *myRecord = [myNode recordWithRecordType:kODRecordTypeUsers
+                                               name:NSUserName()
+                                         attributes:nil
+                                              error:&err];
+  if (err) {
+    NSLog(@"Unable to get %@'s record: %@", NSUserName(), err);
+  }
 
-  // Create an authorization reference, retrieve rights and then release.
-  // CopyRights is where the authorization actually takes place and the result lets us know
-  // whether auth was successful.
-  AuthorizationCreate(&authRights, &authEnv, authFlags, &authRef);
-  OSStatus authStatus = AuthorizationCopyRights(authRef, &authRights, &authEnv, authFlags, NULL);
-  AuthorizationFree(authRef, kAuthorizationFlagDestroyRights);
-
-  return (authStatus == errAuthorizationSuccess);
+  return [myRecord verifyPassword:newPassword error:nil];
 }
 
 BOOL ValidateLoginKeychainPassword(NSString *oldPassword) {

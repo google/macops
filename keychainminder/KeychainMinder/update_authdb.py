@@ -28,12 +28,12 @@ import subprocess
 import sys
 
 
-# Default mechanism.
-AUTHENTICATE_RIGHT = 'authenticate'
 KEYCHAIN_MINDER_MECHANISM = 'KeychainMinder:check,privileged'
-
-SCREENSAVER_RIGHT = 'system.login.screensaver'
 SCREENSAVER_RULE = 'authenticate-session-owner-or-admin'
+
+AUTHENTICATE_RIGHT = 'authenticate'
+LOGIN_DONE_RIGHT = 'system.login.done'
+SCREENSAVER_RIGHT = 'system.login.screensaver'
 
 
 def _GetRightData(right):
@@ -52,46 +52,59 @@ def _SetRightData(right, data):
       ['/usr/bin/security', 'authorizationdb', 'write', right],
       stdin=subprocess.PIPE,
       stderr=subprocess.PIPE)
-  p.communicate(input=data)
+  _, stderr = p.communicate(input=data)
+  return stderr.count('YES') == 1
 
 
 def InstallPlugin():
-  data = _GetRightData(AUTHENTICATE_RIGHT)
-  if not data.get('mechanisms').count(KEYCHAIN_MINDER_MECHANISM):
-    mechanisms = data.get('mechanisms')
-    mechanisms.append(KEYCHAIN_MINDER_MECHANISM)
-    data['mechanisms'] = mechanisms
-    _SetRightData(AUTHENTICATE_RIGHT, data)
-    print 'Mechanism installed.'
-  else:
-    print 'Mechanism already installed.'
+  """Install the plugin to both rules and update screensaver right."""
+  for right in [AUTHENTICATE_RIGHT, LOGIN_DONE_RIGHT]:
+    data = _GetRightData(right)
+    mechanisms = data.get('mechanisms', [])
+    if not mechanisms.count(KEYCHAIN_MINDER_MECHANISM):
+      mechanisms.append(KEYCHAIN_MINDER_MECHANISM)
+      data['mechanisms'] = mechanisms
+      if _SetRightData(right, data):
+        print '%s: Mechanism installed.' % right
+      else:
+        print '%s: Failed to install mechanism' % right
+    else:
+      print '%s: Mechanism already installed.' % right
 
   data = _GetRightData(SCREENSAVER_RIGHT)
   if data.get('rule') != [SCREENSAVER_RULE]:
     data['rule'] = [SCREENSAVER_RULE]
-    _SetRightData(SCREENSAVER_RIGHT, data)
-    print 'Screensaver rule updated.'
+    if _SetRightData(SCREENSAVER_RIGHT, data):
+      print '%s: Rule updated.' % SCREENSAVER_RIGHT
+    else:
+      print '%s: Failed to update rule.' % SCREENSAVER_RIGHT
   else:
-    print 'Screensaver rule already correct.'
+    print '%s: Rule already correct.' % SCREENSAVER_RIGHT
+
 
 def RemovePlugin():
-  data = _GetRightData(AUTHENTICATE_RIGHT)
-  if not data.get('mechanisms').count(KEYCHAIN_MINDER_MECHANISM):
-    mechanisms = data.get('mechanisms')
-    mechanisms.append(KEYCHAIN_MINDER_MECHANISM)
-    data['mechanisms'] = mechanisms
-    _SetRightData(AUTHENTICATE_RIGHT, data)
-    print 'Mechanism removed.'
-  else:
-    print 'Mechanism already removed.'
+  """Remove the plugin from both rules."""
+  for right in [AUTHENTICATE_RIGHT, LOGIN_DONE_RIGHT]:
+    data = _GetRightData(right)
+    mechanisms = data.get('mechanisms', [])
+    if mechanisms.count(KEYCHAIN_MINDER_MECHANISM):
+      mechanisms.remove(KEYCHAIN_MINDER_MECHANISM)
+      data['mechanisms'] = mechanisms
+      if _SetRightData(right, data):
+        print '%s: Mechanism removed.' % right
+      else:
+        print '%s: Failed to remove mechanism.' % right
+    else:
+      print '%s: Mechanism already removed.' % right
 
-  # Note: Don't revert the screensaver rule. It wouldn't be difficult to
-  # revert to 'use-login-window-ui' but this isn't valid on all OS versions.
+    # Note: Don't revert the screensaver rule. It wouldn't be difficult to
+    # revert to 'use-login-window-ui' but this isn't valid on all OS versions.
 
 
 def CheckForRoot():
   if not os.geteuid() == 0:
     sys.exit('This script requires root privileges')
+
 
 def ParseOptions():
   parser = argparse.ArgumentParser()
@@ -100,6 +113,7 @@ def ParseOptions():
   group.add_argument('--remove', action='store_true', dest='remove', help='Remove plugin')
   return parser.parse_args()
 
+
 def main(argv):
   CheckForRoot()
   options = ParseOptions()
@@ -107,6 +121,7 @@ def main(argv):
     InstallPlugin()
   elif options.remove:
     RemovePlugin()
+
 
 if __name__ == '__main__':
   main(sys.argv)

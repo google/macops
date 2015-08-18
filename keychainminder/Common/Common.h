@@ -13,6 +13,7 @@
 ///    limitations under the License.
 
 @import Foundation;
+@import OpenDirectory;
 
 ///
 ///  Retrieves a mutable array from the plist on disk.
