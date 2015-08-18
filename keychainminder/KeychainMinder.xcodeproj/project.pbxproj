@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0D0EA9B51B62C0FC0041A897 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0EA9B41B62C0FC0041A897 /* main.m */; };
-		0D0EA9B71B62C12B0041A897 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0EA9B61B62C12B0041A897 /* Foundation.framework */; };
-		0D0EA9B91B62C12E0041A897 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0EA9B81B62C12E0041A897 /* Security.framework */; };
 		0D0EA9C51B62D9AE0041A897 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0EA9C41B62D9AE0041A897 /* AppDelegate.m */; };
 		0D0EA9C71B62D9AE0041A897 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0EA9C61B62D9AE0041A897 /* main.m */; };
 		0D0EA9CC1B62D9AE0041A897 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0EA9CA1B62D9AE0041A897 /* MainMenu.xib */; };
@@ -85,8 +83,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D0EA9B91B62C12E0041A897 /* Security.framework in Frameworks */,
-				0D0EA9B71B62C12B0041A897 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
