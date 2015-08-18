@@ -9,7 +9,7 @@ include ${LUGGAGE}
 TITLE:=KeychainMinder
 REVERSE_DOMAIN:=com.google.corp
 
-PACKAGE_VERSION:=1.0
+PACKAGE_VERSION:=$(shell defaults read $$PWD/../KeychainMinder/Info.plist CFBundleVersion)
 
 PAYLOAD:=pack-SecurityAgentPlugin-KeychainMinder.bundle \
 				 pack-Library-LaunchAgents-com.google.corp.keychainminder.plist \
