@@ -2,3 +2,5 @@
 *.pbxuser
 *.xcworkspace
 xcuserdata
+Build
+build
