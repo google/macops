@@ -46,6 +46,10 @@
   NSLog(@"KeychainMinder launched for %@", NSUserName());
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+  return YES;
+}
+
 - (void)updateIcon {
   [self.imageView setImage:[NSImage imageNamed:@"Keychain_Unlocked"]];
 }
@@ -61,7 +65,5 @@
   [[self.viewArea subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
   [[self.viewArea animator] addSubview:self.notKnownView.view];
 }
-
-
 
 @end
