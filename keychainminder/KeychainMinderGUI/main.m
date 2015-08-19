@@ -17,11 +17,6 @@
 @import Cocoa;
 
 int main(int argc, const char * argv[]) {
-#ifdef DEBUG
-  NSLog(@"DEBUG: Launching regardless of user's plist contents");
-#else
-  NSArray *users = GetUsers();
-  if (![users containsObject:NSUserName()]) exit(0);
-#endif
+  if (![GetUsers() containsObject:NSUserName()]) exit(0);
   return NSApplicationMain(argc, argv);
 }
