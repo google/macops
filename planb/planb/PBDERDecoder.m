@@ -81,18 +81,18 @@
  this:
  
  SEQUENCE {
- SET {
- SEQUENCE {
- OBJECT IDENTIFIER (2 5 4 6)
- PrintableString 'US'
- }
- }
- SET {
- SEQUENCE {
- OBJECT IDENTIFIER (2 5 4 10)
- PrintableString 'Megacorp Inc'
- }
- }
+  SET {
+    SEQUENCE {
+      OBJECT IDENTIFIER (2 5 4 6)
+      PrintableString 'US'
+    }
+  }
+  SET {
+    SEQUENCE {
+      OBJECT IDENTIFIER (2 5 4 10)
+      PrintableString 'Megacorp Inc'
+    }
+  }
  }
  
  This method assumes the passed in data will be in that format. If it isn't,
