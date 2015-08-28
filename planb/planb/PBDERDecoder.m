@@ -81,23 +81,23 @@
  this:
 
  SEQUENCE {
-   SET {
-     SEQUENCE {
-       OBJECT IDENTIFIER (2 5 4 6)
-       PrintableString 'US'
-     }
-   }
-   SET {
-     SEQUENCE {
-       OBJECT IDENTIFIER (2 5 4 10)
-       PrintableString 'Megacorp Inc'
-     }
-   }
+  SET {
+    SEQUENCE {
+      OBJECT IDENTIFIER (2 5 4 6)
+      PrintableString 'US'
+    }
+  }
+  SET {
+    SEQUENCE {
+      OBJECT IDENTIFIER (2 5 4 10)
+      PrintableString 'Megacorp Inc'
+    }
+  }
  }
 
  This method assumes the passed in data will be in that format. If it isn't,
  the DER decoding will fail and this method will return nil.
-*/
+ */
 - (NSDictionary *)decodeData:(NSData *)data {
   typedef struct {
     SecAsn1Oid oid;
@@ -141,18 +141,23 @@
                       data.length,
                       kSequenceOfSetOfOIDValueTemplate,
                       &a);
-  SecAsn1CoderRelease(coder);
-  if (err != errSecSuccess) return nil;
+  if (err != errSecSuccess) {
+    SecAsn1CoderRelease(coder);
+    return nil;
+  }
 
   // The data is decoded but now it's in a number of embedded structs.
   // Massage that into a nice dictionary of OID->String pairs.
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   OIDKeyValueList *anAttr;
-  for (int i = 0; (anAttr = a.lists[i]); i++) {
+  for (NSUInteger i = 0; (anAttr = a.lists[i]); i++) {
     OIDKeyValue *keyValue = anAttr->vals[0];
 
     // Sanity check
-    if (keyValue->value.Length > data.length) return nil;
+    if (keyValue->value.Length > data.length) {
+      SecAsn1CoderRelease(coder);
+      return nil;
+    }
 
     // Get the string value. First try creating as a UTF-8 string. If that fails,
     // fallback to trying as an ASCII string. If it still doesn't work, continue on
@@ -169,23 +174,24 @@
     if (!valueString) continue;
 
     // The OID is still encoded, so we need to decode it.
-    NSString *objectId = [self decodeOIDWithBytes:keyValue->oid.Data
-                                           length:keyValue->oid.Length];
+    NSString *objectId = [PBDERDecoder decodeOIDWithBytes:keyValue->oid.Data
+                                                   length:keyValue->oid.Length];
 
     // Add to the dictionary
     dict[objectId] = valueString;
   }
 
+  SecAsn1CoderRelease(coder);
   return dict;
 }
 
 
-/*
- Decodes an ASN.1 Object Identifier into a string separated by periods.
- See http://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx for
- details of the encoding.
-*/
-- (NSString *)decodeOIDWithBytes:(unsigned char *)bytes length:(NSUInteger)length {
+/**
+ * Decodes an ASN.1 Object Identifier into a string separated by periods.
+ * See http://msdn.microsoft.com/en-us/library/bb540809(v=vs.85).aspx for
+ * details of the encoding.
+ **/
++ (NSString *)decodeOIDWithBytes:(unsigned char *)bytes length:(NSUInteger)length {
   NSMutableArray *objectId = [NSMutableArray array];
   BOOL inVariableLengthByte = NO;
   NSUInteger variableLength = 0;
@@ -209,6 +215,7 @@
         variableLength += a;
         inVariableLengthByte = NO;
         [objectId addObject:@(variableLength)];
+        variableLength = 0;
       } else {
         [objectId addObject:@((NSUInteger)byte)];
       }

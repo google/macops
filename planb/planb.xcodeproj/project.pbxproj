@@ -31,7 +31,7 @@
 
 /* Begin PBXFileReference section */
 		0D6F12DB19EEDD80006B218E /* PBDERDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBDERDecoder.h; sourceTree = "<group>"; };
-		0D6F12DC19EEDD80006B218E /* PBDERDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBDERDecoder.m; sourceTree = "<group>"; };
+		0D6F12DC19EEDD80006B218E /* PBDERDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = PBDERDecoder.m; sourceTree = "<group>"; tabWidth = 2; };
 		0D789FD819461AC50036F7C4 /* roots.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = roots.pem; sourceTree = "<group>"; };
 		490A51D918D7581B00DA939E /* planb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planb; sourceTree = BUILT_PRODUCTS_DIR; };
 		490A51DC18D7581B00DA939E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
