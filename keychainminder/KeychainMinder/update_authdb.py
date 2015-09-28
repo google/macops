@@ -30,6 +30,7 @@ import sys
 
 KEYCHAIN_MINDER_MECHANISM = 'KeychainMinder:check,privileged'
 SCREENSAVER_RULE = 'authenticate-session-owner-or-admin'
+SCREENSAVER_PRETTY_RULE = 'use-login-window-ui'
 
 AUTHENTICATE_RIGHT = 'authenticate'
 LOGIN_DONE_RIGHT = 'system.login.done'
@@ -82,7 +83,7 @@ def InstallPlugin():
     print '%s: Rule already correct.' % SCREENSAVER_RIGHT
 
 
-def RemovePlugin():
+def RemovePlugin(restore_screensaver=False):
   """Remove the plugin from both rules."""
   for right in [AUTHENTICATE_RIGHT, LOGIN_DONE_RIGHT]:
     data = _GetRightData(right)
@@ -97,8 +98,16 @@ def RemovePlugin():
     else:
       print '%s: Mechanism already removed.' % right
 
-    # Note: Don't revert the screensaver rule. It wouldn't be difficult to
-    # revert to 'use-login-window-ui' but this isn't valid on all OS versions.
+    if restore_screensaver:
+      data = _GetRightData(SCREENSAVER_RIGHT)
+      if data.get('rule') != [SCREENSAVER_PRETTY_RULE]:
+        data['rule'] = [SCREENSAVER_PRETTY_RULE]
+        if _SetRightData(SCREENSAVER_RIGHT, data):
+          print '%s: Rule updated.' % SCREENSAVER_RIGHT
+        else:
+          print '%s: Failed to update rule.' % SCREENSAVER_RIGHT
+      else:
+        print '%s: Rule already correct.' % SCREENSAVER_RIGHT
 
 
 def CheckForRoot():
@@ -109,8 +118,13 @@ def CheckForRoot():
 def ParseOptions():
   parser = argparse.ArgumentParser()
   group = parser.add_mutually_exclusive_group(required=True)
-  group.add_argument('--install', action='store_true', dest='install', help='Install plugin')
-  group.add_argument('--remove', action='store_true', dest='remove', help='Remove plugin')
+  group.add_argument(
+      '--install', action='store_true', dest='install', help='Install plugin')
+  group.add_argument(
+      '--remove', action='store_true', dest='remove', help='Remove plugin')
+  group.add_argument(
+      '--restore_screensaver', action='store_true', dest='restore_screensaver',
+      help='Restore \'pretty\' screensaver UI')
   return parser.parse_args()
 
 
@@ -120,7 +134,9 @@ def main(argv):
   if options.install:
     InstallPlugin()
   elif options.remove:
-    RemovePlugin()
+    RemovePlugin(restore_screensaver=options.restore_screensaver)
+  elif options.restore_screensaver:
+    RemovePlugin(restore_screensaver=True)
 
 
 if __name__ == '__main__':
