@@ -80,7 +80,7 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
     NSString *username = GetStringFromContext(mechanism, kAuthorizationEnvironmentUsername);
     NSString *password = GetStringFromContext(mechanism, kAuthorizationEnvironmentPassword);
 
-    if (username && password) {
+    if (username && password && ![username hasPrefix:@"_"]) {
       // Get current UID/GID for later
       uid_t originalUid = geteuid();
       gid_t originalGid = getegid();
