@@ -81,10 +81,6 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
     NSString *password = GetStringFromContext(mechanism, kAuthorizationEnvironmentPassword);
 
     if (username && password && ![username hasPrefix:@"_"]) {
-      // Get current UID/GID for later
-      uid_t originalUid = geteuid();
-      gid_t originalGid = getegid();
-
       // Get the user's UID/GID from their username
       struct passwd *pw = getpwnam([username UTF8String]);
       uid_t uid = pw->pw_uid;
@@ -93,12 +89,12 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
 
       // Switch EUID/EGID to the target user so SecKeychain* knows who to affect, validate
       // the login keychain password, then switch back to the previous user.
-      seteuid(uid);
       setegid(gid);
+      seteuid(uid);
       SecKeychainSetUserInteractionAllowed(NO);
       BOOL passwordValid = ValidateLoginKeychainPassword(password);
-      seteuid(originalUid);
-      setegid(originalGid);
+      seteuid(getuid());
+      setegid(getgid());
 
       // Remove the current user, so they aren't duplicated in a second if
       // the password wasn't valid.
