@@ -18,6 +18,7 @@
 #import <Security/AuthorizationPlugin.h>
 
 #include <pwd.h>
+#include "KeychainMinderAgentProtocol.h"
 
 #pragma mark Data Types
 
@@ -102,6 +103,20 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
       [users removeObject:username];
 
       if (!passwordValid) {
+        NSXPCConnection *connectionToService =
+        [[NSXPCConnection alloc] initWithMachServiceName:kKeychainMinderAgentMachServiceName
+                                                 options:NSXPCConnectionPrivileged];
+        connectionToService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:
+                                                     @protocol(KeychainMinderAgentProtocol)];
+        [connectionToService resume];
+        
+        id remoteObject = [connectionToService
+                           remoteObjectProxyWithErrorHandler:^(NSError *error) {
+                             NSLog(@"%@", [error debugDescription]);
+                           }];
+        [remoteObject setPassword:password withReply:^(BOOL reply) {
+          NSLog(@"setPassword [%hhd]", reply);
+        }];
         [users addObject:username];
       }
       SetUsers(users);
