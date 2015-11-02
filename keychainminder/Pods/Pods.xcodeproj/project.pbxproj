@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		253F6708930E9B9C41825F1C182274FA /* MOLCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 106EE06E95BB346EC9A8C63D84C4B8B9 /* MOLCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		30F4FD11B70CCE22097B157668968767 /* MOLCertificate-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 20114EDCCA79715EA7AB5A991B93BBE4 /* MOLCertificate-dummy.m */; };
+		470537BA72A1F4394229BE8689C99198 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EE7D93D7A13DAAEAEB63D0AE02D87 /* Security.framework */; };
+		63B49E11395CF1A73A343F709D8AECC3 /* Pods-KeychainMinderAgent-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85AD7188DC27753937C4C08C166E8A78 /* Pods-KeychainMinderAgent-dummy.m */; };
+		690AA221D066A6984B6E664C05BEE00A /* MOLCodesignChecker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D81686CA89CA213A5DB9F0248D6CF /* MOLCodesignChecker-dummy.m */; };
+		69A7617B7C9D5308DBDA51734CA747DA /* MOLCodesignChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = F88680DBA94733C98C82B66F2F767E28 /* MOLCodesignChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E10AF02272A22F6B47CCBDC59A7C733 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA098AB3FC6624B7D041FDF6C1ED4C9 /* Cocoa.framework */; };
+		96FEAAF5BA598F58741FBB8BBFA7F6B0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EE7D93D7A13DAAEAEB63D0AE02D87 /* Security.framework */; };
+		B0CF4EFD0B97AC35F08D8ED2634B9E15 /* MOLCodesignChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFBC7F2974BF5A7647DB27D2A0052B5 /* MOLCodesignChecker.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B0FF2BED1ED391FA3EBD2E824E066F47 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA098AB3FC6624B7D041FDF6C1ED4C9 /* Cocoa.framework */; };
+		C4FB2DBF5C1FE5A771DC092BD0F9A8ED /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA098AB3FC6624B7D041FDF6C1ED4C9 /* Cocoa.framework */; };
+		F8B5D9553A05BE633F6C7D2E5B4895EB /* MOLCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 936FEBDBEBF49648728B23A330163373 /* MOLCertificate.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A015C9811F2CDE39803C8D2E3515E81A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 474BAB9C5BE4DD46AA67025DD7F53534;
+			remoteInfo = MOLCertificate;
+		};
+		AF4C61A145B9BDFB3D78AC66B184DF9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 51A102ADE6292798B9B1CE3D0DBDAF69;
+			remoteInfo = MOLCodesignChecker;
+		};
+		B581E8C296A95C18E6D34C708B0003E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 474BAB9C5BE4DD46AA67025DD7F53534;
+			remoteInfo = MOLCertificate;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		041C794A66DFB9A8BFCC177DBF0F2C43 /* Pods-KeychainMinderAgent-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KeychainMinderAgent-resources.sh"; sourceTree = "<group>"; };
+		106EE06E95BB346EC9A8C63D84C4B8B9 /* MOLCertificate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOLCertificate.h; path = Source/MOLCertificate.h; sourceTree = "<group>"; };
+		20114EDCCA79715EA7AB5A991B93BBE4 /* MOLCertificate-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MOLCertificate-dummy.m"; sourceTree = "<group>"; };
+		24206D2F441E9A431B09653AA6D1D67D /* libMOLCertificate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMOLCertificate.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FBEE6B055B00D33B48B99A9AD513EAC /* Pods-KeychainMinderAgent-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KeychainMinderAgent-frameworks.sh"; sourceTree = "<group>"; };
+		301DA4829BD22912A33DA6E12747B591 /* MOLCodesignChecker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MOLCodesignChecker-prefix.pch"; sourceTree = "<group>"; };
+		4BFBC7F2974BF5A7647DB27D2A0052B5 /* MOLCodesignChecker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MOLCodesignChecker.m; path = Source/MOLCodesignChecker.m; sourceTree = "<group>"; };
+		4EF3DC7A120AC1537FE6D49816D5EE76 /* Pods-KeychainMinderAgent-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KeychainMinderAgent-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6660526084456E972C210F3250C80F3C /* Pods-KeychainMinderAgent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeychainMinderAgent.debug.xcconfig"; sourceTree = "<group>"; };
+		720EE7D93D7A13DAAEAEB63D0AE02D87 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		81603880F1EBB26C5C9A2186455B808A /* libMOLCodesignChecker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMOLCodesignChecker.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		82D5A162B2DED6CFEE5FCD9E96D80229 /* MOLCertificate-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MOLCertificate-prefix.pch"; sourceTree = "<group>"; };
+		85AD7188DC27753937C4C08C166E8A78 /* Pods-KeychainMinderAgent-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KeychainMinderAgent-dummy.m"; sourceTree = "<group>"; };
+		8C2D81686CA89CA213A5DB9F0248D6CF /* MOLCodesignChecker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MOLCodesignChecker-dummy.m"; sourceTree = "<group>"; };
+		8FBCEF4BAD0C07A32B48C8B842D6E39F /* Pods-KeychainMinderAgent-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KeychainMinderAgent-acknowledgements.plist"; sourceTree = "<group>"; };
+		936FEBDBEBF49648728B23A330163373 /* MOLCertificate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MOLCertificate.m; path = Source/MOLCertificate.m; sourceTree = "<group>"; };
+		A3DC5B1AB70808540AE3CCC9125452CE /* Pods-KeychainMinderAgent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeychainMinderAgent.release.xcconfig"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C46EA08F65C21CD9A9C0361891BE6A82 /* libPods-KeychainMinderAgent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KeychainMinderAgent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA098AB3FC6624B7D041FDF6C1ED4C9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		F3C41A1D2DFD29C2734533F2BAEB5CA0 /* MOLCertificate.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MOLCertificate.xcconfig; sourceTree = "<group>"; };
+		F88680DBA94733C98C82B66F2F767E28 /* MOLCodesignChecker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOLCodesignChecker.h; path = Source/MOLCodesignChecker.h; sourceTree = "<group>"; };
+		FE42859D93AB41E864B03255BD02E0DC /* MOLCodesignChecker.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MOLCodesignChecker.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		488E7ED950B71F0184843883BA15770C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4FB2DBF5C1FE5A771DC092BD0F9A8ED /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FA65389611CC600F1E16EAAEF08C481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E10AF02272A22F6B47CCBDC59A7C733 /* Cocoa.framework in Frameworks */,
+				96FEAAF5BA598F58741FBB8BBFA7F6B0 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		565CB93ADAA731D4DB39CEB3030909E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FF2BED1ED391FA3EBD2E824E066F47 /* Cocoa.framework in Frameworks */,
+				470537BA72A1F4394229BE8689C99198 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1E643611717A2764EA0571921900F0F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F652C01EC6EDFAFAD6ACFA60B53EA1B3 /* MOLCertificate */,
+				D98082D4F8825A87597B94304BC290CA /* MOLCodesignChecker */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4631FBB4534330226FCD45D34D95C8F4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FE42859D93AB41E864B03255BD02E0DC /* MOLCodesignChecker.xcconfig */,
+				8C2D81686CA89CA213A5DB9F0248D6CF /* MOLCodesignChecker-dummy.m */,
+				301DA4829BD22912A33DA6E12747B591 /* MOLCodesignChecker-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MOLCodesignChecker";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				D648CE86F139C7CCFD55D5B8A03BE74B /* Frameworks */,
+				1E643611717A2764EA0571921900F0F1 /* Pods */,
+				8360E99B309396A47A67164A37B9FE9F /* Products */,
+				FDCBA3720695BF44F7B98C0BE0C54942 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		7FF7BDCC808E0400F7B03606A67585CD /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F3C41A1D2DFD29C2734533F2BAEB5CA0 /* MOLCertificate.xcconfig */,
+				20114EDCCA79715EA7AB5A991B93BBE4 /* MOLCertificate-dummy.m */,
+				82D5A162B2DED6CFEE5FCD9E96D80229 /* MOLCertificate-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MOLCertificate";
+			sourceTree = "<group>";
+		};
+		8360E99B309396A47A67164A37B9FE9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24206D2F441E9A431B09653AA6D1D67D /* libMOLCertificate.a */,
+				81603880F1EBB26C5C9A2186455B808A /* libMOLCodesignChecker.a */,
+				C46EA08F65C21CD9A9C0361891BE6A82 /* libPods-KeychainMinderAgent.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7CE03E3177CA1C8FE3F4B5FA2B73C6F /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				EBA098AB3FC6624B7D041FDF6C1ED4C9 /* Cocoa.framework */,
+				720EE7D93D7A13DAAEAEB63D0AE02D87 /* Security.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		D648CE86F139C7CCFD55D5B8A03BE74B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7CE03E3177CA1C8FE3F4B5FA2B73C6F /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D98082D4F8825A87597B94304BC290CA /* MOLCodesignChecker */ = {
+			isa = PBXGroup;
+			children = (
+				F88680DBA94733C98C82B66F2F767E28 /* MOLCodesignChecker.h */,
+				4BFBC7F2974BF5A7647DB27D2A0052B5 /* MOLCodesignChecker.m */,
+				4631FBB4534330226FCD45D34D95C8F4 /* Support Files */,
+			);
+			path = MOLCodesignChecker;
+			sourceTree = "<group>";
+		};
+		F0A58E9088A7B92FCBAA8CBC6E80B894 /* Pods-KeychainMinderAgent */ = {
+			isa = PBXGroup;
+			children = (
+				4EF3DC7A120AC1537FE6D49816D5EE76 /* Pods-KeychainMinderAgent-acknowledgements.markdown */,
+				8FBCEF4BAD0C07A32B48C8B842D6E39F /* Pods-KeychainMinderAgent-acknowledgements.plist */,
+				85AD7188DC27753937C4C08C166E8A78 /* Pods-KeychainMinderAgent-dummy.m */,
+				2FBEE6B055B00D33B48B99A9AD513EAC /* Pods-KeychainMinderAgent-frameworks.sh */,
+				041C794A66DFB9A8BFCC177DBF0F2C43 /* Pods-KeychainMinderAgent-resources.sh */,
+				6660526084456E972C210F3250C80F3C /* Pods-KeychainMinderAgent.debug.xcconfig */,
+				A3DC5B1AB70808540AE3CCC9125452CE /* Pods-KeychainMinderAgent.release.xcconfig */,
+			);
+			name = "Pods-KeychainMinderAgent";
+			path = "Target Support Files/Pods-KeychainMinderAgent";
+			sourceTree = "<group>";
+		};
+		F652C01EC6EDFAFAD6ACFA60B53EA1B3 /* MOLCertificate */ = {
+			isa = PBXGroup;
+			children = (
+				106EE06E95BB346EC9A8C63D84C4B8B9 /* MOLCertificate.h */,
+				936FEBDBEBF49648728B23A330163373 /* MOLCertificate.m */,
+				7FF7BDCC808E0400F7B03606A67585CD /* Support Files */,
+			);
+			path = MOLCertificate;
+			sourceTree = "<group>";
+		};
+		FDCBA3720695BF44F7B98C0BE0C54942 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F0A58E9088A7B92FCBAA8CBC6E80B894 /* Pods-KeychainMinderAgent */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		659C0B8EA82CE045A5CF041A10BEFD2C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69A7617B7C9D5308DBDA51734CA747DA /* MOLCodesignChecker.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A509CF5FDFA2F30CB75DA0CB9FDC3DB5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				253F6708930E9B9C41825F1C182274FA /* MOLCertificate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		474BAB9C5BE4DD46AA67025DD7F53534 /* MOLCertificate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6536F67C1BA548CD59CFEBC95876B10 /* Build configuration list for PBXNativeTarget "MOLCertificate" */;
+			buildPhases = (
+				3DC4208C053DDBBC4A24A9B8EBCEFD7F /* Sources */,
+				565CB93ADAA731D4DB39CEB3030909E5 /* Frameworks */,
+				A509CF5FDFA2F30CB75DA0CB9FDC3DB5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MOLCertificate;
+			productName = MOLCertificate;
+			productReference = 24206D2F441E9A431B09653AA6D1D67D /* libMOLCertificate.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		51A102ADE6292798B9B1CE3D0DBDAF69 /* MOLCodesignChecker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16BEBAEB4CB82B4D048CEC9D6E3A90FD /* Build configuration list for PBXNativeTarget "MOLCodesignChecker" */;
+			buildPhases = (
+				2C489DBA2B44BF234B97A12C3A075445 /* Sources */,
+				4FA65389611CC600F1E16EAAEF08C481 /* Frameworks */,
+				659C0B8EA82CE045A5CF041A10BEFD2C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B3DC915C9DC5FB830A0453EB7C96D8A1 /* PBXTargetDependency */,
+			);
+			name = MOLCodesignChecker;
+			productName = MOLCodesignChecker;
+			productReference = 81603880F1EBB26C5C9A2186455B808A /* libMOLCodesignChecker.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		626CE4402F8D02CD238D719B1C2C15C9 /* Pods-KeychainMinderAgent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84B28BE7EFAA40DFDAF5B5BE94A942AC /* Build configuration list for PBXNativeTarget "Pods-KeychainMinderAgent" */;
+			buildPhases = (
+				9B9AE0D348FEF32E6E2C43C2B404C2A8 /* Sources */,
+				488E7ED950B71F0184843883BA15770C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3CB83F9515A9D79E742F5CA3709EEA4 /* PBXTargetDependency */,
+				1EBF92B1FA6B1DCDE4DE4941211B8E96 /* PBXTargetDependency */,
+			);
+			name = "Pods-KeychainMinderAgent";
+			productName = "Pods-KeychainMinderAgent";
+			productReference = C46EA08F65C21CD9A9C0361891BE6A82 /* libPods-KeychainMinderAgent.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 8360E99B309396A47A67164A37B9FE9F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				474BAB9C5BE4DD46AA67025DD7F53534 /* MOLCertificate */,
+				51A102ADE6292798B9B1CE3D0DBDAF69 /* MOLCodesignChecker */,
+				626CE4402F8D02CD238D719B1C2C15C9 /* Pods-KeychainMinderAgent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C489DBA2B44BF234B97A12C3A075445 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				690AA221D066A6984B6E664C05BEE00A /* MOLCodesignChecker-dummy.m in Sources */,
+				B0CF4EFD0B97AC35F08D8ED2634B9E15 /* MOLCodesignChecker.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DC4208C053DDBBC4A24A9B8EBCEFD7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30F4FD11B70CCE22097B157668968767 /* MOLCertificate-dummy.m in Sources */,
+				F8B5D9553A05BE633F6C7D2E5B4895EB /* MOLCertificate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B9AE0D348FEF32E6E2C43C2B404C2A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63B49E11395CF1A73A343F709D8AECC3 /* Pods-KeychainMinderAgent-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1EBF92B1FA6B1DCDE4DE4941211B8E96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MOLCodesignChecker;
+			target = 51A102ADE6292798B9B1CE3D0DBDAF69 /* MOLCodesignChecker */;
+			targetProxy = AF4C61A145B9BDFB3D78AC66B184DF9D /* PBXContainerItemProxy */;
+		};
+		B3DC915C9DC5FB830A0453EB7C96D8A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MOLCertificate;
+			target = 474BAB9C5BE4DD46AA67025DD7F53534 /* MOLCertificate */;
+			targetProxy = B581E8C296A95C18E6D34C708B0003E0 /* PBXContainerItemProxy */;
+		};
+		D3CB83F9515A9D79E742F5CA3709EEA4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MOLCertificate;
+			target = 474BAB9C5BE4DD46AA67025DD7F53534 /* MOLCertificate */;
+			targetProxy = A015C9811F2CDE39803C8D2E3515E81A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		238B5176E88D6540FDB674DDC99D1537 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3DC5B1AB70808540AE3CCC9125452CE /* Pods-KeychainMinderAgent.release.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		27A6517F904D88A7382818DA119DF84B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3C41A1D2DFD29C2734533F2BAEB5CA0 /* MOLCertificate.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/MOLCertificate/MOLCertificate-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3BA5046B8BAABE0DF84712DB08580284 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE42859D93AB41E864B03255BD02E0DC /* MOLCodesignChecker.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/MOLCodesignChecker/MOLCodesignChecker-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		52D4ECB745D1C035F94BD060EE7F6605 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		7D9B4CF177FFB1235B04461D435EDFB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE42859D93AB41E864B03255BD02E0DC /* MOLCodesignChecker.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/MOLCodesignChecker/MOLCodesignChecker-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A070F153A04DD66F4E492261894B37FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C39E4445E6D5C1610B1F409A0C72868C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6660526084456E972C210F3250C80F3C /* Pods-KeychainMinderAgent.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C74DA27E258408D73C16A8D31564768C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3C41A1D2DFD29C2734533F2BAEB5CA0 /* MOLCertificate.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/MOLCertificate/MOLCertificate-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16BEBAEB4CB82B4D048CEC9D6E3A90FD /* Build configuration list for PBXNativeTarget "MOLCodesignChecker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D9B4CF177FFB1235B04461D435EDFB9 /* Debug */,
+				3BA5046B8BAABE0DF84712DB08580284 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52D4ECB745D1C035F94BD060EE7F6605 /* Debug */,
+				A070F153A04DD66F4E492261894B37FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84B28BE7EFAA40DFDAF5B5BE94A942AC /* Build configuration list for PBXNativeTarget "Pods-KeychainMinderAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C39E4445E6D5C1610B1F409A0C72868C /* Debug */,
+				238B5176E88D6540FDB674DDC99D1537 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6536F67C1BA548CD59CFEBC95876B10 /* Build configuration list for PBXNativeTarget "MOLCertificate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27A6517F904D88A7382818DA119DF84B /* Debug */,
+				C74DA27E258408D73C16A8D31564768C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
