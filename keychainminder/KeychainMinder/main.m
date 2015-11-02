@@ -54,6 +54,18 @@ NSString *GetStringFromContext(MechanismRecord *mechanism, AuthorizationString k
   return nil;
 }
 
+NSString *GetStringFromHint(MechanismRecord *mechanism, AuthorizationString key) {
+  const AuthorizationValue *value;
+  OSStatus err = mechanism->pluginRecord->callbacks->GetHintValue(mechanism->engineRef, key, &value);
+  if (err == errSecSuccess && value->length > 0) {
+    NSString *s = [[NSString alloc] initWithBytes:value->data
+                                           length:value->length
+                                         encoding:NSUTF8StringEncoding];
+    return [s stringByReplacingOccurrencesOfString:@"\0" withString:@""];
+  }
+  return nil;
+}
+
 #pragma mark Mechanism Functions
 
 OSStatus MechanismCreate(
@@ -80,14 +92,16 @@ OSStatus MechanismInvoke(AuthorizationMechanismRef inMechanism) {
   @autoreleasepool {
     NSString *username = GetStringFromContext(mechanism, kAuthorizationEnvironmentUsername);
     NSString *password = GetStringFromContext(mechanism, kAuthorizationEnvironmentPassword);
-
-    if (username && password && ![username hasPrefix:@"_"]) {
-      // Get the user's UID/GID from their username
-      struct passwd *pw = getpwnam([username UTF8String]);
-      uid_t uid = pw->pw_uid;
-      uid_t gid = pw->pw_gid;
-      endpwent();
-
+    NSString *sessionOwner = GetStringFromHint(mechanism, "suggested-user");
+    
+    // Get the user's UID/GID from their username
+    struct passwd *pw = getpwnam([username UTF8String]);
+    uid_t uid = pw->pw_uid;
+    uid_t gid = pw->pw_gid;
+    endpwent();
+    
+    if (username && password && !(uid < 501) && [username isEqualToString:sessionOwner]) {
+      
       // Switch EUID/EGID to the target user so SecKeychain* knows who to affect, validate
       // the login keychain password, then switch back to the previous user.
       setegid(gid);
