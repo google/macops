@@ -31,6 +31,13 @@ extern OSStatus SecKeychainResetLogin(UInt32 passwordLength,
 
 @implementation PasswordNotKnownView
 
+- (void)updatePassword:(NSString *)inPassword {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.password setStringValue:inPassword];
+    [self.password setEnabled:NO];
+  });
+}
+
 - (NSArray *)textFields {
   return @[ self.password ];
 }

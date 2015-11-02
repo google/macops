@@ -15,4 +15,5 @@
 #import "PasswordViewController.h"
 
 @interface PasswordNotKnownView : PasswordViewController
+- (void)updatePassword:(NSString *)inPassword;
 @end

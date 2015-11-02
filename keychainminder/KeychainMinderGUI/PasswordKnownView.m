@@ -34,6 +34,13 @@ extern OSStatus SecKeychainChangePassword(SecKeychainRef keychainRef,
 
 @implementation PasswordKnownView
 
+- (void)updatePassword:(NSString *)inPassword {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.currentPassword setStringValue:inPassword];
+    [self.currentPassword setEnabled:NO];
+  });
+}
+
 - (NSArray *)textFields {
   return @[ self.previousPassword, self.currentPassword ];
 }
