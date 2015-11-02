@@ -13,10 +13,11 @@ PACKAGE_VERSION:=$(shell defaults read $$PWD/../KeychainMinder/Info.plist CFBund
 
 PAYLOAD:=pack-SecurityAgentPlugin-KeychainMinder.bundle \
 				 pack-Library-LaunchAgents-com.google.corp.keychainminder.plist \
+				 pack-Library-LaunchDaemons-com.google.corp.keychainminderagent.plist \
 				 pack-script-postinstall
 
 KeychainMinder.bundle:
-	@cd .. && xcodebuild
+	@cd .. && xcodebuild -workspace KeychainMinder.xcworkspace -scheme KeychainMinder -configuration Archive OBJROOT=$(PWD)/../build SYMROOT=$(PWD)/../build DSTROOT=$(PWD)/../build
 	@cp -R ../build/Release/KeychainMinder.bundle .
 
 l_Library_Security: l_Library
@@ -37,4 +38,6 @@ pack-SecurityAgentPlugin-%: % l_Library_Security_SecurityAgentPlugins
 clean: myclean
 
 myclean:
+	rm -rf ${TITLE}-*.pkg
 	rm -rf KeychainMinder.bundle
+	rm -rf ../build

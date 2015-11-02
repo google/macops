@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.google.corp.KeychainMinderAgent</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/Security/SecurityAgentPlugins/KeychainMinder.bundle/Contents/Resources/KeychainMinderAgent</string>
+	</array>
+	<key>MachServices</key>
+	<dict>
+		<key>com.google.corp.KeychainMinderAgent</key>
+		<true/>
+		<key>KeychainMinderAgent</key>
+		<true/>
+	</dict>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+</dict>
+</plist>
