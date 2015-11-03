@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# postinstall script for python 2.7:
+#   - sets up python objective-c bridge
+
+DEST_VOLUME="${3}"
+PTH_PATH="${DEST_VOLUME}/Library/MegaCorpSupport/Python/2.7/lib/python2.7/site-packages/objc.pth"
+echo "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python" > "${PTH_PATH}"
+echo "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC" >> "${PTH_PATH}"
+
+/bin/mkdir -p "${3}"/Library/MegaCorpSupport/bin
+if [[ ! -L "${3}"/Library/MegaCorpSupport/bin/python ]]; then
+  /bin/ln -sf /Library/MegaCorpSupport/Python/2.7/bin/python "${3}"/Library/MegaCorpSupport/bin/python
+fi
