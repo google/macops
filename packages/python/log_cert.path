@@ -1,0 +1,41 @@
+@@ -90,6 +90,7 @@
+ import textwrap
+ import re
+ import sys
++import syslog
+ import os
+ from collections import namedtuple
+ from contextlib import closing
+@@ -232,6 +233,20 @@
+     pat = re.compile(r'\A' + r'\.'.join(pats) + r'\Z', re.IGNORECASE)
+     return pat.match(hostname)
+
++def log_cert_details(cert):
++    """Log certain certificate fields, such as the subject and issuer CN."""
++    template = ("CN: %s, Org: %s, ValidFrom: %s, "
++                "ValidUntil: %s, Serial: %s, Issuer CN: %s")
++
++    details = template % (
++        cert['subject'][4][0][1],
++        cert['subject'][3][0][1],
++        cert['notBefore'],
++        cert['notAfter'],
++        cert['serialNumber'],
++        cert['issuer'][1][0][1])
++    syslog.syslog(
++        syslog.LOG_INFO, 'Server certificate details: %s' % details)
+
+ def match_hostname(cert, hostname):
+     """Verify that *cert* (in decoded format as returned by
+@@ -245,6 +260,11 @@
+         raise ValueError("empty or no certificate, match_hostname needs a "
+                          "SSL socket or SSL context with either "
+                          "CERT_OPTIONAL or CERT_REQUIRED")
++    try:
++        log_cert_details(cert)
++    except IndexError:
++        syslog.syslog(syslog.LOG_ERR, 'Could not read certificate details!')
++
+     dnsnames = []
+     san = cert.get('subjectAltName', ())
+     for key, value in san:
