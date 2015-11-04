@@ -27,14 +27,22 @@ extern OSStatus SecKeychainResetLogin(UInt32 passwordLength,
 @property IBOutlet NSTextField *password;
 @property IBOutlet NSButton *okButton;
 @property IBOutlet NSProgressIndicator *spinner;
+@property IBOutlet NSButton *editPassword;
+- (IBAction)editPasswordClicked:(id)sender;
 @end
 
 @implementation PasswordNotKnownView
+
+- (void)awakeFromNib {
+  [self.editPassword setHidden:YES];
+  [self.editPassword setState:0];
+}
 
 - (void)updatePassword:(NSString *)inPassword {
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.password setStringValue:inPassword];
     [self.password setEnabled:NO];
+    [self.editPassword setHidden:NO];
   });
 }
 
@@ -74,4 +82,9 @@ extern OSStatus SecKeychainResetLogin(UInt32 passwordLength,
 }
 
 
+- (IBAction)editPasswordClicked:(id)sender {
+  [self.password setStringValue:@""];
+  [self.password setEnabled:YES];
+  [self.password becomeFirstResponder];
+}
 @end
