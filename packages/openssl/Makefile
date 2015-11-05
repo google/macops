@@ -17,7 +17,7 @@ l_Library_MegaCorpSupport: l_Library
 	@sudo chown -R root:admin ${WORK_D}/Library/MegaCorpSupport
 	@sudo chmod -R 755 ${WORK_D}/Library/MegaCorpSupport
 
-l_Library_MegaCorp_openssl: l_Library_MegaCorp
+l_Library_MegaCorp_openssl: l_Library_MegaCorpSupport
 	@sudo mkdir -p ${WORK_D}/Library/MegaCorpSupport/openssl
 	@sudo chown -R root:admin ${WORK_D}/Library/MegaCorpSupport/openssl
 	@sudo chmod -R 755 ${WORK_D}/Library/MegaCorpSupport/openssl
