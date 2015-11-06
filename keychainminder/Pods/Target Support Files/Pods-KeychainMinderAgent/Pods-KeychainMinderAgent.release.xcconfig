@@ -1,0 +1,5 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/MOLCertificate" "${PODS_ROOT}/Headers/Public/MOLCodesignChecker"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/MOLCertificate" -isystem "${PODS_ROOT}/Headers/Public/MOLCodesignChecker"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"MOLCertificate" -l"MOLCodesignChecker" -framework "Security"
+PODS_ROOT = ${SRCROOT}/Pods

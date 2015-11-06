@@ -30,9 +30,24 @@ extern OSStatus SecKeychainChangePassword(SecKeychainRef keychainRef,
 @property IBOutlet NSTextField *currentPassword;
 @property IBOutlet NSButton *okButton;
 @property IBOutlet NSProgressIndicator *spinner;
+@property IBOutlet NSButton *editCurrentPassword;
+- (IBAction)editCurrentPasswordClicked:(id)sender;
 @end
 
 @implementation PasswordKnownView
+
+- (void)awakeFromNib {
+  [self.editCurrentPassword setHidden:YES];
+  [self.editCurrentPassword setState:0];
+}
+
+- (void)updatePassword:(NSString *)inPassword {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.currentPassword setStringValue:inPassword];
+    [self.currentPassword setEnabled:NO];
+    [self.editCurrentPassword setHidden:NO];
+  });
+}
 
 - (NSArray *)textFields {
   return @[ self.previousPassword, self.currentPassword ];
@@ -74,6 +89,12 @@ extern OSStatus SecKeychainChangePassword(SecKeychainRef keychainRef,
 - (OSStatus)changeKeychainPasswordOldPassword:(NSString *)oldPw newPassword:(NSString *)newPw {
   return SecKeychainChangePassword(
       NULL, (UInt32)oldPw.length, [oldPw UTF8String], (UInt32)newPw.length, [newPw UTF8String]);
+}
+
+- (IBAction)editCurrentPasswordClicked:(id)sender {
+  [self.currentPassword setStringValue:@""];
+  [self.currentPassword setEnabled:YES];
+  [self.currentPassword becomeFirstResponder];
 }
 
 @end

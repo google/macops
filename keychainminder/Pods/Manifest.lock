@@ -1,0 +1,14 @@
+PODS:
+  - MOLCertificate (1.2)
+  - MOLCodesignChecker (1.2):
+    - MOLCertificate (~> 1.1)
+
+DEPENDENCIES:
+  - MOLCertificate
+  - MOLCodesignChecker
+
+SPEC CHECKSUMS:
+  MOLCertificate: 0e8020eef9eaa5c1183d5583dd198f93e7dce3e0
+  MOLCodesignChecker: e887eeeb7cd87c9b808d1682187c8a27f8ff1100
+
+COCOAPODS: 0.39.0
