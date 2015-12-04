@@ -74,7 +74,7 @@ This is not an official Google product.
   [PyMacAdmin]: http://code.google.com/p/pymacadmin
   [deprecation_notifier]: https://github.com/google/macops/tree/master/deprecation_notifier
   [gmacpyutil]: https://github.com/google/macops/tree/master/gmacpyutil
-  [keychainminder]: https://github.com/google/macops/tree/master/keychainminder
+  [keychainminder]: https://github.com/google/macops-keychainminder
   [macdestroyer]: https://github.com/google/macops/tree/master/macdestroyer
   [planb]: https://github.com/google/macops/tree/master/planb
   [run_it]: https://github.com/google/macops/tree/master/run_it
