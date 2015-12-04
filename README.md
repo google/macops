@@ -76,5 +76,5 @@ This is not an official Google product.
   [gmacpyutil]: https://github.com/google/macops/tree/master/gmacpyutil
   [keychainminder]: https://github.com/google/macops-keychainminder
   [macdestroyer]: https://github.com/google/macops/tree/master/macdestroyer
-  [planb]: https://github.com/google/macops/tree/master/planb
+  [planb]: https://github.com/google/macops-planb
   [run_it]: https://github.com/google/macops/tree/master/run_it
