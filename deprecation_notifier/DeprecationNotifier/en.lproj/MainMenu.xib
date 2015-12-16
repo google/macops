@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,62 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
-        <customObject id="494" customClass="DNAppDelegate">
-            <connections>
-                <outlet property="contentView" destination="538" id="539"/>
-            </connections>
-        </customObject>
-        <customObject id="420" customClass="NSFontManager"/>
-        <customView id="538">
-            <rect key="frame" x="0.0" y="0.0" width="700" height="432"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <box autoresizesSubviews="NO" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" title="Box" borderType="none" titlePosition="noTitle" id="646">
-                    <rect key="frame" x="1" y="-4" width="698" height="441"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="698" height="441"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="587">
-                                <rect key="frame" x="16" y="38.999997310442474" width="666" height="219"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="588">
-                                    <font key="font" size="22" name="HelveticaNeue-Light"/>
-                                    <string key="title">Line1
-Line2
-Line3
-Line4
-Line5
-Line6
-Line7
-Line8</string>
-                                    <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="selectedKnobColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="494" name="value" keyPath="self.deprecationMessage" id="606"/>
-                                </connections>
-                            </textField>
-                            <textField verticalHuggingPriority="750" id="540">
-                                <rect key="frame" x="15" y="310" width="666" height="121"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" placeholderString="0:30 remaining" id="541">
-                                    <font key="font" size="100" name="HelveticaNeue-Bold"/>
-                                    <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="knobColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="494" name="value" keyPath="self.timeRemaining" id="601"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                    </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" red="0.0" green="1" blue="1" alpha="0.53000000000000003" colorSpace="calibratedRGB"/>
-                </box>
-            </subviews>
-        </customView>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="494" customClass="DNAppDelegate"/>
     </objects>
 </document>

@@ -1,19 +1,18 @@
-//
-//  DNAppDelegate.h
-//  DeprecationNotifier
-//
+/// Copyright 2015 Google Inc. All rights reserved.
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///    http://www.apache.org/licenses/LICENSE-2.0
+///
+///    Unless required by applicable law or agreed to in writing, software
+///    distributed under the License is distributed on an "AS IS" BASIS,
+///    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+///    See the License for the specific language governing permissions and
+///    limitations under the License.
 
 #import "DNLockedWindow.h"
-
-#define KEY_TIMEOUT         @"WindowTimeOut"
-#define INITIAL_TIMEOUT     [NSNumber numberWithInt:10]
-#define KEY_MAXTIMEOUT      @"MaxWindowTimeOut"
-#define INITIAL_MAXTIMEOUT  [NSNumber numberWithInt:300]
-#define KEY_TIMEOUTMULT     @"TimeOutMultiplier"
-#define INITIAL_TIMEOUTMULT [NSNumber numberWithFloat:1.1]
-#define KEY_RENOTIFY        @"RenotifyPeriod"
-#define INITIAL_RENOTIFY    [NSNumber numberWithInt:3600]
-
 
 @interface DNAppDelegate : NSResponder <NSApplicationDelegate>
 @end
