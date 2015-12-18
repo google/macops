@@ -1,27 +1,40 @@
-//
-//  DNAppDelegate.m
-//  DeprecationNotifier
-//
+/// Copyright 2015 Google Inc. All rights reserved.
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///    http://www.apache.org/licenses/LICENSE-2.0
+///
+///    Unless required by applicable law or agreed to in writing, software
+///    distributed under the License is distributed on an "AS IS" BASIS,
+///    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+///    See the License for the specific language governing permissions and
+///    limitations under the License.
 
 #import "DNAppDelegate.h"
 
-@interface DNAppDelegate () {
-  float _countdownTime;
-  NSTimer *_countdownTimer;
-  NSTimer *_reopenTimer;
-  NSUserDefaults *_defaults;
-  NSMutableArray *_windows;
-  NSMutableString *_enteredKeys;
-}
+@interface DNAppDelegate ()
 
+@property NSTimer *countdownTimer;
+@property NSTimer *reopenTimer;
+
+@property NSMutableArray *windows;
+
+@property float countdownTime;
 @property NSString *timeRemaining;
 @property NSString *deprecationMessage;
 @property NSWindow *window;
-@property IBOutlet NSView *contentView;
 
 @end
 
 @implementation DNAppDelegate
+
+// These are the names of the keys in the configuration plist
+static NSString * const kWindowTimeoutKey = @"WindowTimeOut";
+static NSString * const kMaxWindowTimeoutKey = @"MaxWindowTimeOut";
+static NSString * const kTimeoutMultiplierKey = @"TimeOutMultiplier";
+static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   NSString *expectedVersion = NSLocalizedString(@"expectedVersion", @"");
@@ -41,27 +54,59 @@
     [NSApp terminate:nil];
   }
 
-  _defaults = [NSUserDefaults standardUserDefaults];
-  [_defaults synchronize];
-  [_defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-                                  INITIAL_TIMEOUT, KEY_TIMEOUT,
-                                  INITIAL_MAXTIMEOUT, KEY_MAXTIMEOUT,
-                                  INITIAL_TIMEOUTMULT, KEY_TIMEOUTMULT,
-                                  INITIAL_RENOTIFY, KEY_RENOTIFY,
-                                  nil]];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  [[NSUserDefaults standardUserDefaults] registerDefaults:@{
+      kWindowTimeoutKey: @([NSLocalizedString(@"initialTimeout", @"") intValue]),
+      kMaxWindowTimeoutKey: @([NSLocalizedString(@"maxWindowTimeout", @"") intValue]),
+      kTimeoutMultiplierKey: @([NSLocalizedString(@"timeoutMultiplier", @"") floatValue]),
+      kRenotifyPeriodKey: @([NSLocalizedString(@"renotifyPeriod", @"") intValue]),
+  }];
 
   // Get this message from the .strings file for easier changing in the future
   self.deprecationMessage = NSLocalizedString(@"deprecationMsg", @"");
 
-  _windows = [[NSMutableArray alloc] init];
+  self.windows = [[NSMutableArray alloc] init];
 
   // Create a window on every screen
   for (NSScreen *thisScreen in [[NSScreen screens] reverseObjectEnumerator]) {
     NSWindow *window = [DNLockedWindow windowWithFrame:[thisScreen frame]];
-    [_windows addObject:window];
+    [self.windows addObject:window];
 
-    [window setContentView:self.contentView];
+    // Make view and add to window. View is now full size of window.
+    NSView *customView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)];
+    [window setContentView:customView];
 
+    NSBox *box = [[NSBox alloc] initWithFrame:NSMakeRect(
+        (NSWidth(customView.frame) - 700) / 2, (NSHeight(customView.frame) - 450) / 2, 700, 450)];
+    box.boxType = NSBoxCustom;
+    [customView addSubview:box];
+
+    // Add countdown timer label
+    NSTextField *countdownLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(15, 300, 670, 120)];
+    [countdownLabel bind:@"value"
+                toObject:self
+             withKeyPath:@"timeRemaining"
+                 options:@{NSConditionallySetsEditableBindingOption: @NO}];
+    countdownLabel.bezeled = NO;
+    countdownLabel.drawsBackground = NO;
+    countdownLabel.selectable = NO;
+    countdownLabel.font = [NSFont fontWithName:@"HelveticaNeue-Bold" size:100.0];
+    countdownLabel.textColor = [NSColor highlightColor];
+    countdownLabel.alignment = NSTextAlignmentCenter;
+    [box addSubview:countdownLabel];
+
+    // Add message label
+    NSTextField *userMsgLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(15, 40, 670, 220)];
+    userMsgLabel.stringValue = self.deprecationMessage;
+    userMsgLabel.bezeled = NO;
+    userMsgLabel.drawsBackground = NO;
+    userMsgLabel.selectable = NO;
+    userMsgLabel.font = [NSFont fontWithName:@"HelveticaNeue-Light" size:22.0];
+    userMsgLabel.textColor = [NSColor highlightColor];
+    userMsgLabel.alignment = NSTextAlignmentCenter;
+    [box addSubview:userMsgLabel];
+
+    // Now bring window to front and make this class the next responder in the chain
     [window makeKeyAndOrderFront:self];
     [window setNextResponder:(NSResponder *)self];
   }
@@ -70,82 +115,83 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
-  [_defaults synchronize];
+  [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)countDown {
   // Keep stealing focus..
   [NSApp activateIgnoringOtherApps:YES];
 
-  _countdownTime -= 0.1;
+  self.countdownTime -= 0.1;
 
   // Update time remaining message
   self.timeRemaining = [NSString stringWithFormat:@"%i:%02i",
-                        (int)_countdownTime / 60,
-                        (int)_countdownTime % 60];
+                           (int)self.countdownTime / 60, (int)self.countdownTime % 60];
 
-  if (_countdownTime < 1) {
+  if (self.countdownTime < 1) {
     self.timeRemaining = @"Click to close";
+    [self.countdownTimer invalidate];
   }
 }
 
 - (void)hideCountdownWindowReopen:(BOOL)reopen {
   // Stop the countdown timer
-  [_countdownTimer invalidate];
+  [self.countdownTimer invalidate];
 
   // Hide window
-  for (NSWindow *window in _windows) {
+  for (NSWindow *window in self.windows) {
     [window orderOut:nil];
   }
 
-  // Synchronize defaults in case Puppet has made changes
-  [_defaults synchronize];
-
-  // Update countdown
-  float newTimeOut = [_defaults floatForKey:KEY_TIMEOUT] * [_defaults floatForKey:KEY_TIMEOUTMULT];
-
-  if (newTimeOut > [_defaults integerForKey:KEY_MAXTIMEOUT]) {
-    [_defaults setFloat:[_defaults integerForKey:KEY_MAXTIMEOUT] forKey:KEY_TIMEOUT];
-  } else {
-    [_defaults setFloat:newTimeOut forKey:KEY_TIMEOUT];
-  }
-  [_defaults synchronize];
-
-  if (reopen) {
-    // Start reopen timer
-    long reopen_time = [_defaults integerForKey:KEY_RENOTIFY];
-    NSLog(@"Will re-open in %ld seconds", reopen_time);
-    _reopenTimer = [NSTimer scheduledTimerWithTimeInterval:reopen_time
-                                                    target:self
-                                                  selector:@selector(openCountdownWindow)
-                                                  userInfo:nil
-                                                   repeats:NO];
-  }
-}
-
-- (void)openCountdownWindow {
   // Show the instructions URL to the user
   NSURL *instURL = [NSURL URLWithString:NSLocalizedString(@"instructionURL", @"")];
   [[NSWorkspace sharedWorkspace] openURL:instURL];
 
-  // Set the countdown time from the plist, plus 1 (as it'll be decremented in the countDown method)
-  _countdownTime = [_defaults integerForKey:KEY_TIMEOUT] + 1;
-  [self countDown];
+  // Synchronize defaults in case Puppet has made changes
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults synchronize];
+
+  // Update countdown
+  float newTimeout = ([userDefaults floatForKey:kWindowTimeoutKey] *
+                      [userDefaults floatForKey:kTimeoutMultiplierKey]);
+
+  // Ensure timeout is not above max
+  NSInteger maxTimeout = [userDefaults integerForKey:kMaxWindowTimeoutKey];
+  if (newTimeout > maxTimeout) newTimeout = maxTimeout;
+
+  [userDefaults setFloat:newTimeout forKey:kWindowTimeoutKey];
+  [userDefaults synchronize];
+
+  if (reopen) {
+    // Start reopen timer
+    long reopenTime = [userDefaults integerForKey:kRenotifyPeriodKey];
+    NSLog(@"Will re-open in %ld seconds", reopenTime);
+    self.reopenTimer = [NSTimer scheduledTimerWithTimeInterval:reopenTime
+                                                        target:self
+                                                      selector:@selector(openCountdownWindow)
+                                                      userInfo:nil
+                                                       repeats:NO];
+  }
+}
+
+- (void)openCountdownWindow {
+  // Set the countdown time from the plist
+  self.countdownTime = [[NSUserDefaults standardUserDefaults] floatForKey:kWindowTimeoutKey];
 
   // Start the countdown timer, once per 0.1 seconds
-  _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                     target:self
-                                                   selector:@selector(countDown)
-                                                   userInfo:nil
-                                                    repeats:YES];
+  self.countdownTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                         target:self
+                                                       selector:@selector(countDown)
+                                                       userInfo:nil
+                                                        repeats:YES];
   // Show the windows on every screen
-  for (NSWindow *window in _windows) {
-    [window makeKeyAndOrderFront:nil];
+  for (NSWindow *window in self.windows) {
+    [window makeKeyAndOrderFront:self];
   }
 }
 
 - (void)mouseDown:(NSEvent *)event {
-  if (_countdownTime < 1) {
+  if (self.countdownTime < 1) {
     [self hideCountdownWindowReopen:YES];
   }
 }
