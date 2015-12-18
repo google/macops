@@ -19,5 +19,6 @@ Features
 Customizing
 -----------
 
-The customizations will generally be in Localizable.strings. There are also some
-defaults in DNAppDelegate.h which you may want to change.
+All customization should be possible in Localizable.strings. If there's something
+you want to customize that isn't possible in that file, let us know.
+
