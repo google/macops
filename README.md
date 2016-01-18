@@ -71,7 +71,7 @@ This is not an official Google product.
   [Munki]: http://code.google.com/p/munki
   [Santa]: https://github.com/google/santa
   [Cauliflower Vest]: https://github.com/google/cauliflowervest
-  [PyMacAdmin]: http://code.google.com/p/pymacadmin
+  [PyMacAdmin]: https://github.com/nigelkersten/pymacadmin
   [deprecation_notifier]: https://github.com/google/macops/tree/master/deprecation_notifier
   [gmacpyutil]: https://github.com/google/macops/tree/master/gmacpyutil
   [keychainminder]: https://github.com/google/macops-keychainminder
