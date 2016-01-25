@@ -68,10 +68,10 @@ Disclaimer
 This is not an official Google product.
 
   [Simian]: https://github.com/google/simian
-  [Munki]: http://code.google.com/p/munki
+  [Munki]: https://github.com/munki/munki
   [Santa]: https://github.com/google/santa
   [Cauliflower Vest]: https://github.com/google/cauliflowervest
-  [PyMacAdmin]: http://code.google.com/p/pymacadmin
+  [PyMacAdmin]:  https://github.com/MacSysadmin/pymacadmin
   [deprecation_notifier]: https://github.com/google/macops/tree/master/deprecation_notifier
   [gmacpyutil]: https://github.com/google/macops/tree/master/gmacpyutil
   [keychainminder]: https://github.com/google/macops-keychainminder
