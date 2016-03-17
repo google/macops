@@ -18,7 +18,8 @@ A nagging utility intended to provoke users into doing major OS upgrades.
 
 facter
 ------
-A simple fact for tracking application usage
+A simple fact for tracking application usage.
+A class for caching custom fact values.
 
 [gmacpyutil][]
 ----------
