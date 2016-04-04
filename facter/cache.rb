@@ -82,15 +82,15 @@ class FactCache
     unless @cache_disabled
       at_exit do
         if @cache_needs_saving
-          Facter.debug('Saving Facter cache')
+          Facter.debug('Saving Facter cache') rescue nil
           begin
             lock(@cache_path) do
               File.open(@cache_path, 'w') do |file|
                 file.puts @cached_facts_data.to_yaml
               end
             end
-          rescue Errno::EPERM, Errno::ACCES => e
-            Facter.warn("Error saving fact cache: #{e}")
+          rescue Errno::EPERM, Errno::EACCES => e
+            Facter.warn("Error saving fact cache: #{e}") rescue nil
           end
         end
       end
@@ -131,7 +131,7 @@ class FactCache
   # Global interprocess lock.
   # If we exceed the timeout, a Timeout::Error is raised.
   def lock(lockname, timeout=0)
-    Facter.debug("Locking #{lockname}, timeout #{timeout}")
+    Facter.debug("Locking #{lockname}, timeout #{timeout}") rescue nil
     File.open(lockname, File::RDWR|File::CREAT, 0644) do |f|
       begin
         Timeout::timeout(timeout) do
@@ -142,7 +142,7 @@ class FactCache
         f.flock File::LOCK_UN
       end
     end
-    Facter.debug("Unlocking #{lockname}")
+    Facter.debug("Unlocking #{lockname}") rescue nil
   end
 
   # Remove the cache file if it exists, ensure the directory exists.
