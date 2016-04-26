@@ -337,8 +337,8 @@ class OK_MsgBox(MsgBox):
   def GetNoCancel(self):
     return self._no_cancel
 
-  def SetNoCancel(self):
-    self._no_cancel = True
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
 
   no_cancel = property(GetNoCancel, SetNoCancel)
 
@@ -369,8 +369,8 @@ class YesNo_MsgBox(MsgBox):
   def GetNoCancel(self):
     return self._no_cancel
 
-  def SetNoCancel(self):
-    self._no_cancel = True
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
 
   no_cancel = property(GetNoCancel, SetNoCancel)
 
@@ -413,8 +413,8 @@ class Standard_InputBox(Dialog):  # pylint: disable=invalid-name
   def GetNoCancel(self):
     return self._no_cancel
 
-  def SetNoCancel(self):
-    self._no_cancel = True
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
 
   informative_text = property(GetInformativeText, SetInformativeText)
   text = property(GetText, SetText)
@@ -510,8 +510,8 @@ class Standard_DropDown(MsgBox):  # pylint: disable=invalid-name
   def GetNoCancel(self):
     return self._no_cancel
 
-  def SetNoCancel(self):
-    self._no_cancel = True
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
 
   items = property(GetItems, SetItems)
   no_cancel = property(GetNoCancel, SetNoCancel)
