@@ -134,13 +134,14 @@ def EnsureContactsNodeAbsent(node):
     DeleteNodeFromContactsPath(node)
 
 
-def DSQuery(dstype, objectname, attribute=None):
+def DSQuery(dstype, objectname, attribute=None, node='.'):
   """DirectoryServices query.
 
   Args:
     dstype: The type of objects to query. user, group.
     objectname: the object to query.
     attribute: the optional attribute to query.
+    node: the node to query.
   Returns:
     If an attribute is specified, the value of the attribute. Otherwise, the
     entire plist.
@@ -148,7 +149,7 @@ def DSQuery(dstype, objectname, attribute=None):
     DSException: Cannot query DirectoryServices.
   """
   ds_path = '/%ss/%s' % (dstype.capitalize(), objectname)
-  cmd = [_DSCL, '-plist', '.', '-read', ds_path]
+  cmd = [_DSCL, '-plist', node, '-read', ds_path]
   if attribute:
     cmd.append(attribute)
   (stdout, stderr, returncode) = gmacpyutil.RunProcess(cmd)
@@ -298,28 +299,30 @@ def DSDelete(dstype, objectname, attribute=None, value=None):
                                                        stderr))
 
 
-def UserAttribute(username, attribute):
+def UserAttribute(username, attribute, node='.'):
   """Returns the requested DirectoryService attribute for this user.
 
   Args:
     username: the user to retrieve a value for.
     attribute: the attribute to retrieve.
+    node: the node to query.
   Returns:
     the value of the attribute.
   """
-  return DSQuery('user', username, attribute)
+  return DSQuery('user', username, attribute, node=node)
 
 
-def GroupAttribute(groupname, attribute):
+def GroupAttribute(groupname, attribute, node='.'):
   """Returns the requested DirectoryService attribute for this group.
 
   Args:
     groupname: the group to retrieve a value for.
     attribute: the attribute to retrieve.
+    node: the node to query.
   Returns:
     the value of the attribute.
   """
-  return DSQuery('group', groupname, attribute)
+  return DSQuery('group', groupname, attribute, node=node)
 
 
 def EditLocalGroup(action, recordtype, account, group):

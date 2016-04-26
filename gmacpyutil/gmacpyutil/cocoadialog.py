@@ -266,12 +266,6 @@ class MsgBox(TweakDialog):
     self._button3 = None
     super(MsgBox, self).__init__(title)
 
-  def GetText(self):
-    return self._text
-
-  def SetText(self, value):
-    self._text = value
-
   def GetInformativeText(self):
     return self._informative_text
 
@@ -303,7 +297,6 @@ class MsgBox(TweakDialog):
   def SetButton3(self, value):
     self._button3 = value
 
-  text = property(GetText, SetText)
   informative_text = property(GetInformativeText, SetInformativeText)
   float = property(GetFloat, SetFloat)
   button1 = property(GetButton1, SetButton1)
@@ -322,6 +315,96 @@ class MsgBox(TweakDialog):
       cmds.extend(['--informative-text', self._informative_text])
     if self._float:
       cmds.append('--float')
+    super_cmds.extend(cmds)
+    return super_cmds
+
+
+class OK_MsgBox(TweakDialog):
+  """ok-msgbox base class."""
+
+  def __init__(self, title=None):
+    self._informative_text = None
+    self._float = True
+    self._no_cancel = False
+    super(OK_MsgBox, self).__init__(title)
+
+  def GetInformativeText(self):
+    return self._informative_text
+
+  def SetInformativeText(self, value):
+    value = value.replace('\n', chr(13))
+    self._informative_text = value
+
+  def GetFloat(self):
+    return self._float
+
+  def SetFloat(self, value):
+    self._float = value
+
+  def GetNoCancel(self):
+    return self._no_cancel
+
+  def SetNoCancel(self):
+    self._no_cancel = True
+
+  informative_text = property(GetInformativeText, SetInformativeText)
+  float = property(GetFloat, SetFloat)
+  no_cancel = property(GetNoCancel, SetNoCancel)
+
+  def GenerateCommand(self):
+    super_cmds = super(OK_MsgBox, self).GenerateCommand()
+    cmds = []
+    if self._informative_text:
+      cmds.extend(['--informative-text', self._informative_text])
+    if self._float:
+      cmds.append('--float')
+    if self._no_cancel:
+      cmds.extend(['--no-cancel'])
+    super_cmds.extend(cmds)
+    return super_cmds
+
+
+class YesNo_MsgBox(TweakDialog):
+  """yesno-msgbox base class."""
+
+  def __init__(self, title=None):
+    self._informative_text = None
+    self._float = True
+    self._no_cancel = False
+    super(YesNo_MsgBox, self).__init__(title)
+
+  def GetInformativeText(self):
+    return self._informative_text
+
+  def SetInformativeText(self, value):
+    value = value.replace('\n', chr(13))
+    self._informative_text = value
+
+  def GetFloat(self):
+    return self._float
+
+  def SetFloat(self, value):
+    self._float = value
+
+  def GetNoCancel(self):
+    return self._no_cancel
+
+  def SetNoCancel(self):
+    self._no_cancel = True
+
+  informative_text = property(GetInformativeText, SetInformativeText)
+  float = property(GetFloat, SetFloat)
+  no_cancel = property(GetNoCancel, SetNoCancel)
+
+  def GenerateCommand(self):
+    super_cmds = super(YesNo_MsgBox, self).GenerateCommand()
+    cmds = []
+    if self._informative_text:
+      cmds.extend(['--informative-text', self._informative_text])
+    if self._float:
+      cmds.append('--float')
+    if self._no_cancel:
+      cmds.extend(['--no-cancel'])
     super_cmds.extend(cmds)
     return super_cmds
 
@@ -391,7 +474,7 @@ class DropDown(MsgBox):
       self._cocoadialog = _CD
     self._title = title
     self._debug = None
-    super(DropDown, self).__init__()
+    super(DropDown, self).__init__(title)
 
   def __str__(self):
     return 'CocoaDialog[%s] -- title: [%s]' % (self.__class__.__name__,
@@ -418,7 +501,7 @@ class DropDown(MsgBox):
     return super_cmds
 
 
-class Standard_DropDown(Dialog):  # pylint: disable=invalid-name
+class Standard_DropDown(MsgBox):  # pylint: disable=invalid-name
   """Generate a basic dropdown with Cancel and OK buttons."""
 
   def __init__(self, title=None, cocoadialog=None):
@@ -430,7 +513,7 @@ class Standard_DropDown(Dialog):  # pylint: disable=invalid-name
     self._title = title
     self._no_cancel = False
     self._debug = None
-    super(Standard_DropDown, self).__init__()
+    super(Standard_DropDown, self).__init__(title)
 
   def __str__(self):
     return 'CocoaDialog[%s] -- title: [%s]' % (self.__class__.__name__,
