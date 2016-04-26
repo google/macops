@@ -266,12 +266,6 @@ class MsgBox(TweakDialog):
     self._button3 = None
     super(MsgBox, self).__init__(title)
 
-  def GetText(self):
-    return self._text
-
-  def SetText(self, value):
-    self._text = value
-
   def GetInformativeText(self):
     return self._informative_text
 
@@ -303,7 +297,6 @@ class MsgBox(TweakDialog):
   def SetButton3(self, value):
     self._button3 = value
 
-  text = property(GetText, SetText)
   informative_text = property(GetInformativeText, SetInformativeText)
   float = property(GetFloat, SetFloat)
   button1 = property(GetButton1, SetButton1)
@@ -322,6 +315,70 @@ class MsgBox(TweakDialog):
       cmds.extend(['--informative-text', self._informative_text])
     if self._float:
       cmds.append('--float')
+    super_cmds.extend(cmds)
+    return super_cmds
+
+
+class OK_MsgBox(MsgBox):
+  """ok-msgbox base class."""
+
+  # Disable buttons - not supported by this cocoadialog run mode.
+  GetButton1 = None
+  SetButton1 = None
+  GetButton2 = None
+  SetButton2 = None
+  GetButton3 = None
+  SetButton3 = None
+
+  def __init__(self, title=None):
+    self._no_cancel = False
+    super(OK_MsgBox, self).__init__(title)
+
+  def GetNoCancel(self):
+    return self._no_cancel
+
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
+
+  no_cancel = property(GetNoCancel, SetNoCancel)
+
+  def GenerateCommand(self):
+    super_cmds = super(OK_MsgBox, self).GenerateCommand()
+    cmds = []
+    if self._no_cancel:
+      cmds.append('--no-cancel')
+    super_cmds.extend(cmds)
+    return super_cmds
+
+
+class YesNo_MsgBox(MsgBox):
+  """yesno-msgbox base class."""
+
+  # Disable buttons - not supported by this cocoadialog run mode.
+  GetButton1 = None
+  SetButton1 = None
+  GetButton2 = None
+  SetButton2 = None
+  GetButton3 = None
+  SetButton3 = None
+
+  def __init__(self, title=None):
+    self._no_cancel = False
+    super(YesNo_MsgBox, self).__init__(title)
+
+  def GetNoCancel(self):
+    return self._no_cancel
+
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
+
+  no_cancel = property(GetNoCancel, SetNoCancel)
+
+  def GenerateCommand(self):
+    super_cmds = super(YesNo_MsgBox, self).GenerateCommand()
+    cmds = []
+    if self._no_cancel:
+      cmds.append('--no-cancel')
     super_cmds.extend(cmds)
     return super_cmds
 
@@ -356,8 +413,8 @@ class Standard_InputBox(Dialog):  # pylint: disable=invalid-name
   def GetNoCancel(self):
     return self._no_cancel
 
-  def SetNoCancel(self):
-    self._no_cancel = True
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
 
   informative_text = property(GetInformativeText, SetInformativeText)
   text = property(GetText, SetText)
@@ -391,7 +448,7 @@ class DropDown(MsgBox):
       self._cocoadialog = _CD
     self._title = title
     self._debug = None
-    super(DropDown, self).__init__()
+    super(DropDown, self).__init__(title)
 
   def __str__(self):
     return 'CocoaDialog[%s] -- title: [%s]' % (self.__class__.__name__,
@@ -418,8 +475,16 @@ class DropDown(MsgBox):
     return super_cmds
 
 
-class Standard_DropDown(Dialog):  # pylint: disable=invalid-name
+class Standard_DropDown(MsgBox):  # pylint: disable=invalid-name
   """Generate a basic dropdown with Cancel and OK buttons."""
+
+  # Disable buttons - not supported by this cocoadialog run mode.
+  GetButton1 = None
+  SetButton1 = None
+  GetButton2 = None
+  SetButton2 = None
+  GetButton3 = None
+  SetButton3 = None
 
   def __init__(self, title=None, cocoadialog=None):
     self._items = []
@@ -430,7 +495,7 @@ class Standard_DropDown(Dialog):  # pylint: disable=invalid-name
     self._title = title
     self._no_cancel = False
     self._debug = None
-    super(Standard_DropDown, self).__init__()
+    super(Standard_DropDown, self).__init__(title)
 
   def __str__(self):
     return 'CocoaDialog[%s] -- title: [%s]' % (self.__class__.__name__,
@@ -445,8 +510,8 @@ class Standard_DropDown(Dialog):  # pylint: disable=invalid-name
   def GetNoCancel(self):
     return self._no_cancel
 
-  def SetNoCancel(self):
-    self._no_cancel = True
+  def SetNoCancel(self, cancel=True):
+    self._no_cancel = cancel
 
   items = property(GetItems, SetItems)
   no_cancel = property(GetNoCancel, SetNoCancel)
@@ -461,6 +526,6 @@ class Standard_DropDown(Dialog):  # pylint: disable=invalid-name
         dropdown_items.append(item)
       cmds.extend(dropdown_items)
     if self._no_cancel:
-      cmds.extend(['--no-cancel'])
+      cmds.append('--no-cancel')
     super_cmds.extend(cmds)
     return super_cmds
