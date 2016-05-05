@@ -227,9 +227,9 @@ def _RunProcess(cmd, stdinput=None, env=None, cwd=None, sudo=False,
   Returns:
     Tuple: two strings and an integer: (stdout, stderr, returncode);
     stdout/stderr may also be None. If the process is set to launch in
-    background mode, a tuple of (<subprocess.Popen object>, None, None) is
+    background mode, an instance of <subprocess.Popen object> is
     returned, in order to be able to read from its pipes *and* use poll() to
-    check when it is finished
+    check when it is finished.
   Raises:
     GmacpyutilException: If both stdinput and sudo_password are specified
     GmacpyutilException: If both sudo and background are specified
