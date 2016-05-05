@@ -123,6 +123,11 @@ class Dialog(object):
     (stdout, unused_stderr, unused_returncode) = gmacpyutil.RunProcess(cmd)
     return stdout
 
+  def ShowAndDetach(self):
+    """Displays the dialog and allows execution to continue."""
+    cmd = [unicode(i) for i in self.GenerateCommand()]
+    return gmacpyutil.RunProcessInBackground(cmd)
+
 
 class TweakDialog(Dialog):
   """This class is one that can be tweaked with icons, text-color etc."""
