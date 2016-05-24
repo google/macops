@@ -33,6 +33,10 @@ A SecurityAgentPlugin to keep the login keychain synchronized in enterprise envi
 ------------
 A package that attempts to render the target machine unbootable.
 
+[momenu][]
+------------
+A menubar item with a plug-in architecture which allows admins to create anything that helps their fleet: from setting user preferences to reporting on machine status.
+
 [planb][]
 ------
 A host remediation program for managed Macs. Securely downloads disk images from your server and installs contained packages.
@@ -45,17 +49,15 @@ A utility to measure the system impact of a process.
 Related Projects
 ================
 
-[Simian][] is an enterprise-class Mac OS X software deployment solution
+[Simian][] is an enterprise-class Mac OS X software deployment solution.
 
-[Munki][] is a set of package management tools
+[Munki][] is a set of package management tools.
 
 [Santa][] is a binary whitelisting/blacklisting solution for OS X. It features a kernel extension that monitors executions, and a GUI agent that alerts the user that a binary is blocked. Read more at the Santa repo: https://github.com/google/santa
 
-[Cauliflower Vest][] is an end-to-end solution for automatically
-enabling and escrowing keys for !FileVault 2.
+[Cauliflower Vest][] is an end-to-end solution for automatically enabling and escrowing keys for FileVault 2.
 
-[PyMacAdmin][] is another collection of Python utilities for Mac OS X
-system administration, the main piece of which is crankd
+[PyMacAdmin][] is another collection of Python utilities for Mac OS X system administration, the main piece of which is crankd
 
 Contact
 =======
@@ -77,5 +79,6 @@ This is not an official Google product.
   [gmacpyutil]: https://github.com/google/macops/tree/master/gmacpyutil
   [keychainminder]: https://github.com/google/macops-keychainminder
   [macdestroyer]: https://github.com/google/macops/tree/master/macdestroyer
+  [momenu]: https://github.com/google/macops-MOMenu
   [planb]: https://github.com/google/macops-planb
   [run_it]: https://github.com/google/macops/tree/master/run_it
