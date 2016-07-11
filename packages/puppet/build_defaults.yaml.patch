@@ -1,0 +1,22 @@
+--- build_defaults.yaml	2016-03-22 15:40:10.000000000 -0400
++++ build_defaults.yaml.new	2016-03-18 14:06:25.000000000 -0400
+@@ -1,7 +1,7 @@
+ ---
+ packaging_url: 'git://github.com/puppetlabs/packaging.git --branch=master'
+ packaging_repo: 'packaging'
+-packager: 'puppetlabs'
++packager: 'google.corp'
+ gpg_key: '4BD6EC30'
+ 
+ # These are the build targets used by the packaging repo. Uncomment to allow use.
+@@ -9,8 +9,8 @@
+ #cows: 'base-lucid-i386.cow base-precise-i386.cow base-squeeze-i386.cow base-trusty-i386.cow base-wheezy-i386.cow'
+ pbuild_conf: '/etc/pbuilderrc'
+ 
+-build_gem: TRUE
+-build_dmg: FALSE
++build_gem: FALSE
++build_dmg: TRUE
+ sign_tar: FALSE
+ yum_host: 'yum.puppetlabs.com'
+ yum_repo_path: '/opt/repository/yum/'

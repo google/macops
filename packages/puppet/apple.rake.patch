@@ -1,0 +1,11 @@
+--- /tmp/puppet-4.4.0-src/ext/packaging/tasks/apple.rake	2016-03-22 16:55:02.000000000 -0400
++++ apple.rake	2016-03-22 17:02:27.000000000 -0400
+@@ -236,7 +236,7 @@
+   if @source_files['directories'] and @source_files['directories']['bin']
+     if bindir = @source_files['directories']['bin']['path']
+       Dir[File.join(work, bindir, '*')].each do |binfile|
+-        sh "sudo /usr/bin/sed -E -i '' '1 s,^#![[:space:]]*/usr/bin/env[[:space:]]+ruby$,#!/usr/bin/ruby,' #{binfile}"
++        sh "sudo /usr/bin/sed -E -i '' '1 s,^#![[:space:]]*/usr/bin/env[[:space:]]+ruby$,#!/Library/MegaCorpSupport/bin/ruby,' #{binfile}"
+       end
+     end
+   end
