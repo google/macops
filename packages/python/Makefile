@@ -194,11 +194,7 @@ build-venv: l_Library_MegaCorpSupport_Python_Env install-python
 build-pip: build-venv
 	sudo ${WORK_D}/${VENV}/bin/pip install --upgrade --no-cache-dir --index-url ${DISTURL}/python_venv/simple pip
 
-# Add our googlecorp python library as a .pth
-googlecorp: build-venv
-	echo "/Library/MegaCorpSupport/Python" | sudo tee ${WORK_D}/${VENV}/lib/python2.7/site-packages/googlecorp.pth
-
-fix-path-venv: build-venv build-pip pip-pyopenssl pip-xattr pip-pyobjc-core pip-pyobjc pip-pip2pi pip-readline googlecorp
+fix-path-venv: build-venv build-pip pip-pyopenssl pip-xattr pip-pyobjc-core pip-pyobjc pip-pip2pi pip-readline
 	for f in $$(grep -Il ${WORK_D} ${WORK_D}/${VENV}/bin/*); \
 		do sudo sed -i '' -e "s^${WORK_D}^^" $${f}; \
 		done
