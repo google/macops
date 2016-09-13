@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/bin/rm -rf "${3}"/Library/MegaCorpSupport/Python/2.7
+/bin/rm -rf "${3}"/Library/MegaCorpSupport/Python/Env
+
+exit 0
