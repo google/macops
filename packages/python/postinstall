@@ -12,3 +12,5 @@ echo "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python
 if [[ ! -L "${3}"/Library/MegaCorpSupport/bin/python ]]; then
   /bin/ln -sf /Library/MegaCorpSupport/Python/2.7/bin/python "${3}"/Library/MegaCorpSupport/bin/python
 fi
+
+exit 0
