@@ -211,7 +211,7 @@ def _RunProcess(cmd, stdinput=None, env=None, cwd=None, sudo=False,
 
   Args:
     cmd: An array of strings as the command to run
-    stdinput: An optional sting as stdin
+    stdinput: An optional string as stdin
     env: An optional dictionary as the environment
     cwd: An optional string as the current working directory
     sudo: An optional boolean on whether to do the command via sudo
