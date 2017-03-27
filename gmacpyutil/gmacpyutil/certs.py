@@ -524,7 +524,7 @@ def InstallTrustedCertInKeychain(pem, root_ca=False, policies=None, gui=False,
   Args:
     pem: str, the certificate in PEM format
     root_ca: bool, whether the cert is a root CA cert (trustRoot vs trustAsRoot)
-    policies: list of strings, optional policy constaints eg, ssl, basic, etc.
+    policies: list of strings, optional policy constraints eg, ssl, basic, etc.
     gui: True if running in a gui context
     password: The user's password if already known
     keychain: str, keychain to install cert and key into
