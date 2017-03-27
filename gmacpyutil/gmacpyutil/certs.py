@@ -517,6 +517,57 @@ def InstallCertInKeychain(pem, private_key, keychain=login_keychain,
     shutil.rmtree(temp_dir)
 
 
+def InstallTrustedCertInKeychain(pem, root_ca=False, policies=None, gui=False,
+                                 password=None, keychain=SYSTEM_KEYCHAIN):
+  """Install a trusted certificate into the keychain.
+
+  Args:
+    pem: str, the certificate in PEM format
+    root_ca: bool, whether the cert is a root CA cert (trustRoot vs trustAsRoot)
+    policies: list of strings, optional policy constraints eg, ssl, basic, etc.
+    gui: True if running in a gui context
+    password: The user's password if already known
+    keychain: str, keychain to install cert and key into
+
+  Raises:
+    KeychainError: if there are any errors installing
+  """
+  sudo, sudo_pass = _GetSudoContext(keychain,
+                                    gui=gui,
+                                    password=password)
+
+  temp_dir = tempfile.mkdtemp(prefix='trusted_cert_install')
+  trusted_cert_file = '%s/trusted_certificate.pem' % temp_dir
+
+  try:
+    with open(trusted_cert_file, 'w') as trusted_cert_handle:
+      trusted_cert_handle.write(pem)
+
+    logging.info('Installing trusted certificate into keychain: %s', keychain)
+
+    command = [CMD_SECURITY, 'add-trusted-cert', '-d']
+    if root_ca:
+      command.extend(['-r', 'trustRoot'])
+    else:
+      command.extend(['-r', 'trustAsRoot'])
+
+    if policies:
+      for policy in policies:
+        command.extend(['-p', policy])
+    command.extend(['-k', keychain, trusted_cert_file])
+
+    logging.debug('Command: %s', command)
+    (stdout, stderr, status) = gmacpyutil.RunProcess(command, sudo=sudo,
+                                                     sudo_password=sudo_pass)
+    logging.debug('Trusted certificate installation output: %s', stdout)
+    if status:
+      raise KeychainError(stdout, stderr)
+  except IOError:
+    raise KeychainError('Could not write to temp files in %s' % temp_dir)
+  finally:
+    shutil.rmtree(temp_dir)
+
+
 def RemoveIssuerCertsFromKeychain(issuer_cn, keychain=login_keychain, gui=False,
                                   password=None):
   """Removes all certificates issued from a given CN from the keychain.
