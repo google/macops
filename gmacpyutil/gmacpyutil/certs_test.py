@@ -691,6 +691,95 @@ class CertsModuleTest(mox.MoxTestBase):
                       'key', keychain='k')
     self.mox.VerifyAll()
 
+  def testInstallTrustedCertInKeychainSuccess(self):
+    """Test InstallTrustedCertInKeychain success, system keychain."""
+    self.StubSetup()
+    certs.tempfile.mkdtemp(prefix=mox.IgnoreArg()).AndReturn('tempdir')
+
+    mock_file = self.mox.CreateMockAnything()
+    open('tempdir/trusted_certificate.pem', 'w').AndReturn(mock_file)
+    mock_file.__enter__().AndReturn(mock_file)
+    mock_file.write('cert')
+    mock_file.__exit__(None, None, None)
+
+    certs.logging.info('Installing trusted certificate into keychain: %s',
+                       certs.SYSTEM_KEYCHAIN).AndReturn(None)
+
+    command = [certs.CMD_SECURITY, 'add-trusted-cert', '-d', '-r',
+               'trustAsRoot', '-k', certs.SYSTEM_KEYCHAIN,
+               'tempdir/trusted_certificate.pem']
+    certs.logging.debug('Command: %s', command).AndReturn(None)
+    certs.gmacpyutil.RunProcess(command,
+                                sudo=True,
+                                sudo_password=None).AndReturn(('out', 'err', 0))
+    certs.logging.debug('Trusted certificate installation output: %s',
+                        'out').AndReturn(None)
+    certs.shutil.rmtree('tempdir').AndReturn(None)
+
+    self.mox.ReplayAll()
+    certs.InstallTrustedCertInKeychain('cert')
+    self.mox.VerifyAll()
+
+  def testInstallTrustedCertInKeychainRootCASuccess(self):
+    """Test InstallTrustedCertInKeychain success, system keychain."""
+    self.StubSetup()
+    certs.tempfile.mkdtemp(prefix=mox.IgnoreArg()).AndReturn('tempdir')
+
+    mock_file = self.mox.CreateMockAnything()
+    open('tempdir/trusted_certificate.pem', 'w').AndReturn(mock_file)
+    mock_file.__enter__().AndReturn(mock_file)
+    mock_file.write('cert')
+    mock_file.__exit__(None, None, None)
+
+    certs.logging.info('Installing trusted certificate into keychain: %s',
+                       certs.SYSTEM_KEYCHAIN).AndReturn(None)
+
+    command = [certs.CMD_SECURITY, 'add-trusted-cert', '-d', '-r',
+               'trustRoot', '-k', certs.SYSTEM_KEYCHAIN,
+               'tempdir/trusted_certificate.pem']
+    certs.logging.debug('Command: %s', command).AndReturn(None)
+    certs.gmacpyutil.RunProcess(command,
+                                sudo=True,
+                                sudo_password=None).AndReturn(('out', 'err', 0))
+    certs.logging.debug('Trusted certificate installation output: %s',
+                        'out').AndReturn(None)
+    certs.shutil.rmtree('tempdir').AndReturn(None)
+
+    self.mox.ReplayAll()
+    certs.InstallTrustedCertInKeychain('cert', root_ca=True)
+    self.mox.VerifyAll()
+
+  def testInstallTrustedCertInKeychainWithPoliciesSuccess(self):
+    """Test InstallTrustedCertInKeychain success, system keychain."""
+    self.StubSetup()
+    certs.tempfile.mkdtemp(prefix=mox.IgnoreArg()).AndReturn('tempdir')
+
+    mock_file = self.mox.CreateMockAnything()
+    open('tempdir/trusted_certificate.pem', 'w').AndReturn(mock_file)
+    mock_file.__enter__().AndReturn(mock_file)
+    mock_file.write('cert')
+    mock_file.__exit__(None, None, None)
+
+    certs.logging.info('Installing trusted certificate into keychain: %s',
+                       certs.SYSTEM_KEYCHAIN).AndReturn(None)
+
+    command = [certs.CMD_SECURITY, 'add-trusted-cert', '-d', '-r',
+               'trustRoot', '-p', 'ssl', '-p', 'smime', '-p', 'basic',
+               '-k', certs.SYSTEM_KEYCHAIN,
+               'tempdir/trusted_certificate.pem']
+    certs.logging.debug('Command: %s', command).AndReturn(None)
+    certs.gmacpyutil.RunProcess(command,
+                                sudo=True,
+                                sudo_password=None).AndReturn(('out', 'err', 0))
+    certs.logging.debug('Trusted certificate installation output: %s',
+                        'out').AndReturn(None)
+    certs.shutil.rmtree('tempdir').AndReturn(None)
+
+    self.mox.ReplayAll()
+    certs.InstallTrustedCertInKeychain('cert', root_ca=True,
+                                       policies=['ssl', 'smime', 'basic'])
+    self.mox.VerifyAll()
+
   def testRemoveIssuerCertsFromKeycahin(self):
     """Test RemoveIssuerCertsFromKeychain."""
     self.StubSetup()
