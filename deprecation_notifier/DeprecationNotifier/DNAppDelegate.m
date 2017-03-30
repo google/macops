@@ -175,6 +175,15 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 }
 
 - (void)openCountdownWindow {
+  // Start Kiosk Mode to disallow Expose and other such features
+  @try {
+      NSApplicationPresentationOptions options = NSApplicationPresentationHideDock + NSApplicationPresentationDisableProcessSwitching;
+      [NSApp setPresentationOptions:options];
+  }
+  @catch(NSException * exception) {
+      NSLog(@"Error.  Invalid combination of Kiosk Mode options.");
+  }
+
   // Set the countdown time from the plist
   self.countdownTime = [[NSUserDefaults standardUserDefaults] floatForKey:kWindowTimeoutKey];
 
