@@ -178,7 +178,7 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 - (void)openCountdownWindow {
   // Start Kiosk Mode to disallow Expose and other such features
   @try {
-      int *kioskOptions = [NSLocalizedString(@"kioskModeSettings", @"") intValue];
+      int kioskOptions = [NSLocalizedString(@"kioskModeSettings", @"") intValue];
       NSApplicationPresentationOptions options = kioskOptions;
       [NSApp setPresentationOptions:options];
   } @catch (NSException *exception) {
