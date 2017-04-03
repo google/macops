@@ -36,6 +36,7 @@ static NSString * const kMaxWindowTimeoutKey = @"MaxWindowTimeOut";
 static NSString * const kTimeoutMultiplierKey = @"TimeOutMultiplier";
 static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   NSString *expectedVersion = NSLocalizedString(@"expectedVersion", @"");
   NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:
@@ -175,6 +176,15 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 }
 
 - (void)openCountdownWindow {
+  // Start Kiosk Mode to disallow Expose and other such features
+  @try {
+      int *kioskOptions = [NSLocalizedString(@"kioskModeSettings", @"") intValue];
+      NSApplicationPresentationOptions options = kioskOptions;
+      [NSApp setPresentationOptions:options];
+  } @catch (NSException *exception) {
+      NSLog(@"Error: Invalid combination of Kiosk Mode options.");
+  }
+
   // Set the countdown time from the plist
   self.countdownTime = [[NSUserDefaults standardUserDefaults] floatForKey:kWindowTimeoutKey];
 

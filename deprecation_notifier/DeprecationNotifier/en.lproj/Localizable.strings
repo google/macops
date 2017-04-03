@@ -8,7 +8,7 @@
 // The message shown to the user below the countdown timer. Can be up to 8 lines long.
 "deprecationMsg" = "Your computer is running a deprecated version of Mac OS X.
 
-Please upgrade to Mac OS X 10.11 (El Capitan) as soon as possible.";
+Please upgrade to macOS 10.12 (Sierra) as soon as possible.";
 
 // The URL to open in the user's web browser, which is opened when they close the window.
 "instructionURL" = "https://megacorp.com/helpdesk/upgrade-instructions";
@@ -18,3 +18,18 @@ Please upgrade to Mac OS X 10.11 (El Capitan) as soon as possible.";
 "maxWindowTimeout" = "300";   // The maximum amount of time the user is forced to wait
 "timeoutMultiplier" = "1.1";  // Manages the speed at which the timeout goes up
 "renotifyPeriod" = "3600";    // The time between notifications, in seconds
+
+// List of Kiosk Mode options. In order to use these, you need to add the numbers together and put the total for the 'kioskModeSettings' variable.
+// The default sets 'NSApplicationPresentationHideDock', 'NSApplicationPresentationDisableProcessSwitching', and 'NSApplicationPresentationDisableForceQuit'
+// NSApplicationPresentationDefault = 0
+// NSApplicationPresentationAutoHideDock = 1
+// NSApplicationPresentationHideDock = 2
+// NSApplicationPresentationAutoHideMenuBar = 4
+// NSApplicationPresentationHideMenuBar = 8
+// NSApplicationPresentationDisableAppleMenu = 16
+// NSApplicationPresentationDisableProcessSwitching = 32
+// NSApplicationPresentationDisableForceQuit = 64
+// NSApplicationPresentationDisableSessionTermination = 128
+// NSApplicationPresentationDisableHideApplication = 256
+// NSApplicationPresentationDisableMenuBarTransparency = 512
+"kioskModeSettings" = "114";
