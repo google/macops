@@ -181,9 +181,8 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
       int *kioskOptions = [NSLocalizedString(@"kioskModeSettings", @"") intValue];
       NSApplicationPresentationOptions options = kioskOptions;
       [NSApp setPresentationOptions:options];
-  }
-  @catch(NSException * exception) {
-      NSLog(@"Error.  Invalid combination of Kiosk Mode options.");
+  } @catch (NSException *exception) {
+      NSLog(@"Error: Invalid combination of Kiosk Mode options.");
   }
 
   // Set the countdown time from the plist
