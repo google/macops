@@ -32,6 +32,9 @@ LOCK_USER_SHELL=/usr/bin/false
 LOCK_USER_GROUP=20
 LOCK_USER_IMAGE="/Library/User Pictures/jolly-roger.jpg"
 
+RECOVERY_KEY_FILE='/var/root/crypt_output.plist'
+RECOVERY_KEY_KEY='RecoveryKey'
+
 function check_for_root() {
   if [[ $(id -u) -ne 0 ]]; then
     echo "Not invoked as root, exiting."
@@ -53,8 +56,27 @@ function create_temp_user() {
   dscl . create /Users/${LOCK_USER_UNAME} Hint "${LOCK_USER_HINT}"
 }
 
+function get_recovery_key() {
+ local recovery_key=`/usr/bin/defaults read ${RECOVERY_KEY_FILE} ${RECOVERY_KEY_KEY}`
+ echo $recovery_key 
+}
+
 function add_user_to_filevault() {
-  fdeadduser ${LOCK_USER_UNAME} ${LOCK_USER_PASSW}
+  if [[ ${OSTYPE:6} -ge 17 ]]; then
+      # At least 10.13, fdeadduser doesn't work anymore, so we need a recovery key.
+      local RECOVERY_KEY=get_recovery_key
+      /usr/bin/expect -c "
+      log_user 0
+      spawn fdesetup add -usertoadd ${LOCK_USER_UNAME}
+      expect \"or the recovery key:\"
+      send ${RECOVERY_KEY}\r
+      expect \"Enter the password for the added user '${LOCK_USER_UNAME}':\"
+      send ${LOCK_USER_PASSW}\r
+      log_user 1
+      expect eof"
+  else 
+      fdeadduser ${LOCK_USER_UNAME} ${LOCK_USER_PASSW}
+  fi
 }
 
 function remove_old_filevault_users() {
