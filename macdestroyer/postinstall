@@ -20,20 +20,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PATH="/usr/bin:/bin:/sbin:/usr/local/bin"
-
-CURRENT_FV_USERS=$(fdesetup list 2>&1 | cut -d ',' -f 1)
+PATH='/usr/bin:/bin:/sbin:/usr/local/bin'
 
 LOCK_USER_UNAME=fde_locked_user
 LOCK_USER_PASSW=$(openssl rand -base64 32)
-LOCK_USER_NAME="Machine Disabled"
-LOCK_USER_HINT="Machine Disabled"
+LOCK_USER_NAME='Machine Disabled'
+LOCK_USER_HINT='Machine Disabled'
 LOCK_USER_SHELL=/usr/bin/false
 LOCK_USER_GROUP=20
 LOCK_USER_IMAGE="/Library/User Pictures/jolly-roger.jpg"
 
 RECOVERY_KEY_FILE='/var/root/crypt_output.plist'
 RECOVERY_KEY_KEY='RecoveryKey'
+
+
+function current_fv_users() {
+  local USERS=`fdesetup list 2>&1 | cut -d ',' -f 1`
+  echo $USERS
+}
 
 function check_for_root() {
   if [[ $(id -u) -ne 0 ]]; then
@@ -58,35 +62,66 @@ function create_temp_user() {
 
 function get_recovery_key() {
  local recovery_key=`/usr/bin/defaults read ${RECOVERY_KEY_FILE} ${RECOVERY_KEY_KEY}`
- echo $recovery_key 
+ if [[ $? == 0 ]]; then
+    echo $recovery_key
+  else
+    echo 'unknown'
+  fi
+}
+
+function apfs_check() {
+  diskutil info / | grep 'Type (Bundle):' | grep -q 'apfs'
+  echo $?
 }
 
 function add_user_to_filevault() {
-  if [[ ${OSTYPE:6} -ge 17 ]]; then
+  if [[ afps_check -eq 0 ]]; then
       # At least 10.13, fdeadduser doesn't work anymore, so we need a recovery key.
-      local RECOVERY_KEY=get_recovery_key
-      /usr/bin/expect -c "
-      log_user 0
-      spawn fdesetup add -usertoadd ${LOCK_USER_UNAME}
-      expect \"or the recovery key:\"
-      send ${RECOVERY_KEY}\r
-      expect \"Enter the password for the added user '${LOCK_USER_UNAME}':\"
-      send ${LOCK_USER_PASSW}\r
-      log_user 1
-      expect eof"
+      local RECOVERY_KEY=`get_recovery_key`
+      echo $RECOVERY_KEY
+      if [ "${RECOVERY_KEY}" = 'unknown' ]; then
+        /usr/bin/expect -c "
+        log_user 0
+        spawn fdesetup add -usertoadd ${LOCK_USER_UNAME}
+        expect \"or the recovery key:\"
+        send ${RECOVERY_KEY}\r
+        expect \"Enter the password for the added user '${LOCK_USER_UNAME}':\"
+        send ${LOCK_USER_PASSW}\r
+        log_user 1
+        expect eof"
+      fi
   else 
       fdeadduser ${LOCK_USER_UNAME} ${LOCK_USER_PASSW}
+  fi
+
+  # check if that actually worked
+  for USER in `current_fv_users`; do
+    echo $USER
+    if [[ ${USER} == ${LOCK_USER_UNAME} ]]; then
+      USER_ADDED=1
+    fi
+  done
+  if [[ $USER_ADDED -ne 1 ]]; then
+    USER_ADD_FAILURE=1
   fi
 }
 
 function remove_old_filevault_users() {
-  for USER in ${CURRENT_FV_USERS}; do
-    fdesetup remove -user ${USER}
+  for USER in `current_fv_users`; do
+    # on APFS volumes this returns '(null)' for a PRK
+    if [[ ${USER} != '(null)' && ${USER} != ${LOCK_USER_UNAME}} ]]; then
+      fdesetup remove -user ${USER}
+    fi
   done
 }
 
 function break_machine() {
   mv -f /sbin/launchd /sbin/launchd_disabled
+}
+
+function check_for_sip() {
+  csrutil status | grep -q 'enabled'
+  echo $?
 }
 
 function main() {
@@ -95,9 +130,15 @@ function main() {
   if check_for_filevault; then
     create_temp_user
     add_user_to_filevault
-    remove_old_filevault_users
+    if [[ ${USER_ADD_FAILURE} -ne 1 ]]; then
+      remove_old_filevault_users
+    else
+      if [[ check_for_sip == 1 ]]; then
+        break_machine
+      fi
+    fi
   else
-    break_machine
+   break_machine
   fi
 
   halt -q
