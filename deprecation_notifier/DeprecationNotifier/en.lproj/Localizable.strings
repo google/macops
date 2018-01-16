@@ -2,7 +2,7 @@
     Configuraration options for building DeprecationNotifier.
 */
 
-// The desired OS version. Should be major and minor version (e.g. 10.13.0)
+// The desired OS version (e.g. 10.13 or 10.12.6)
 "expectedVersion" = "10.13.2";
 
 // The message shown to the user below the countdown timer. Can be up to 8 lines long.
