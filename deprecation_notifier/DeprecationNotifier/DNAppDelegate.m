@@ -42,15 +42,24 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
   NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:
                                               @"/System/Library/CoreServices/SystemVersion.plist"];
   NSString *systemVersion = systemVersionDictionary[@"ProductVersion"];
-
+  
   NSArray *systemVersionArray = [systemVersion componentsSeparatedByString:@"."];
-  NSArray *expectedVersionArray = [expectedVersion componentsSeparatedByString:@"."];
+  if (systemVersionArray.count == 2) {
+      systemVersionArray = [systemVersionArray arrayByAddingObject:@"0"];
+    }
 
-  if (systemVersionArray.count < 2 || expectedVersionArray.count < 2) {
+  NSArray *expectedVersionArray = [expectedVersion componentsSeparatedByString:@"."];
+  if (expectedVersionArray.count == 2) {
+      expectedVersionArray = [expectedVersionArray arrayByAddingObject:@"0"];
+  }
+  
+    
+  if (systemVersionArray.count < 3 || expectedVersionArray.count < 3) {
     NSLog(@"Exiting: Error, unable to properly determine system version or expected version");
     [NSApp terminate:nil];
   } else if (([expectedVersionArray[0] intValue] <= [systemVersionArray[0] intValue]) &&
-             ([expectedVersionArray[1] intValue] <= [systemVersionArray[1] intValue])) {
+             ([expectedVersionArray[1] intValue] <= [systemVersionArray[1] intValue]) &&
+             ([expectedVersionArray[2] intValue] <= [systemVersionArray[2] intValue])) {
     NSLog(@"Exiting: OS is already %@ or greater", expectedVersion);
     [NSApp terminate:nil];
   }
