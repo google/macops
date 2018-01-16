@@ -42,16 +42,26 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
   NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:
                                               @"/System/Library/CoreServices/SystemVersion.plist"];
   NSString *systemVersion = systemVersionDictionary[@"ProductVersion"];
-
+  
   NSArray *systemVersionArray = [systemVersion componentsSeparatedByString:@"."];
+  NSMutableArray *mutableSystemVersionArray = [NSMutableArray array];
+  [mutableSystemVersionArray addObjectsFromArray:systemVersionArray];
+  if (mutableSystemVersionArray.count == 2) {
+      [mutableSystemVersionArray addObject:@"0"];
+  }
   NSArray *expectedVersionArray = [expectedVersion componentsSeparatedByString:@"."];
-
-  if (systemVersionArray.count < 3 || expectedVersionArray.count < 3) {
+  NSMutableArray *mutableExpectedVersionArray = [NSMutableArray array];
+  [mutableExpectedVersionArray addObjectsFromArray:expectedVersionArray];
+  if (mutableExpectedVersionArray.count == 2) {
+    [mutableExpectedVersionArray addObject:@"0"];
+  }
+  
+  if (mutableSystemVersionArray.count < 3 || mutableExpectedVersionArray.count < 3) {
     NSLog(@"Exiting: Error, unable to properly determine system version or expected version");
     [NSApp terminate:nil];
-  } else if (([expectedVersionArray[0] intValue] <= [systemVersionArray[0] intValue]) &&
-             ([expectedVersionArray[1] intValue] <= [systemVersionArray[1] intValue]) &&
-             ([expectedVersionArray[2] intValue] <= [systemVersionArray[2] intValue])) {
+  } else if (([mutableExpectedVersionArray[0] intValue] <= [mutableSystemVersionArray[0] intValue]) &&
+             ([mutableExpectedVersionArray[1] intValue] <= [mutableSystemVersionArray[1] intValue]) &&
+             ([mutableExpectedVersionArray[2] intValue] <= [mutableSystemVersionArray[2] intValue])) {
     NSLog(@"Exiting: OS is already %@ or greater", expectedVersion);
     [NSApp terminate:nil];
   }
