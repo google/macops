@@ -39,9 +39,20 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   NSString *expectedVersion = NSLocalizedString(@"expectedVersion", @"");
+  NSString *expectedBuildsStr = NSLocalizedString(@"expectedBuilds", @"");
+  NSArray *expectedBuilds;
+
+  if ([expectedBuildsStr isEqualToString:@"expectedBuilds"]) {
+    // Apparently NSLocalizedStringWithDefaultValue will act exactly like NSLocalizedString
+    // if you attempt to use a default value of nil or empty string. Ugh.
+    expectedBuildsStr = @"";
+  } else {
+    expectedBuilds = [expectedBuildsStr componentsSeparatedByString:@","];
+  }
   NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:
                                               @"/System/Library/CoreServices/SystemVersion.plist"];
   NSString *systemVersion = systemVersionDictionary[@"ProductVersion"];
+  NSString *systemBuild = systemVersionDictionary[@"ProductBuildVersion"];
   
   NSArray *systemVersionArray = [systemVersion componentsSeparatedByString:@"."];
   if (systemVersionArray.count == 2) {
@@ -53,15 +64,38 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
       expectedVersionArray = [expectedVersionArray arrayByAddingObject:@"0"];
   }
   
-    
+  NSLog(@"Info: System version: %@ %@", systemVersion, systemBuild);
+  NSLog(@"Info: Expected version: %@ %@", expectedVersion, expectedBuildsStr);
   if (systemVersionArray.count < 3 || expectedVersionArray.count < 3) {
     NSLog(@"Exiting: Error, unable to properly determine system version or expected version");
     [NSApp terminate:nil];
-  } else if (([expectedVersionArray[0] intValue] <= [systemVersionArray[0] intValue]) &&
-             ([expectedVersionArray[1] intValue] <= [systemVersionArray[1] intValue]) &&
-             ([expectedVersionArray[2] intValue] <= [systemVersionArray[2] intValue])) {
+  } else if ([expectedVersionArray[0] intValue] < [systemVersionArray[0] intValue]) {
     NSLog(@"Exiting: OS is already %@ or greater", expectedVersion);
     [NSApp terminate:nil];
+  } else if (([expectedVersionArray[0] intValue] <= [systemVersionArray[0] intValue]) &&
+             ([expectedVersionArray[1] intValue] <  [systemVersionArray[1] intValue])) {
+    NSLog(@"Exiting: OS is already %@ or greater", expectedVersion);
+    [NSApp terminate:nil];
+  } else if (([expectedVersionArray[0] intValue] <= [systemVersionArray[0] intValue]) &&
+             ([expectedVersionArray[1] intValue] <= [systemVersionArray[1] intValue]) &&
+             ([expectedVersionArray[2] intValue] <  [systemVersionArray[2] intValue])) {
+    NSLog(@"Exiting: OS is already %@ or greater", expectedVersion);
+    [NSApp terminate:nil];
+  } else if (([expectedVersionArray[0] intValue] == [systemVersionArray[0] intValue]) &&
+             ([expectedVersionArray[1] intValue] == [systemVersionArray[1] intValue]) &&
+             ([expectedVersionArray[2] intValue] == [systemVersionArray[2] intValue])) {
+    NSLog(@"Checking: OS is equal to %@, checking build version", expectedVersion);
+    if (expectedBuilds == nil) {
+      NSLog(@"Exiting: No preferred build, so considered equal to %@", expectedVersion);
+      [NSApp terminate:nil];
+    } else {
+      if ([expectedBuilds containsObject:systemBuild]) {
+        NSLog(@"Exiting: OS build is one of the expected builds [ %@ ]", expectedBuildsStr);
+        [NSApp terminate:nil];
+      } else {
+        NSLog(@"Checking: OS build not found in expected builds [ %@ ]", expectedBuildsStr);
+      }
+    }
   }
 
   [[NSUserDefaults standardUserDefaults] synchronize];
