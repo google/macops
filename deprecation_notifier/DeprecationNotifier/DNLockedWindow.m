@@ -17,7 +17,7 @@
 @implementation DNLockedWindow
 
 - (id)initWithContentRect:(NSRect)contentRect
-                styleMask:(NSUInteger)windowStyle
+                styleMask:(NSWindowStyleMask)windowStyle
                   backing:(NSBackingStoreType)bufferingType
                     defer:(BOOL)deferCreation {
   self = [super initWithContentRect:contentRect
