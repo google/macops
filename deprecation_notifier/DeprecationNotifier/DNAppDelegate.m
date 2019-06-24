@@ -42,7 +42,7 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
   NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:
                                               @"/System/Library/CoreServices/SystemVersion.plist"];
   NSString *systemVersion = systemVersionDictionary[@"ProductVersion"];
-  
+
   NSArray *systemVersionArray = [systemVersion componentsSeparatedByString:@"."];
   if (systemVersionArray.count == 2) {
       systemVersionArray = [systemVersionArray arrayByAddingObject:@"0"];
@@ -52,8 +52,8 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
   if (expectedVersionArray.count == 2) {
       expectedVersionArray = [expectedVersionArray arrayByAddingObject:@"0"];
   }
-  
-    
+
+
   if (systemVersionArray.count < 3 || expectedVersionArray.count < 3) {
     NSLog(@"Exiting: Error, unable to properly determine system version or expected version");
     [NSApp terminate:nil];
@@ -89,11 +89,16 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
     NSBox *box = [[NSBox alloc] initWithFrame:NSMakeRect(
         (NSWidth(customView.frame) - 700) / 2, (NSHeight(customView.frame) - 450) / 2, 700, 450)];
     box.boxType = NSBoxCustom;
+    box.transparent = YES;
     [customView addSubview:box];
 
     // Add countdown timer label
     NSTextField *countdownLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(15, 300, 670, 120)];
     [countdownLabel bind:@"value"
+                toObject:self
+             withKeyPath:@"timeRemaining"
+                 options:@{NSConditionallySetsEditableBindingOption: @NO}];
+    [countdownLabel bind:@"accessibilityLabel"
                 toObject:self
              withKeyPath:@"timeRemaining"
                  options:@{NSConditionallySetsEditableBindingOption: @NO}];
@@ -103,6 +108,7 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
     countdownLabel.font = [NSFont fontWithName:@"HelveticaNeue-Bold" size:100.0];
     countdownLabel.textColor = [NSColor highlightColor];
     countdownLabel.alignment = NSTextAlignmentCenter;
+    countdownLabel.accessibilityElement = YES;
     [box addSubview:countdownLabel];
 
     // Add message label
@@ -114,6 +120,8 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
     userMsgLabel.font = [NSFont fontWithName:@"HelveticaNeue-Light" size:22.0];
     userMsgLabel.textColor = [NSColor highlightColor];
     userMsgLabel.alignment = NSTextAlignmentCenter;
+    userMsgLabel.accessibilityElement = YES;
+    userMsgLabel.accessibilityLabel = userMsgLabel.stringValue;
     [box addSubview:userMsgLabel];
 
     // Now bring window to front and make this class the next responder in the chain
