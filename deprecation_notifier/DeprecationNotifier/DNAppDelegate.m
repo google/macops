@@ -39,7 +39,6 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   NSString *expectedVersion = NSLocalizedString(@"expectedVersion", @"");
-  NSString *expectedBuildsStr = NSLocalizedString(@"expectedBuilds", @"");
   NSString *buildsKey = @"expectedBuilds";
   NSString *builds = NSLocalizedString(buildsKey, @"");
   NSSet *expectedBuilds = [NSSet setWithArray:[builds componentsSeparatedByString:@","]];
@@ -61,7 +60,7 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
   }
 
   NSLog(@"Info: System version: %@ %@", systemVersion, systemBuild);
-  NSLog(@"Info: Expected version: %@ %@", expectedVersion, expectedBuildsStr);
+  NSLog(@"Info: Expected version: %@ %@", expectedVersion, builds);
   if ([expectedVersionArray isEqualToArray:systemVersionArray]) {
     NSLog(@"Checking: running OS is equal to %@, checking build version", expectedVersion);
     if (!expectedBuilds.count) {
