@@ -39,9 +39,15 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   NSString *expectedVersion = NSLocalizedString(@"expectedVersion", @"");
+  NSString *buildsKey = @"expectedBuilds";
+  NSString *builds = NSLocalizedString(buildsKey, @"");
+  NSSet *expectedBuilds = [NSSet setWithArray:[builds componentsSeparatedByString:@","]];
+  if (!expectedBuilds.count || [expectedBuilds containsObject:buildsKey]) expectedBuilds = nil;
+
   NSDictionary *systemVersionDictionary = [NSDictionary dictionaryWithContentsOfFile:
                                               @"/System/Library/CoreServices/SystemVersion.plist"];
   NSString *systemVersion = systemVersionDictionary[@"ProductVersion"];
+  NSString *systemBuild = systemVersionDictionary[@"ProductBuildVersion"];
 
   NSArray *systemVersionArray = [systemVersion componentsSeparatedByString:@"."];
   if (systemVersionArray.count == 2) {
@@ -53,14 +59,25 @@ static NSString * const kRenotifyPeriodKey = @"RenotifyPeriod";
       expectedVersionArray = [expectedVersionArray arrayByAddingObject:@"0"];
   }
 
-
-  if (systemVersionArray.count < 3 || expectedVersionArray.count < 3) {
-    NSLog(@"Exiting: Error, unable to properly determine system version or expected version");
-    [NSApp terminate:nil];
-  } else if (([expectedVersionArray[0] intValue] <= [systemVersionArray[0] intValue]) &&
-             ([expectedVersionArray[1] intValue] <= [systemVersionArray[1] intValue]) &&
-             ([expectedVersionArray[2] intValue] <= [systemVersionArray[2] intValue])) {
-    NSLog(@"Exiting: OS is already %@ or greater", expectedVersion);
+  NSLog(@"Info: System version: %@ %@", systemVersion, systemBuild);
+  NSLog(@"Info: Expected version: %@ %@", expectedVersion, builds);
+  if ([expectedVersionArray isEqualToArray:systemVersionArray]) {
+    NSLog(@"Checking: running OS is equal to %@, checking build version", expectedVersion);
+    if (!expectedBuilds.count) {
+      NSLog(@"Exiting: No preferred build, so considered equal");
+      [NSApp terminate:nil];
+    }
+    if ([expectedBuilds containsObject:systemBuild]) {
+      NSLog(@"Exiting: OS build is one of the expected builds %@", expectedBuilds);
+      [NSApp terminate:nil];
+    }
+    NSLog(@"Checking: OS build not found in expected builds %@", expectedBuilds);
+  } else if ([systemVersionArray[0] intValue] < [expectedVersionArray[0] intValue] ||
+            [systemVersionArray[1] intValue] < [expectedVersionArray[1] intValue] ||
+            [systemVersionArray[2] intValue] < [expectedVersionArray[2] intValue]) {
+    NSLog(@"Checking: OS build is lower than required");
+  } else {
+    NSLog(@"Exiting: OS build is greater than required");
     [NSApp terminate:nil];
   }
 
