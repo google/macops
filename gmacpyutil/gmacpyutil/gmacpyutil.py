@@ -382,7 +382,11 @@ def GetAirportInfo(include_nearby_networks=False):
                  6: u'Dynamic WEP',
                  7: u'WPA Enterprise',
                  8: u'WPA Enterprise Mixed',
-                 9: u'WPA2 Enterprise'}
+                 9: u'WPA2 Enterprise',
+                 10: u'Enterprise',
+                 11: u'WPA3 Personal',
+                 12: u'WPA3 Enterprise',
+                 13: u'WPA3 Transition'}
 
   cw_phy_mode = {0: u'None',
                  1: u'802.11a',
