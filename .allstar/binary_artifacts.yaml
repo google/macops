@@ -1,0 +1,3 @@
+ignorePaths:
+# Ignore reason: This pre-compiled binary is provided as a convenience to users.
+- macdestroyer/fdeadduser
